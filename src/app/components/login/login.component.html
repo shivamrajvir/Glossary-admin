@@ -1,7 +1,7 @@
 <div class="login-div d-flex justify-content-center align-items-center min-vh-100">
   <mat-card class="login-card">
     <mat-card-title class="text-center">Login</mat-card-title>
-    <mat-card-content>
+    <mat-card-content class="d-flex justify-content-center align-items-center">
       <form *ngIf="loginForm" [formGroup]="loginForm">
         <mat-form-field class="w-100">
           <input matInput placeholder="Email" formControlName="email">
@@ -13,11 +13,14 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-100">
-          <input matInput placeholder="Password" formControlName="password">
+          <input type="password" matInput placeholder="Password" formControlName="password">
           <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
             Please enter a <strong>Password</strong>
           </mat-error>
         </mat-form-field>
+        <button mat-button color="primary">Forgot Password?</button>
+        <button mat-raised-button color="primary" class="login-btn">Login</button>
+        <button mat-raised-button class="signup-btn">Sign Up</button>
       </form>
     </mat-card-content>
   </mat-card>
