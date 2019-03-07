@@ -7,6 +7,7 @@ const routes: any[] = [
   {
     path: '',
     redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',

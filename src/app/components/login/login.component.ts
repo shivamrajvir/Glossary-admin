@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {SnotifyService} from 'ng-snotify';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _auth: AuthService, private snotify: SnotifyService) { }
 
   ngOnInit() {
     this.initializeForm();
@@ -26,6 +28,20 @@ export class LoginComponent implements OnInit {
 
   goToSignupPage() {
     this.router.navigate(['signup']);
+  }
+
+  doLogin() {
+    if (this.loginForm.valid) {
+    this._auth.login(this.loginForm.value)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    } else {
+      this.snotify.error('Please Enter credentials properly!');
+    }
   }
 
 }

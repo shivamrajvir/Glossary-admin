@@ -9,6 +9,9 @@ import {MAT_LABEL_GLOBAL_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModules} from './material-modules';
 import { SignupComponent } from './components/signup/signup.component';
+import {AuthService} from './services/auth.service';
+import {HttpClientModule} from '@angular/common/http';
+import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
 
 @NgModule({
   declarations: [
@@ -21,10 +24,15 @@ import { SignupComponent } from './components/signup/signup.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    SnotifyModule
   ],
   providers: [
     {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}},
+    AuthService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService
 
   ],
   bootstrap: [AppComponent]

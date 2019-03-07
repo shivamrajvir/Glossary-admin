@@ -1,26 +1,36 @@
 <div class="login-div d-flex justify-content-center align-items-center min-vh-100">
   <mat-card class="login-card">
-    <mat-card-title class="text-center">Login</mat-card-title>
+    <mat-card-title class="text-center">Sign up</mat-card-title>
     <mat-card-content class="d-flex justify-content-center align-items-center">
-      <form *ngIf="loginForm" [formGroup]="loginForm">
+      <form *ngIf="signupForm" [formGroup]="signupForm">
         <mat-form-field class="w-100">
           <input matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
+          <mat-error *ngIf="signupForm.controls['email'].touched && !signupForm.controls['email'].value.length && signupForm.controls['email'].invalid">
             Please enter a valid email address
           </mat-error>
-          <mat-error *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
+          <mat-error *ngIf="signupForm.controls['email'].touched && signupForm.controls['email'].value.length && signupForm.controls['email'].invalid">
             Email is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-100">
+          <input type="text" matInput placeholder="Name" formControlName="name">
+          <mat-error *ngIf="signupForm.controls['name'].touched && signupForm.controls['name'].invalid">
+            Please enter your <strong>name</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input type="number" matInput placeholder="Number" formControlName="phone" (keypress)="restrictInput($event)">
+          <mat-error *ngIf="signupForm.controls['phone'].touched && signupForm.controls['phone'].invalid">
+            Please enter your <strong>phone number</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
           <input type="password" matInput placeholder="Password" formControlName="password">
-          <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+          <mat-error *ngIf="signupForm.controls['password'].touched && signupForm.controls['password'].invalid">
             Please enter a <strong>Password</strong>
           </mat-error>
         </mat-form-field>
-        <button mat-button color="primary">Forgot Password?</button>
-        <button mat-raised-button color="primary" class="login-btn">Login</button>
-        <button mat-raised-button class="signup-btn">Sign Up</button>
+        <button mat-raised-button color="primary" class="signup-btn">Sign Up</button>
       </form>
     </mat-card-content>
   </mat-card>
