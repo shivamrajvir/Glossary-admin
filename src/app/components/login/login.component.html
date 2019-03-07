@@ -1,0 +1,24 @@
+<div class="login-div d-flex justify-content-center align-items-center min-vh-100">
+  <mat-card class="login-card">
+    <mat-card-title class="text-center">Login</mat-card-title>
+    <mat-card-content>
+      <form *ngIf="loginForm" [formGroup]="loginForm">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Password" formControlName="password">
+          <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+            Please enter a <strong>Password</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
