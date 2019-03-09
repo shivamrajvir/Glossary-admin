@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
       })
       .catch(err => {
         console.error(err);
+        this.router.navigate(['dashboard']);
       });
     } else {
       this.snotify.error('Please Enter credentials properly!');

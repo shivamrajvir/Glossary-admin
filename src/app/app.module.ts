@@ -12,6 +12,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import {AuthService} from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
+import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,8 @@ import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
     {provide: MAT_LABEL_GLOBAL_OPTIONS, useValue: {float: 'always'}},
     AuthService,
     { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-    SnotifyService
-
+    SnotifyService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

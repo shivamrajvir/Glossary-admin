@@ -1,0 +1,45 @@
+.side-nav {
+  width: 250px;
+  box-shadow: 1px 0 3px 1px rgba(0,0,0,0.1);
+}
+
+.router-container {
+  height: calc(100vh - 64px);
+  padding: 20px 10px 10px 10px;
+  overflow: hidden;
+}
+
+.menu-list {
+  padding-top: 0;
+}
+
+.menu-list a:hover {
+  background-color: aliceblue;
+  color: #673AB7;
+}
+.active-menu-item {
+  background-color: #673AB7 !important;
+  color: white;
+}
+
+button {
+  outline: none !important;
+}
+
+.menu-nested-list {
+  padding: 0;
+  margin: 0;
+  li {
+    list-style-type: none;
+    a {
+      transition: all 0.2s ease-in;
+      background-color: #fafafa;
+      color: black;
+    }
+
+    a:hover {
+      background-color: aliceblue;
+      color: #673AB7;
+    }
+  }
+}

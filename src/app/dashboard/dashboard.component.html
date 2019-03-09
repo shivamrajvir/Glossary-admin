@@ -1,0 +1,34 @@
+<div class="wrapper">
+  <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button mat-icon-button (click)="snav.toggle()">
+        <i class="material-icons">menu</i>
+      </button>
+      <h1 class="example-app-name">Glossary App</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav class="side-nav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list class="menu-list">
+          <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>
+          <a mat-list-item (click)="openActivities()">One Time Activity</a>
+          <ul [@slideInOut]="showSettings" class="menu-nested-list">
+            <li>
+              <a mat-list-item [routerLink]="['one-time-activity']" [routerLinkActive]="'active-menu-item'">Add Product</a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['one-time-activity/add-category']" [routerLinkActive]="'active-menu-item'">Add Category</a>
+            </li>
+          </ul>
+          <a mat-list-item [routerLink]="['daily-activity']" [routerLinkActive]="'active-menu-item'">Daily Activity</a>
+        </mat-nav-list>
+      </mat-sidenav>
+
+      <mat-sidenav-content class="router-container">
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

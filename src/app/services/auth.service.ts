@@ -7,6 +7,8 @@ import {Urls} from '../shared/urls';
 })
 export class AuthService {
 
+  private token;
+
   constructor(private http: HttpClient) { }
 
   login(creds) {
@@ -29,5 +31,9 @@ export class AuthService {
           reject(err);
         });
     });
+  }
+
+  getToken() {
+    return this.token;
   }
 }
