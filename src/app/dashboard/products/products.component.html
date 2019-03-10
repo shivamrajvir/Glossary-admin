@@ -38,5 +38,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div *ngIf="!loaded"  class="progress-spinner">
+      <mat-progress-spinner
+        [color]="'warn'"
+        [mode]="'indeterminate'">
+      </mat-progress-spinner>
+    </div>
   </div>
 </div>

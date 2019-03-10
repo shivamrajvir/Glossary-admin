@@ -1,3 +1,5 @@
+@import "../../styles";
+
 .side-nav {
   width: 250px;
   box-shadow: 1px 0 3px 1px rgba(0,0,0,0.1);
@@ -16,16 +18,16 @@
 
 .menu-list a:hover {
   background-color: aliceblue;
-  color: #673AB7;
+  color: $primary-orange;
 }
 .active-menu-item {
-  background-color: #673AB7 !important;
+  background-color: $primary-orange !important;
   color: white;
 }
 
 .active-menu-item:hover {
   color: aliceblue !important;
-  background-color: #673AB7 !important;
+  background-color: $primary-orange !important;
 }
 
 button {
@@ -47,7 +49,7 @@ button {
 
     a:hover {
       background-color: aliceblue;
-      color: #673AB7;
+      color: $primary-orange;
     }
   }
 }
