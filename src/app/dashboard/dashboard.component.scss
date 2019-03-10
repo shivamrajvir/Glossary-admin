@@ -1,6 +1,7 @@
 .side-nav {
   width: 250px;
   box-shadow: 1px 0 3px 1px rgba(0,0,0,0.1);
+  overflow-x: hidden;
 }
 
 .router-container {
@@ -22,6 +23,11 @@
   color: white;
 }
 
+.active-menu-item:hover {
+  color: aliceblue !important;
+  background-color: #673AB7 !important;
+}
+
 button {
   outline: none !important;
 }
@@ -29,6 +35,8 @@ button {
 .menu-nested-list {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
+
   li {
     list-style-type: none;
     a {

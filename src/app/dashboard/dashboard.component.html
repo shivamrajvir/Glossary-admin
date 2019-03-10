@@ -10,16 +10,16 @@
     <mat-sidenav-container class="sidenav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav class="side-nav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="true">
         <mat-nav-list class="menu-list">
           <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>
           <a mat-list-item (click)="openActivities()">One Time Activity</a>
-          <ul [@slideInOut]="showSettings" class="menu-nested-list">
+          <ul [@slideInOut]="showMenu" class="menu-nested-list">
             <li>
-              <a mat-list-item [routerLink]="['one-time-activity']" [routerLinkActive]="'active-menu-item'">Add Product</a>
+              <a mat-list-item [routerLink]="['products']" [routerLinkActive]="'active-menu-item'">Products</a>
             </li>
             <li>
-              <a mat-list-item [routerLink]="['one-time-activity/add-category']" [routerLinkActive]="'active-menu-item'">Add Category</a>
+              <a mat-list-item [routerLink]="['categories']" [routerLinkActive]="'active-menu-item'">Categories</a>
             </li>
           </ul>
           <a mat-list-item [routerLink]="['daily-activity']" [routerLinkActive]="'active-menu-item'">Daily Activity</a>

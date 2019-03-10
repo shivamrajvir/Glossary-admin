@@ -8,7 +8,6 @@ import { LoginComponent } from './components/login/login.component';
 import {MAT_LABEL_GLOBAL_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModules} from './material-modules';
-import { SignupComponent } from './components/signup/signup.component';
 import {AuthService} from './services/auth.service';
 import {HttpClientModule} from '@angular/common/http';
 import {SnotifyModule, SnotifyService, ToastDefaults} from 'ng-snotify';
@@ -17,8 +16,7 @@ import {AuthGuard} from './guards/auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignupComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,

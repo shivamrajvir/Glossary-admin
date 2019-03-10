@@ -1,8 +1,9 @@
 import {DashboardComponent} from './dashboard.component';
 import {Routes} from '@angular/router';
-import {OneTimeActivityComponent} from './one-time-activity/one-time-activity.component';
 import {DailyActivityComponent} from './daily-activity/daily-activity.component';
 import {ReportsComponent} from './reports/reports.component';
+import {ProductsComponent} from './products/products.component';
+import {CategoriesComponent} from './categories/categories.component';
 
 export const routes: Routes = [
   {
@@ -14,8 +15,12 @@ export const routes: Routes = [
         redirectTo: 'reports'
       },
       {
-        path: 'one-time-activity',
-        component: OneTimeActivityComponent
+        path: 'products',
+        component: ProductsComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesComponent
       },
       {
         path: 'daily-activity',

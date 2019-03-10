@@ -22,16 +22,16 @@ export class AuthService {
     });
   }
 
-  signup(creds) {
-    return new Promise((resolve, reject) => {
-      this.http.post(Urls.signup, creds)
-        .subscribe(data => {
-          resolve(data);
-        }, err => {
-          reject(err);
-        });
-    });
-  }
+  // signup(creds) {
+  //   return new Promise((resolve, reject) => {
+  //     this.http.post(Urls.signup, creds)
+  //       .subscribe(data => {
+  //         resolve(data);
+  //       }, err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
 
   getToken() {
     return this.token;
