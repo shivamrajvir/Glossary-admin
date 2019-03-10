@@ -1,0 +1,19 @@
+.overflow-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.product-table {
+  width: 100%;
+
+  th {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .product-image {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+  }
+}
