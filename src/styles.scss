@@ -21,3 +21,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance:textfield; /* Firefox */
 }
+
+.mat-drawer-inner-container {
+  overflow-x: hidden !important;
+}
+
+button {
+  outline: none !important;
+}

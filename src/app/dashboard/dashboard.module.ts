@@ -6,9 +6,11 @@ import {routes} from './dashboard.routing';
 import {MaterialModules} from '../material-modules';
 import { ReportsComponent } from './reports/reports.component';
 import { DailyActivityComponent } from './daily-activity/daily-activity.component';
-import { ProductsComponent } from './products/products.component';
+import {AddEditProductModalComponent, ProductsComponent} from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import {ProductsService} from '../services/products.service';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,15 +18,22 @@ import {ProductsService} from '../services/products.service';
     ReportsComponent,
     DailyActivityComponent,
     ProductsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    AddEditProductModalComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    MaterialModules
+    MaterialModules,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    AddEditProductModalComponent
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
   ]
 })
 export class DashboardModule { }

@@ -18,4 +18,15 @@ export class ProductsService {
     });
   }
 
+  addProduct(object) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_product, object)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }
