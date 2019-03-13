@@ -49,6 +49,17 @@
             <th mat-header-cell *matHeaderCellDef>Date</th>
             <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
           </ng-container>
+          <ng-container matColumnDef="Actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let element">
+              <i class="material-icons" style="color: #F44336; cursor: pointer" (click)="openAddEditProductModal(element)">
+                edit
+              </i>
+              <i class="material-icons" style="color: #F44336; cursor: pointer" (click)="deleteProduct()">
+                delete
+              </i>
+            </td>
+          </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

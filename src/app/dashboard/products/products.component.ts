@@ -30,6 +30,7 @@ export class ProductsComponent implements OnInit {
         console.log(data);
         this.products = data;
         this.displayedColumns = Object.keys(this.products[0]);
+        this.displayedColumns.push('Actions');
         this.loaded = true;
       })
       .catch(err => {
@@ -51,7 +52,7 @@ export class ProductsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.getProductList();
     });
   }
 
@@ -63,13 +64,16 @@ export class ProductsComponent implements OnInit {
 export class AddEditProductModalComponent {
   addEditProductForm: FormGroup;
   imageUrl = environment.imageUrl;
+  isImageUploading = false;
+  imageUploadFile;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _product: ProductsService,
     private http: HttpClient) {
-    this.initializeForm(this.data);
+    this.initializeForm(this.data.data);
+    console.log(this.data);
   }
 
   initializeForm(data?) {
@@ -85,7 +89,6 @@ export class AddEditProductModalComponent {
   }
 
   uploadImage(event) {
-    console.log(event);
     const file = event.target.files[0];
     if (file.type === 'image/jpeg' || file.type === 'image/png') {
       this.uploadFile(file);
@@ -97,14 +100,26 @@ export class AddEditProductModalComponent {
   }
 
   uploadFile(file) {
+    this.isImageUploading = true;
     const fd = new FormData();
     const name = file.name + new Date().toISOString();
-    fd.append(name, file);
+    this.imageUploadFile = file;
+    fd.append('tmp_name', file.name);
+    fd.append('file', file);
     this.http.post(Urls.upload_product_image, fd)
-      .subscribe(data => {
+      .subscribe((data: any) => {
+        this.isImageUploading = false;
         console.log(data);
+        this.addEditProductForm.controls['image'].setValue(data[0].pathName);
+        this.snackbar.open('Image Uploaded', 'Success', {
+          duration: 4000
+        });
       }, err => {
+        this.isImageUploading = false;
         console.error(err);
+        this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
+          duration: 4000
+        });
       });
   }
 
@@ -113,12 +128,13 @@ export class AddEditProductModalComponent {
   }
 
   addEditProduct() {
+    this.isImageUploading = true;
+    console.log(this.addEditProductForm);
     if (this.addEditProductForm.valid) {
-      const object = {
-        name: this.addEditProductForm.value.name,
-        file: this.addEditProductForm.value.image,
-      };
-      if (this.data) {
+      const pFormData = new FormData();
+      pFormData.append('name', this.addEditProductForm.value.name);
+      pFormData.append('file', this.imageUploadFile);
+      if (this.data.data) {
         // this._product.editProduct(object)
         //   .then(data => {
         //     console.log(data);
@@ -131,13 +147,18 @@ export class AddEditProductModalComponent {
         //     });
         //   });
       } else {
-        this._product.addProduct(object)
+        this._product.addProduct(pFormData)
           .then(data => {
             console.log(data);
+            this.isImageUploading = false;
+            this.snackbar.open('Product Added', 'Success', {
+              duration: 4000
+            });
             this.closeModal();
           })
           .catch(err => {
             console.error(err);
+            this.isImageUploading = false;
             this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
               duration: 4000
             });
