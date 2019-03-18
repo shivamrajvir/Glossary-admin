@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { AuthService } from './../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ export class DashboardComponent implements OnInit {
 
   private _mobileQueryListener: () => void;
   @ViewChild('navbar') navbarToggle: ElementRef;
-  constructor(private changeDetectorRef: ChangeDetectorRef, protected media: MediaMatcher) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, protected media: MediaMatcher,
+     private auth: AuthService) { }
 
   ngOnInit() {
     console.log(this.showMenu);
@@ -43,6 +45,10 @@ export class DashboardComponent implements OnInit {
   openActivities() {
     this.showMenu = this.showMenu === 'out' ? 'in' : 'out';
     console.log(this.showMenu);
+  }
+
+  doLogout() {
+    this.auth.logout();
   }
 
 }

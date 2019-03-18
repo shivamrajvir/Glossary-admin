@@ -131,9 +131,10 @@ export class AddEditProductModalComponent {
     this.isImageUploading = true;
     console.log(this.addEditProductForm);
     if (this.addEditProductForm.valid) {
-      const pFormData = new FormData();
-      pFormData.append('name', this.addEditProductForm.value.name);
-      pFormData.append('file', this.imageUploadFile);
+      const object = {
+        name: this.addEditProductForm.value.name,
+        file: this.addEditProductForm.value.image
+      };
       if (this.data.data) {
         // this._product.editProduct(object)
         //   .then(data => {
@@ -147,7 +148,7 @@ export class AddEditProductModalComponent {
         //     });
         //   });
       } else {
-        this._product.addProduct(pFormData)
+        this._product.addProduct(object)
           .then(data => {
             console.log(data);
             this.isImageUploading = false;

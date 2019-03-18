@@ -11,6 +11,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import {ProductsService} from '../services/products.service';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import { SliderComponent } from './slider/slider.component';
+import {OwlModule} from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import {ReactiveFormsModule} from '@angular/forms';
     DailyActivityComponent,
     ProductsComponent,
     CategoriesComponent,
-    AddEditProductModalComponent
+    AddEditProductModalComponent,
+    SliderComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModules,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OwlModule
   ],
   entryComponents: [
     AddEditProductModalComponent

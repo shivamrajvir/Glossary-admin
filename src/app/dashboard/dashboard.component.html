@@ -1,16 +1,26 @@
 <div class="wrapper">
   <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
     <mat-toolbar color="warn" class="example-toolbar">
-      <button mat-icon-button (click)="snav.toggle()">
-        <i class="material-icons">menu</i>
-      </button>
-      <h1 class="example-app-name">Glossary App</h1>
+      <div class="d-flex justify-content-between w-100">
+        <div class="d-flex align-items-center">
+          <button mat-icon-button (click)="snav.toggle()">
+            <i class="material-icons">menu</i>
+          </button>
+          <h1 class="example-app-name">Glossary App</h1>
+        </div>
+        <div class="d-flex">
+          <button mat-button [matMenuTriggerFor]="menu">Admin</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="doLogout()">Logout</button>
+          </mat-menu>
+        </div>
+      </div>
     </mat-toolbar>
 
-    <mat-sidenav-container class="sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav class="side-nav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56" [opened]="true">
+                   [fixedInViewport]="mobileQuery.matches"
+                   fixedTopGap="56" [opened]="true">
         <mat-nav-list class="menu-list">
           <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>
           <a mat-list-item (click)="openActivities()">One Time Activity</a>
