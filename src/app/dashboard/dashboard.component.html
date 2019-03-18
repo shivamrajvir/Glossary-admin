@@ -32,7 +32,12 @@
               <a mat-list-item [routerLink]="['categories']" [routerLinkActive]="'active-menu-item'">Categories</a>
             </li>
           </ul>
-          <a mat-list-item [routerLink]="['daily-activity']" [routerLinkActive]="'active-menu-item'">Daily Activity</a>
+          <a mat-list-item (click)="openDailyActivities()">Daily Activity</a>
+          <ul [@slideInOut]="showDailyActivity" class="menu-nested-list">
+            <li>
+              <a mat-list-item [routerLink]="['slider']" [routerLinkActive]="'active-menu-item'">Dashboard Slider</a>
+            </li>
+          </ul>
         </mat-nav-list>
       </mat-sidenav>
 

@@ -5,20 +5,19 @@ import {RouterModule} from '@angular/router';
 import {routes} from './dashboard.routing';
 import {MaterialModules} from '../material-modules';
 import { ReportsComponent } from './reports/reports.component';
-import { DailyActivityComponent } from './daily-activity/daily-activity.component';
 import {AddEditProductModalComponent, ProductsComponent} from './products/products.component';
 import { CategoriesComponent } from './categories/categories.component';
 import {ProductsService} from '../services/products.service';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SliderComponent } from './slider/slider.component';
-import {OwlModule} from 'ngx-owl-carousel';
+import {SliderService} from '../services/slider.service';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
     DashboardComponent,
     ReportsComponent,
-    DailyActivityComponent,
     ProductsComponent,
     CategoriesComponent,
     AddEditProductModalComponent,
@@ -29,7 +28,7 @@ import {OwlModule} from 'ngx-owl-carousel';
     RouterModule.forChild(routes),
     MaterialModules,
     ReactiveFormsModule,
-    OwlModule
+    CarouselModule
   ],
   entryComponents: [
     AddEditProductModalComponent
@@ -37,7 +36,8 @@ import {OwlModule} from 'ngx-owl-carousel';
   providers: [
     ProductsService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    SliderService
   ]
 })
 export class DashboardModule { }
