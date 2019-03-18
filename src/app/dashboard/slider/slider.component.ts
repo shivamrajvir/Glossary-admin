@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SliderService} from '../../services/slider.service';
-import { MatSnackBar } from '@angular/material';
-import { environment } from 'src/environments/environment.prod';
+import {MatSnackBar} from '@angular/material';
+import {environment} from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-slider',
@@ -40,7 +41,8 @@ export class SliderComponent implements OnInit {
   loaded = false;
   imageUrl = environment.imageUrl;
 
-  constructor(private _sliderService: SliderService, private snackBar: MatSnackBar) { }
+  constructor(private _sliderService: SliderService, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     this.refreshSliders();
@@ -59,6 +61,36 @@ export class SliderComponent implements OnInit {
         this.snackBar.open(error, 'Error', {
           duration: 2000
         });
+      });
+  }
+
+  deleteSlider(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+        this.deleteSelectedSlider(id);
+      }
+    });
+  }
+
+  deleteSelectedSlider(id) {
+    this._sliderService.deleteSlider({id: id})
+      .subscribe(data => {
+
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        );
+      }, err => {
+        console.error(err);
       });
   }
 

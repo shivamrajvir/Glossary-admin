@@ -14,6 +14,7 @@ import { SliderComponent } from './slider/slider.component';
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
+
 @NgModule({
   declarations: [
     DashboardComponent,

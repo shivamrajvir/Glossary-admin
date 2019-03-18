@@ -31,4 +31,15 @@ export class SliderService {
     });
   }
 
+  deleteSlider(object) {
+    return Observable.create((observer) => {
+      return this.http.post(Urls.delete_slidder, object, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}})
+        .subscribe(data => {
+          observer.next(data);
+        }, err => {
+          observer.error(err);
+        });
+    });
+  }
+
 }

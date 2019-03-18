@@ -12,4 +12,5 @@ export class Urls {
   static get_slider = Urls.base + 'getSlides.php';
 
   static add_slider = Urls.base + 'addSlide.php';
+  static delete_slidder = Urls.base + 'deleteSlides.php';
 }
