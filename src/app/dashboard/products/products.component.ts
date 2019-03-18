@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/ma
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {environment} from '../../../environments/environment';
 import {Urls} from '../../shared/urls';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
@@ -127,30 +127,36 @@ export class AddEditProductModalComponent {
     this.dialogRef.close();
   }
 
+  deleteImage() {
+    this.addEditProductForm.controls['image'].setValue('');
+  }
+
   addEditProduct() {
     this.isImageUploading = true;
     console.log(this.addEditProductForm);
     if (this.addEditProductForm.valid) {
-      const object = {
-        name: this.addEditProductForm.value.name,
-        file: this.addEditProductForm.value.image
-      };
       if (this.data.data) {
-        // this._product.editProduct(object)
-        //   .then(data => {
-        //     console.log(data);
-        //     this.closeModal();
-        //   })
-        //   .catch(err => {
-        //     console.error(err);
-        //     this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
-        //       duration: 4000
-        //     });
-        //   });
-      } else {
-        this._product.addProduct(object)
+        const object = new HttpParams()
+          .set('name', this.addEditProductForm.value.name)
+          .set('fileName', this.addEditProductForm.value.image)
+          .set('id', this.data.data.id);
+        this._product.editProduct(object)
           .then(data => {
             console.log(data);
+            this.closeModal();
+          })
+          .catch(err => {
+            console.error(err);
+            this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
+              duration: 4000
+            });
+          });
+      } else {
+        const object = new HttpParams()
+          .set('name', this.addEditProductForm.value.name)
+          .set('fileName', this.addEditProductForm.value.image);
+        this._product.addProduct(object)
+          .then(data => {
             this.isImageUploading = false;
             this.snackbar.open('Product Added', 'Success', {
               duration: 4000

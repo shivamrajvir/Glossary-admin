@@ -1,5 +1,5 @@
 
-  <mat-dialog-content class="mat-typography">
+  <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
 
     <h3>{{data.data ? 'Edit' : 'Add'}} Product</h3>
     <form *ngIf="!isImageUploading" style="display: flex; flex-direction: column" [formGroup]="addEditProductForm">
@@ -11,6 +11,9 @@
       </mat-form-field>
       <div *ngIf="addEditProductForm.controls['image'].value" style="">
         <img [src]="imageUrl + addEditProductForm.controls['image'].value" style="height: 50px; width: auto; object-fit: contain" />
+        <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">
+          delete
+        </i>
       </div>
       <button *ngIf="!addEditProductForm.controls['image'].value" mat-raised-button
               color="accent" (click)="file.click()">Upload File</button>

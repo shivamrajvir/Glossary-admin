@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {SliderService} from '../../services/slider.service';
-import {MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {environment} from 'src/environments/environment.prod';
 import Swal from 'sweetalert2';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {AddEditProductModalComponent} from '../products/products.component';
+import {ProductsService} from '../../services/products.service';
+import {Urls} from '../../shared/urls';
 
 @Component({
   selector: 'app-slider',
@@ -41,7 +45,7 @@ export class SliderComponent implements OnInit {
   loaded = false;
   imageUrl = environment.imageUrl;
 
-  constructor(private _sliderService: SliderService, private snackBar: MatSnackBar) {
+  constructor(private _sliderService: SliderService, private snackBar: MatSnackBar, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -81,9 +85,12 @@ export class SliderComponent implements OnInit {
   }
 
   deleteSelectedSlider(id) {
-    this._sliderService.deleteSlider({id: id})
+    const body = new HttpParams()
+      .set('id', id);
+    this._sliderService.deleteSlider(body)
       .subscribe(data => {
-
+        console.log(data);
+        this.refreshSliders();
         Swal.fire(
           'Deleted!',
           'Your file has been deleted.',
@@ -92,6 +99,69 @@ export class SliderComponent implements OnInit {
       }, err => {
         console.error(err);
       });
+  }
+
+  openAddSliderModal() {
+    const dialogRef = this.dialog.open(addSliderModal, {
+      width: '600px'
+    });
+
+    dialogRef.afterClosed()
+      .subscribe(result => {
+      this.refreshSliders();
+    });
+  }
+
+}
+
+
+@Component({
+  templateUrl: 'add-slider.html',
+})
+export class addSliderModal {
+
+  isImageUploading = false;
+  imageUploadFile;
+
+  constructor(public dialogRef: MatDialogRef<any>,
+              public snackbar: MatSnackBar) {}
+
+  uploadImage(event) {
+    const file = event.target.files[0];
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      this.uploadFile(file);
+    } else {
+      this.snackbar.open('Please Upload an image with .jpg or .png format', 'Error', {
+        duration: 4000
+      });
+    }
+  }
+
+  uploadFile(file) {
+    this.isImageUploading = true;
+    const fd = new FormData();
+    const name = file.name + new Date().toISOString();
+    this.imageUploadFile = file;
+    fd.append('tmp_name', file.name);
+    fd.append('file', file);
+    this.http.post(Urls.upload_product_image, fd)
+      .subscribe((data: any) => {
+        this.isImageUploading = false;
+        console.log(data);
+        this.snackbar.open('Image Uploaded', 'Success', {
+          duration: 4000
+        });
+      }, err => {
+        this.isImageUploading = false;
+        console.error(err);
+        this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
+          duration: 4000
+        });
+      });
+  }
+
+  closeModal(): void {
+    this.dialogRef.close();
   }
 
 }

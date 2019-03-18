@@ -8,6 +8,7 @@ export class Urls {
   static product = Urls.base + 'getProducts.php';
   static upload_product_image = Urls.base + 'addSlide.php';
   static add_product = Urls.base + 'addProducts.php';
+  static edit_product = Urls.base + 'editProducts.php';
 
   static get_slider = Urls.base + 'getSlides.php';
 

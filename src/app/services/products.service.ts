@@ -29,4 +29,15 @@ export class ProductsService {
     });
   }
 
+  editProduct(object) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.edit_product, object)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }
