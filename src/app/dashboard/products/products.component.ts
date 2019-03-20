@@ -73,7 +73,6 @@ export class AddEditProductModalComponent {
     public snackbar: MatSnackBar, private _product: ProductsService,
     private http: HttpClient) {
     this.initializeForm(this.data.data);
-    console.log(this.data);
   }
 
   initializeForm(data?) {
@@ -133,7 +132,6 @@ export class AddEditProductModalComponent {
 
   addEditProduct() {
     this.isImageUploading = true;
-    console.log(this.addEditProductForm);
     if (this.addEditProductForm.valid) {
       if (this.data.data) {
         const object = new HttpParams()
@@ -142,7 +140,6 @@ export class AddEditProductModalComponent {
           .set('id', this.data.data.id);
         this._product.editProduct(object)
           .then(data => {
-            console.log(data);
             this.closeModal();
           })
           .catch(err => {

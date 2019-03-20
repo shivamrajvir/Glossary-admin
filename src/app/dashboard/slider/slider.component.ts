@@ -122,9 +122,10 @@ export class addSliderModal {
 
   isImageUploading = false;
   imageUploadFile;
+  imageFileName;
+  imageUrl = environment.imageUrl;
 
-  constructor(public dialogRef: MatDialogRef<any>,
-              public snackbar: MatSnackBar) {}
+  constructor(public dialogRef: MatDialogRef<any>, public snackbar: MatSnackBar, private http: HttpClient) {}
 
   uploadImage(event) {
     const file = event.target.files[0];
@@ -158,6 +159,10 @@ export class addSliderModal {
           duration: 4000
         });
       });
+  }
+
+  deleteImage() {
+    this.imageFileName = '';
   }
 
   closeModal(): void {
