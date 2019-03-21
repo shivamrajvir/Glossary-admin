@@ -6,7 +6,7 @@ import {routes} from './dashboard.routing';
 import {MaterialModules} from '../material-modules';
 import { ReportsComponent } from './reports/reports.component';
 import {AddEditProductModalComponent, ProductsComponent} from './products/products.component';
-import { CategoriesComponent } from './categories/categories.component';
+import {AddEditCategoryModalComponent, CategoriesComponent} from './categories/categories.component';
 import {ProductsService} from '../services/products.service';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -23,7 +23,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     CategoriesComponent,
     AddEditProductModalComponent,
     SliderComponent,
-    addSliderModal
+    addSliderModal,
+    AddEditCategoryModalComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +35,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   ],
   entryComponents: [
     AddEditProductModalComponent,
-    addSliderModal
+    addSliderModal,
+    AddEditCategoryModalComponent
   ],
   providers: [
     ProductsService,

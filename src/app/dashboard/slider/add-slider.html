@@ -1,8 +1,8 @@
 
 <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
 
-  <h3>{{data.data ? 'Edit' : 'Add'}} Product</h3>
-    <div *ngIf="aimageUploadFile">
+  <h3>Add Slider</h3>
+    <div *ngIf="imageFileName">
       <img [src]="imageUrl + imageFileName" style="height: 50px; width: auto; object-fit: contain" />
       <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">
         delete
@@ -20,5 +20,5 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button color="warn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button cdkFocusInitial color="warn" (click)="addEditProduct()">Save</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="addSlider()">Save</button>
 </mat-dialog-actions>

@@ -123,13 +123,16 @@ export class addSliderModal {
   isImageUploading = false;
   imageUploadFile;
   imageFileName;
+  data;
   imageUrl = environment.imageUrl;
 
-  constructor(public dialogRef: MatDialogRef<any>, public snackbar: MatSnackBar, private http: HttpClient) {}
+  constructor(public dialogRef: MatDialogRef<any>, public snackbar: MatSnackBar, private http: HttpClient,
+              private _slider: SliderService) {}
 
   uploadImage(event) {
     const file = event.target.files[0];
     if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      console.log(file);
       this.uploadFile(file);
     } else {
       this.snackbar.open('Please Upload an image with .jpg or .png format', 'Error', {
@@ -140,15 +143,17 @@ export class addSliderModal {
 
   uploadFile(file) {
     this.isImageUploading = true;
+    this.imageUploadFile = file;
+    console.log(this.imageUploadFile);
     const fd = new FormData();
     const name = file.name + new Date().toISOString();
-    this.imageUploadFile = file;
     fd.append('tmp_name', file.name);
     fd.append('file', file);
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {
         this.isImageUploading = false;
         console.log(data);
+        this.imageFileName = data[0].pathName;
         this.snackbar.open('Image Uploaded', 'Success', {
           duration: 4000
         });
@@ -163,6 +168,36 @@ export class addSliderModal {
 
   deleteImage() {
     this.imageFileName = '';
+    this.imageUploadFile = null;
+  }
+
+  addSlider() {
+    if (this.imageFileName) {
+    const fd = new HttpParams()
+      .set('tmp_name', Date.now().toString())
+      .set('file', this.imageUploadFile);
+    // const fd = new FormData();
+    //   fd.append('tmp_name', Date.now().toString());
+    //   fd.append('file', this.imageUploadFile);
+    this._slider.addDashboardSlider(fd)
+      .subscribe(data => {
+        this.isImageUploading = false;
+        this.snackbar.open('Product Added', 'Success', {
+          duration: 4000
+        });
+        this.closeModal();
+      }, err => {
+        console.error(err);
+        this.isImageUploading = false;
+        this.snackbar.open((err.error && err.error.message) ? err.error.message : 'Server Error', 'Error', {
+          duration: 4000
+        });
+      });
+    } else {
+      this.snackbar.open('Please add an image for the Slider', 'Error', {
+        duration: 4000
+      });
+    }
   }
 
   closeModal(): void {
