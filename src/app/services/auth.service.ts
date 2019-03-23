@@ -46,4 +46,15 @@ export class AuthService {
       return null;
     }
   }
+
+  getStatistics() {
+    return new Promise((resolve, reject) => {
+      return this.http.get(Urls.stats)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
 }

@@ -1,36 +1,85 @@
-<div class="row ml-0 mr-0">
-  <div class="col-12 pb-4 overflow-x">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 report-table">
-
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-          <th mat-header-cell *matHeaderCellDef> No.</th>
-          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef> Name</th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-          <th mat-header-cell *matHeaderCellDef> Weight</th>
-          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-        </ng-container>
-
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-          <th mat-header-cell *matHeaderCellDef> Symbol</th>
-          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+<div class="row ml-0 mr-0 pb-4">
+  <div *ngIf="!loaded" class="progress-spinner">
+    <mat-progress-spinner
+      [color]="'warn'"
+      [mode]="'indeterminate'">
+    </mat-progress-spinner>
   </div>
+  <ng-container *ngIf="loaded && statistics">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <mat-card class="blue-card">
+        <div>
+          <mat-card-title>Users</mat-card-title>
+          <mat-card-content>
+            <h4>{{statistics['usersCount'] ? statistics['usersCount'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            people
+          </i>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+      <mat-card class="crimson-card">
+        <div>
+          <mat-card-title>Cities</mat-card-title>
+          <mat-card-content>
+            <h4>{{statistics['cityCount'] ? statistics['cityCount'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            location_city
+          </i>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+      <mat-card class="green-card">
+        <div>
+          <mat-card-title>Products</mat-card-title>
+          <mat-card-content>
+            <h4>{{statistics['productCount'] ? statistics['productCount'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            view_list
+          </i>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <mat-card class="purple-card">
+        <div>
+          <mat-card-title>Categories</mat-card-title>
+          <mat-card-content>
+            <h4>{{statistics['categoryCount'] ? statistics['categoryCount'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            category
+          </i>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <mat-card class="pink-card">
+        <div>
+        <mat-card-title>Sub Categories</mat-card-title>
+        <mat-card-content>
+          <h4>{{statistics['subcategoriesCount'] ? statistics['subcategoriesCount'] : 0}}</h4>
+        </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            pie_chart
+          </i>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
 </div>

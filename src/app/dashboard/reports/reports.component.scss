@@ -1,9 +1,92 @@
-.report-table {
-  width: 100%;
-  min-width: 600px;
-}
-
 .overflow-x {
   overflow-x: auto;
   overflow-y: hidden;
+}
+
+.progress-spinner {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.blue-card {
+  background-color: #17a2b8;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
+.green-card {
+  background-color: #28a745;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
+.crimson-card {
+  background-color: crimson;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
+.purple-card {
+  background-color: #673AB7;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
+.pink-card {
+  background-color: #e83e8c;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
+mat-card {
+  border-radius: 8px;
+}
+
+mat-card-content {
+  h4 {
+    font-weight: 700;
+  }
 }
