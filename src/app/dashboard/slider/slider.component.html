@@ -3,17 +3,23 @@
     <button class="mb-4 float-right" mat-raised-button color="warn" (click)="openAddSliderModal()">Add Slider</button>
   </div>
   <div class="col-12">
-    <owl-carousel-o class="dashboard-slider" [options]="sliderCustomOptions">
- 
-      <ng-container *ngFor="let slide of sliderList">
-        <ng-template carouselSlide [id]="slide.id">
-          <img [src]="imageUrl + slide.path" [alt]="slide.alt" [title]="slide.id">
-          <i class="material-icons slider-delete" (click)="deleteSlider(slide.id)">
-            delete
-          </i>
-        </ng-template>
-      </ng-container>
-   
-    </owl-carousel-o>
+    <div *ngIf="!loaded" class="progress-spinner">
+      <mat-progress-spinner
+        [color]="'warn'"
+        [mode]="'indeterminate'">
+      </mat-progress-spinner>
+    </div>
+    <ng-container *ngIf="loaded">
+      <owl-carousel-o class="dashboard-slider" [options]="sliderCustomOptions">
+        <ng-container *ngFor="let slide of sliderList">
+          <ng-template carouselSlide [id]="slide.id">
+            <img [src]="imageUrl + slide.path" [alt]="slide.alt" [title]="slide.id">
+            <i class="material-icons slider-delete" (click)="deleteSlider(slide.id)">
+              delete
+            </i>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </ng-container>
   </div>
 </div>

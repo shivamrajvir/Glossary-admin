@@ -6,6 +6,7 @@ import {AddEditProductModalComponent} from '../products/products.component';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Urls} from '../../shared/urls';
+import {CategoryService} from '../../services/category.service';
 
 @Component({
   selector: 'app-categories',
@@ -15,20 +16,56 @@ import {Urls} from '../../shared/urls';
 export class CategoriesComponent implements OnInit {
 
   loaded = false;
-  products = [];
   categories = [];
-  displayedColumns = [];
+  displayedColumns = ['id', 'name', 'image', 'status', 'datetime', 'Actions'];
   imageUrl = environment.imageUrl;
+  selectedProduct;
+  productList = [];
 
-  constructor(private _product: ProductsService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(private _product: ProductsService, private _category: CategoryService,
+              private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.getCategories();
+    this.getProductList();
+  }
+
+  getProductList() {
+    this._product.getProductList()
+      .then((data: any) => {
+        this.productList = data;
+        this.selectedProduct = data[0].id;
+        this.getCategories();
+      })
+      .catch(err => {
+        console.error(err);
+        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        this.snackBar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
   }
 
   getCategories() {
-    this.loaded = true;
-    // this._product.getCategories();
+    const fd = new HttpParams()
+      .set('p_id', this.selectedProduct);
+    this._category.getCategoriesByProductID(fd)
+      .then((data: any[]) => {
+        this.categories = data;
+        this.loaded = true;
+      })
+      .catch(err => {
+        console.error(err);
+        this.loaded = true;
+        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        this.snackBar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
+  }
+
+  productSelectionChanged() {
+    this.loaded = false;
+    this.getCategories();
   }
 
   openAddEditCategoryModal(data?) {
@@ -42,6 +79,28 @@ export class CategoriesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
 
     });
+  }
+
+  changeCategoryStatus(index) {
+    this.categories[index].status = this.categories[index].status === '1' ? '0' : '1';
+    const object = new HttpParams()
+      .set('catId', this.categories[index].id)
+      .set('catStatus', this.categories[index].status === '1' ? '0' : '1');
+    this._category.changeCategoryStatus(object)
+      .then(data => {
+        const status = this.categories[index].status === '0' ? 'De-activated' : 'Activated';
+        this.snackBar.open('Your Category has been ' + status, 'Success', {
+          duration: 2000
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.categories[index].status = this.categories[index].status === '1' ? '0' : '1';
+        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        this.snackBar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
   }
 
 }
@@ -142,7 +201,7 @@ export class AddEditCategoryModalComponent {
     this.addEditCategoryForm.controls['fileName'].setValue('');
   }
 
-  addEditProduct() {
+  addEditCategory() {
     this.isImageUploading = true;
     if (this.addEditCategoryForm.valid) {
       if (this.data.data) {

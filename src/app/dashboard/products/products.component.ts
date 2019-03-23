@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
@@ -18,7 +18,7 @@ export class ProductsComponent implements OnInit {
   displayedColumns = [];
   imageUrl = environment.imageUrl;
 
-  constructor(private _product: ProductsService, private snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(private _product: ProductsService, private snackBar: MatSnackBar, public dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getProductList();
@@ -54,6 +54,28 @@ export class ProductsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getProductList();
     });
+  }
+
+  changeProductStatus(index) {
+    this.products[index].status = this.products[index].status === '1' ? '0' : '1';
+    const object = new HttpParams()
+      .set('productId', this.products[index].id)
+      .set('productStatus', this.products[index].status === '1' ? '0' : '1');
+    this._product.changeProductStatus(object)
+      .then(data => {
+        const status = this.products[index].status === '0' ? 'De-activated' : 'Activated';
+        this.snackBar.open('Your product has been ' + status, 'Success', {
+          duration: 2000
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.products[index].status = this.products[index].status === '1' ? '0' : '1';
+        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        this.snackBar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
   }
 
 }

@@ -23,7 +23,7 @@ export class SliderComponent implements OnInit {
     dots: true,
     navSpeed: 700,
     navText: ['', ''],
-    center: true,
+    center: false,
     responsive: {
       0: {
         items: 1
@@ -144,7 +144,6 @@ export class addSliderModal {
   uploadFile(file) {
     this.isImageUploading = true;
     this.imageUploadFile = file;
-    console.log(this.imageUploadFile);
     const fd = new FormData();
     const name = file.name + new Date().toISOString();
     fd.append('tmp_name', file.name);
@@ -173,12 +172,12 @@ export class addSliderModal {
 
   addSlider() {
     if (this.imageFileName) {
-    const fd = new HttpParams()
-      .set('tmp_name', Date.now().toString())
-      .set('file', this.imageUploadFile);
-    // const fd = new FormData();
-    //   fd.append('tmp_name', Date.now().toString());
-    //   fd.append('file', this.imageUploadFile);
+    // const fd = new HttpParams()
+    //   .set('tmp_name', Date.now().toString())
+    //   .set('file', this.imageUploadFile);
+    const fd = new FormData();
+      fd.append('tmp_name', Date.now().toString());
+      fd.append('file', this.imageUploadFile);
     this._slider.addDashboardSlider(fd)
       .subscribe(data => {
         this.isImageUploading = false;

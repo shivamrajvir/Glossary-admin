@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {addSliderModal, SliderComponent} from './slider/slider.component';
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+import {CategoryService} from '../services/category.service';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     ProductsService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
-    SliderService
+    SliderService,
+    CategoryService
   ]
 })
 export class DashboardModule { }
