@@ -78,7 +78,7 @@ export class CategoriesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.getCategories();
     });
   }
 
@@ -117,7 +117,7 @@ export class AddEditCategoryModalComponent {
   imageUrl = environment.imageUrl;
   isImageUploading = false;
   imageUploadFile;
-  products = [];
+  // products = [];
   p_id;
 
   constructor(
@@ -125,39 +125,39 @@ export class AddEditCategoryModalComponent {
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _category: CategoryService,
     private http: HttpClient, private _product: ProductsService) {
-    this.getProductList();
+    // this.getProductList();
     this.p_id = this.data.p_id;
     this.initializeForm(this.data.data);
   }
 
   getProductList() {
-    this._product.getProductList()
-      .then((data: any) => {
-        this.products = data;
-        if (this.data.data) {
-          this.addEditCategoryForm.controls['productId'].setValue(this.data.data.p_id);
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
-        this.snackbar.open(error, 'Error', {
-          duration: 2000
-        });
-      });
+    // this._product.getProductList()
+    //   .then((data: any) => {
+    //     this.products = data;
+    //     if (this.data.data) {
+    //       this.addEditCategoryForm.controls['productId'].setValue(this.data.data.p_id);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //     const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+    //     this.snackbar.open(error, 'Error', {
+    //       duration: 2000
+    //     });
+    //   });
   }
 
   initializeForm(data?) {
     this.addEditCategoryForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      fileName: new FormControl('', Validators.required),
-      productId: new FormControl('', Validators.required)
+      fileName: new FormControl('', Validators.required)
     });
 
     if (data) {
       this.addEditCategoryForm.controls['name'].setValue(data.name);
-      this.addEditCategoryForm.controls['fileName'].setValue(data.fileName);
-      this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
+      this.addEditCategoryForm.controls['fileName'].setValue(data.image);
+      console.log(this.addEditCategoryForm);
+      // this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
     }
   }
 

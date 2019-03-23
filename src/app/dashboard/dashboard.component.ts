@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
   }
 
   openActivities() {
+    this.showDailyActivity = 'out';
     this.showMenu = this.showMenu === 'out' ? 'in' : 'out';
   }
 
