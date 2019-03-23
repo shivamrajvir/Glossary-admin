@@ -8,8 +8,6 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  private token;
-
   constructor(private http: HttpClient, private router: Router) { }
 
   login(creds) {
@@ -17,6 +15,7 @@ export class AuthService {
       this.http.post(Urls.login, creds)
         .subscribe(data => {
           resolve(data);
+          localStorage.setItem('status', 'true');
         }, err => {
           reject(err);
         });
@@ -40,6 +39,11 @@ export class AuthService {
   // }
 
   getToken() {
-    return this.token;
+    const token = localStorage.getItem('status');
+    if (token) {
+      return token;
+    } else {
+      return null;
+    }
   }
 }

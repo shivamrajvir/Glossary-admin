@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {SnotifyService} from 'ng-snotify';
+import {HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -32,13 +33,22 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     if (this.loginForm.valid) {
-    this._auth.login(this.loginForm.value)
+      const params = new HttpParams()
+        .set('phone', this.loginForm.value.phone)
+        .set('password', this.loginForm.value.password);
+    this._auth.login(params)
       .then(data => {
         console.log(data);
+        if (data['sta'] === 1) {
+          this.router.navigate(['dashboard']);
+        } else {
+          this.snotify.error('Error: Internal Server Error');
+        }
       })
       .catch(err => {
         console.error(err);
-        this.router.navigate(['dashboard']);
+        const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
+        this.snotify.error('Error: ' + error);
       });
     } else {
       this.snotify.error('Please Enter credentials properly!');
