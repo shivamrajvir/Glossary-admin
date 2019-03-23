@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   initializeForm() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required)
     });
   }
@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.snotify.error('Please Enter credentials properly!');
     }
+  }
+
+  restrictInput() {
+
   }
 
 }

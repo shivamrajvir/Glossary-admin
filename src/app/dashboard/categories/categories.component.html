@@ -64,7 +64,7 @@
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let element;index as i">
               <i class="material-icons" style="color: #F44336; cursor: pointer"
-                 (click)="openAddEditProductModal(element)">
+                 (click)="openAddEditCategoryModal(element)">
                 edit
               </i>
               <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'" (change)="changeCategoryStatus(i)">

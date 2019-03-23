@@ -53,3 +53,14 @@ button {
     }
   }
 }
+
+.menu-arrow {
+  display: flex;
+  transition: all 0.3s ease-in;
+  font-size: 16px;
+}
+
+.arrow-rotate-down {
+  color: #F44336;
+  transform: rotate(-90deg);
+}

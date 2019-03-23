@@ -72,12 +72,13 @@ export class CategoriesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEditCategoryModalComponent, {
       width: '600px',
       data: {
-        data: data ? data : ''
+        data: data ? data : '',
+        p_id: this.selectedProduct
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.getCategories();
     });
   }
 
@@ -116,45 +117,47 @@ export class AddEditCategoryModalComponent {
   imageUrl = environment.imageUrl;
   isImageUploading = false;
   imageUploadFile;
-  products = [];
+  // products = [];
+  p_id;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data,
-    public snackbar: MatSnackBar, private _product: ProductsService,
-    private http: HttpClient) {
-    this.getProductList();
+    public snackbar: MatSnackBar, private _category: CategoryService,
+    private http: HttpClient, private _product: ProductsService) {
+    // this.getProductList();
+    this.p_id = this.data.p_id;
     this.initializeForm(this.data.data);
   }
 
   getProductList() {
-    this._product.getProductList()
-      .then((data: any) => {
-        this.products = data;
-        if (this.data.data) {
-          this.addEditCategoryForm.controls['productId'].setValue(this.data.data.p_id);
-        }
-      })
-      .catch(err => {
-        console.error(err);
-        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
-        this.snackbar.open(error, 'Error', {
-          duration: 2000
-        });
-      });
+    // this._product.getProductList()
+    //   .then((data: any) => {
+    //     this.products = data;
+    //     if (this.data.data) {
+    //       this.addEditCategoryForm.controls['productId'].setValue(this.data.data.p_id);
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //     const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+    //     this.snackbar.open(error, 'Error', {
+    //       duration: 2000
+    //     });
+    //   });
   }
 
   initializeForm(data?) {
     this.addEditCategoryForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      fileName: new FormControl('', Validators.required),
-      productId: new FormControl('', Validators.required)
+      fileName: new FormControl('', Validators.required)
     });
 
     if (data) {
       this.addEditCategoryForm.controls['name'].setValue(data.name);
-      this.addEditCategoryForm.controls['fileName'].setValue(data.fileName);
-      this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
+      this.addEditCategoryForm.controls['fileName'].setValue(data.image);
+      console.log(this.addEditCategoryForm);
+      // this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
     }
   }
 
@@ -208,8 +211,9 @@ export class AddEditCategoryModalComponent {
         const object = new HttpParams()
           .set('name', this.addEditCategoryForm.value.name)
           .set('fileName', this.addEditCategoryForm.value.fileName)
-          .set('id', this.data.data.id);
-        this._product.editProduct(object)
+          .set('id', this.data.data.id)
+          .set('p_id', this.p_id);
+        this._category.editCategory(object)
           .then(data => {
             this.closeModal();
           })
@@ -222,11 +226,12 @@ export class AddEditCategoryModalComponent {
       } else {
         const object = new HttpParams()
           .set('name', this.addEditCategoryForm.value.name)
-          .set('fileName', this.addEditCategoryForm.value.fileName);
-        this._product.addProduct(object)
+          .set('fileName', this.addEditCategoryForm.value.fileName)
+          .set('p_id', this.p_id);
+        this._category.addCategory(object)
           .then(data => {
             this.isImageUploading = false;
-            this.snackbar.open('Product Added', 'Success', {
+            this.snackbar.open('Category Added', 'Success', {
               duration: 4000
             });
             this.closeModal();
@@ -240,7 +245,7 @@ export class AddEditCategoryModalComponent {
           });
       }
     } else {
-      this.snackbar.open('Please add Name and upload an image for the product', 'Error', {
+      this.snackbar.open('Please add Name and upload an image for the Category', 'Error', {
         duration: 4000
       });
     }

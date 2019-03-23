@@ -4,12 +4,12 @@
     <mat-card-content class="d-flex justify-content-center align-items-center">
       <form *ngIf="loginForm" [formGroup]="loginForm">
         <mat-form-field class="w-100">
-          <input matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="loginForm.controls['email'].touched && !loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
-            Please enter a valid email address
+          <input matInput type="number" placeholder="Email" formControlName="phone" (keypress)="restrictInput($event)">
+          <mat-error *ngIf="loginForm.controls['phone'].touched && !loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
+            Please enter a valid phone number
           </mat-error>
-          <mat-error *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].value.length && loginForm.controls['email'].invalid">
-            Email is <strong>required</strong>
+          <mat-error *ngIf="loginForm.controls['phone'].touched && loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
+            phone is <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <mat-form-field class="w-100">
