@@ -1,0 +1,25 @@
+.dashboard-slider {
+  img {
+    width: 260px;
+    height: 200px;
+    object-fit: contain;
+    margin: 0 5px;
+    position: relative;
+  }
+
+  .slider-delete {
+    color: red;
+    cursor: pointer;
+    position: absolute;
+    top: calc(50% - 12px);
+    right: 0;
+  }
+}
+
+.progress-spinner {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

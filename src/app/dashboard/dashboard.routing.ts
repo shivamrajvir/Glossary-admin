@@ -1,9 +1,9 @@
 import {DashboardComponent} from './dashboard.component';
 import {Routes} from '@angular/router';
-import {DailyActivityComponent} from './daily-activity/daily-activity.component';
 import {ReportsComponent} from './reports/reports.component';
 import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
+import {SliderComponent} from './slider/slider.component';
 
 export const routes: Routes = [
   {
@@ -23,12 +23,12 @@ export const routes: Routes = [
         component: CategoriesComponent
       },
       {
-        path: 'daily-activity',
-        component: DailyActivityComponent
-      },
-      {
         path: 'reports',
         component: ReportsComponent
+      },
+      {
+        path: 'slider',
+        component: SliderComponent
       }
     ]
   }

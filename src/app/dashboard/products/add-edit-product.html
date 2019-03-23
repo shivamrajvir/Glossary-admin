@@ -1,0 +1,32 @@
+
+  <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
+
+    <h3>{{data.data ? 'Edit' : 'Add'}} Product</h3>
+    <form *ngIf="!isImageUploading" style="display: flex; flex-direction: column" [formGroup]="addEditProductForm">
+      <mat-form-field color="warn">
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="addEditProductForm.controls['name'].touched && addEditProductForm.controls['name'].invalid">
+          Please enter <strong>name</strong>
+        </mat-error>
+      </mat-form-field>
+      <div *ngIf="addEditProductForm.controls['image'].value" style="">
+        <img [src]="imageUrl + addEditProductForm.controls['image'].value" style="height: 50px; width: auto; object-fit: contain" />
+        <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">
+          delete
+        </i>
+      </div>
+      <button *ngIf="!addEditProductForm.controls['image'].value" mat-raised-button
+              color="accent" (click)="file.click()">Upload File</button>
+      <input hidden #file type="file" accept="image/jpeg, image/png" (change)="uploadImage($event)">
+    </form>
+    <div *ngIf="isImageUploading" class="progress-spinner">
+      <mat-progress-spinner
+        [color]="'warn'"
+        [mode]="'indeterminate'">
+      </mat-progress-spinner>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button color="warn" mat-dialog-close>Cancel</button>
+    <button mat-raised-button cdkFocusInitial color="warn" (click)="addEditProduct()">Save</button>
+  </mat-dialog-actions>
