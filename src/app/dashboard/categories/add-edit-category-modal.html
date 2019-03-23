@@ -17,7 +17,7 @@
         Please enter <strong>name</strong>
       </mat-error>
     </mat-form-field>
-    <div *ngIf="addEditCategoryForm.controls['fileName'].value" style="">
+    <div *ngIf="addEditCategoryForm.controls['fileName'].value" class="d-flex align-items-center">
       <img [src]="imageUrl + addEditCategoryForm.controls['fileName'].value" style="height: 50px; width: auto; object-fit: contain" />
       <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">
         delete
