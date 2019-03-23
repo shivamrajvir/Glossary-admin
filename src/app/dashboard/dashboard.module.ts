@@ -10,7 +10,7 @@ import {AddEditCategoryModalComponent, CategoriesComponent} from './categories/c
 import {ProductsService} from '../services/products.service';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
-import {addSliderModal, SliderComponent} from './slider/slider.component';
+import {addSliderModalComponent, SliderComponent} from './slider/slider.component';
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
@@ -24,7 +24,7 @@ import {CategoryService} from '../services/category.service';
     CategoriesComponent,
     AddEditProductModalComponent,
     SliderComponent,
-    addSliderModal,
+    addSliderModalComponent,
     AddEditCategoryModalComponent
   ],
   imports: [
@@ -36,7 +36,7 @@ import {CategoryService} from '../services/category.service';
   ],
   entryComponents: [
     AddEditProductModalComponent,
-    addSliderModal,
+    addSliderModalComponent,
     AddEditCategoryModalComponent
   ],
   providers: [

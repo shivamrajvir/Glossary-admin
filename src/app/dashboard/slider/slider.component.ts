@@ -102,7 +102,7 @@ export class SliderComponent implements OnInit {
   }
 
   openAddSliderModal() {
-    const dialogRef = this.dialog.open(addSliderModal, {
+    const dialogRef = this.dialog.open(addSliderModalComponent, {
       width: '600px'
     });
 
@@ -118,7 +118,7 @@ export class SliderComponent implements OnInit {
 @Component({
   templateUrl: 'add-slider.html',
 })
-export class addSliderModal {
+export class addSliderModalComponent {
 
   isImageUploading = false;
   imageUploadFile;
