@@ -4,7 +4,7 @@
       <mat-card class="mb-2 mt-2">
         <mat-card-title>
           <div class="d-flex justify-content-between align-items-center">
-            <div>Products</div>
+            <div>Products <span>({{activeProductCount}} Active)</span></div>
             <div class="d-flex align-items-center">
               <span class="mr-1" style="font-size: 16px;">Add Product</span>
               <i class="material-icons product-add-icon" (click)="openAddEditProductModal()">
@@ -34,7 +34,7 @@
           <!-- Weight Column -->
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status</th>
-            <td mat-cell *matCellDef="let element"> {{element.status === '1' ? 'Activated' : 'InActive'}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.status === '1' ? 'Activated' : 'De-Actived'}} </td>
           </ng-container>
 
           <!-- Symbol Column -->

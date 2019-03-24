@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   products = [];
   displayedColumns = [];
   imageUrl = environment.imageUrl;
+  activeProductCount = 0;
 
   constructor(private _product: ProductsService, private snackBar: MatSnackBar, public dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
@@ -31,6 +32,7 @@ export class ProductsComponent implements OnInit {
         this.products = data;
         this.displayedColumns = Object.keys(this.products[0]);
         this.displayedColumns.push('Actions');
+        this.calculateActiveProductCount();
         this.loaded = true;
       })
       .catch(err => {
@@ -67,6 +69,7 @@ export class ProductsComponent implements OnInit {
         this.snackBar.open('Your product has been ' + status, 'Success', {
           duration: 2000
         });
+        this.calculateActiveProductCount();
       })
       .catch(err => {
         console.error(err);
@@ -76,6 +79,16 @@ export class ProductsComponent implements OnInit {
           duration: 2000
         });
       });
+  }
+
+  calculateActiveProductCount() {
+    let tempCount = 0;
+    this.products.forEach(p => {
+      if (p.status === '1') {
+        tempCount += 1;
+      }
+    });
+    this.activeProductCount = tempCount;
   }
 
 }
