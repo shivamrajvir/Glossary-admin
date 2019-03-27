@@ -117,7 +117,7 @@ export class AddEditCategoryModalComponent {
   imageUrl = environment.imageUrl;
   isImageUploading = false;
   imageUploadFile;
-  // products = [];
+  products = [];
   p_id;
 
   constructor(
@@ -125,39 +125,48 @@ export class AddEditCategoryModalComponent {
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _category: CategoryService,
     private http: HttpClient, private _product: ProductsService) {
-    // this.getProductList();
+    this.getProductList();
     this.p_id = this.data.p_id;
+    console.log(this.data.data);
     this.initializeForm(this.data.data);
   }
 
   getProductList() {
-    // this._product.getProductList()
-    //   .then((data: any) => {
-    //     this.products = data;
-    //     if (this.data.data) {
-    //       this.addEditCategoryForm.controls['productId'].setValue(this.data.data.p_id);
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //     const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
-    //     this.snackbar.open(error, 'Error', {
-    //       duration: 2000
-    //     });
-    //   });
+    this._product.getProductList()
+      .then((data: any) => {
+        this.products = data;
+        if (this.data.data) {
+          this.addEditCategoryForm.controls['productId'].setValue(this.data.data.product_id);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        this.snackbar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
   }
 
   initializeForm(data?) {
     this.addEditCategoryForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      fileName: new FormControl('', Validators.required)
+      fileName: new FormControl('', Validators.required),
+      productId: new FormControl('', Validators.required)
     });
 
     if (data) {
       this.addEditCategoryForm.controls['name'].setValue(data.name);
       this.addEditCategoryForm.controls['fileName'].setValue(data.image);
       console.log(this.addEditCategoryForm);
-      // this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
+      setTimeout(() => {
+        this.addEditCategoryForm.controls['productId'].disable();
+      }, 0);
+      this.addEditCategoryForm.controls['productId'].setValue(data.p_id);
+    } else {
+      setTimeout(() => {
+        this.addEditCategoryForm.controls['productId'].enable();
+      }, 0);
     }
   }
 
@@ -175,14 +184,18 @@ export class AddEditCategoryModalComponent {
   uploadFile(file) {
     this.isImageUploading = true;
     const fd = new FormData();
-    const name = file.name + new Date().toISOString();
+    let name = '';
+    if (file.type === 'image/jpeg') {
+      name = file.name.split('.jpg') + Date.now() + '.jpg';
+    } else if (file.type === 'image/png') {
+      name = file.name.split('.png') + Date.now() + '.png';
+    }
     this.imageUploadFile = file;
-    fd.append('tmp_name', file.name);
+    fd.append('tmp_name', name);
     fd.append('file', file);
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {
         this.isImageUploading = false;
-        console.log(data);
         this.addEditCategoryForm.controls['fileName'].setValue(data[0].pathName);
         this.snackbar.open('Image Uploaded', 'Success', {
           duration: 4000
@@ -212,7 +225,7 @@ export class AddEditCategoryModalComponent {
           .set('name', this.addEditCategoryForm.value.name)
           .set('fileName', this.addEditCategoryForm.value.fileName)
           .set('id', this.data.data.id)
-          .set('p_id', this.p_id);
+          .set('p_id', this.addEditCategoryForm.value.productId);
         this._category.editCategory(object)
           .then(data => {
             this.closeModal();
@@ -227,7 +240,7 @@ export class AddEditCategoryModalComponent {
         const object = new HttpParams()
           .set('name', this.addEditCategoryForm.value.name)
           .set('fileName', this.addEditCategoryForm.value.fileName)
-          .set('p_id', this.p_id);
+          .set('p_id', this.addEditCategoryForm.value.productId);
         this._category.addCategory(object)
           .then(data => {
             this.isImageUploading = false;

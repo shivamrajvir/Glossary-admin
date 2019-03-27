@@ -6,7 +6,6 @@
             <mat-card-title>Select a product</mat-card-title>
             <mat-form-field color="warn" class="ml-2">
               <mat-select [(value)]="selectedProduct" (selectionChange)="productSelectionChanged()">
-                <mat-option>None</mat-option>
                 <mat-option *ngFor="let p of productList" [value]="p.id">{{p.name}}</mat-option>
               </mat-select>
             </mat-form-field>
