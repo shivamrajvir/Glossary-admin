@@ -225,7 +225,7 @@ export class AddEditCategoryModalComponent {
           .set('name', this.addEditCategoryForm.value.name)
           .set('fileName', this.addEditCategoryForm.value.fileName)
           .set('id', this.data.data.id)
-          .set('p_id', this.addEditCategoryForm.value.productId);
+          .set('p_id', this.p_id);
         this._category.editCategory(object)
           .then(data => {
             this.closeModal();
