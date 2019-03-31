@@ -49,3 +49,12 @@ button {
     display: flex;
   }
 }
+
+.mat-tab-label {
+  font-size: 16px;
+}
+
+.mat-tab-label-active {
+  color: #F44336;
+  font-weight: 600;
+}

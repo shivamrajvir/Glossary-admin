@@ -21,4 +21,7 @@ export class Urls {
   static edit_category = Urls.base + 'editCategories.php';
   static get_category = Urls.base + 'getCategories.php';
   static changeStatus_category = Urls.base + 'changeCategoryStatus.php';
+
+  static get_states = Urls.base + 'getStates.php';
+  static get_cities = Urls.base + 'getCities.php';
 }

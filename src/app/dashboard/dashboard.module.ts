@@ -14,6 +14,8 @@ import {addSliderModalComponent, SliderComponent} from './slider/slider.componen
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
+import { AddressesComponent } from './addresses/addresses.component';
+import {AddressService} from '../services/address.service';
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import {CategoryService} from '../services/category.service';
     AddEditProductModalComponent,
     SliderComponent,
     addSliderModalComponent,
-    AddEditCategoryModalComponent
+    AddEditCategoryModalComponent,
+    AddressesComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +47,8 @@ import {CategoryService} from '../services/category.service';
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}},
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     SliderService,
-    CategoryService
+    CategoryService,
+    AddressService
   ]
 })
 export class DashboardModule { }

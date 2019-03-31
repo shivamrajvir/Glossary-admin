@@ -4,6 +4,7 @@ import {ReportsComponent} from './reports/reports.component';
 import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {SliderComponent} from './slider/slider.component';
+import {AddressesComponent} from './addresses/addresses.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,10 @@ export const routes: Routes = [
       {
         path: 'slider',
         component: SliderComponent
+      },
+      {
+        path: 'address',
+        component: AddressesComponent
       }
     ]
   }
