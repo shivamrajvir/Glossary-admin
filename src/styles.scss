@@ -39,3 +39,13 @@ button {
 .owl-theme .owl-dots {
   margin-top: 5px;
 }
+
+.owl-carousel.owl-drag .owl-item {
+  max-width: 270px;
+}
+
+.owl-carousel.owl-drag .owl-item:hover {
+  .slider-delete {
+    display: flex;
+  }
+}

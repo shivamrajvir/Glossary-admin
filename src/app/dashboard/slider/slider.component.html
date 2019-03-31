@@ -11,7 +11,7 @@
     </div>
     <ng-container *ngIf="loaded">
       <owl-carousel-o class="dashboard-slider" [options]="sliderCustomOptions">
-        <ng-container *ngFor="let slide of sliderList">
+        <ng-container class="showDelete" *ngFor="let slide of sliderList">
           <ng-template carouselSlide [id]="slide.id">
             <img [src]="imageUrl + slide.path" [alt]="slide.alt" [title]="slide.id">
             <i class="material-icons slider-delete" (click)="deleteSlider(slide.id)">

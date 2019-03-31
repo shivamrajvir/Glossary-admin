@@ -1,19 +1,26 @@
 .dashboard-slider {
   img {
     width: 260px;
-    height: 200px;
-    object-fit: contain;
+    height: 170px;
+    object-fit: fill;
     margin: 0 5px;
     position: relative;
   }
 
   .slider-delete {
     color: red;
+    display: none;
     cursor: pointer;
     position: absolute;
     top: calc(50% - 12px);
     right: 0;
+    animation: showDelete 0.5s linear;
   }
+}
+
+@keyframes showDelete {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .progress-spinner {

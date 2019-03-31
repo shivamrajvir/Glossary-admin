@@ -14,8 +14,8 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http.post(Urls.login, creds)
         .subscribe(data => {
-          resolve(data);
           localStorage.setItem('status', 'true');
+          resolve(data);
         }, err => {
           reject(err);
         });
@@ -41,7 +41,7 @@ export class AuthService {
   getToken() {
     const token = localStorage.getItem('status');
     if (token) {
-      return token;
+      return token.slice();
     } else {
       return null;
     }

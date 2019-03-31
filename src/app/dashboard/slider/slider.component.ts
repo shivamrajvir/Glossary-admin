@@ -16,14 +16,16 @@ import {Urls} from '../../shared/urls';
 export class SliderComponent implements OnInit {
 
   sliderCustomOptions: any = {
-    loop: true,
+    loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
     dots: true,
     navSpeed: 700,
     navText: ['', ''],
+    autoWidth: false,
     center: false,
+    responsiveClass: true,
     responsive: {
       0: {
         items: 1
