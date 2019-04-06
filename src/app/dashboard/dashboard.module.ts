@@ -14,7 +14,7 @@ import {addSliderModalComponent, SliderComponent} from './slider/slider.componen
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
-import { AddressesComponent } from './addresses/addresses.component';
+import { AddressesComponent, AddCityModalComponent } from './addresses/addresses.component';
 import {AddressService} from '../services/address.service';
 
 
@@ -28,7 +28,8 @@ import {AddressService} from '../services/address.service';
     SliderComponent,
     addSliderModalComponent,
     AddEditCategoryModalComponent,
-    AddressesComponent
+    AddressesComponent,
+    AddCityModalComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import {AddressService} from '../services/address.service';
   entryComponents: [
     AddEditProductModalComponent,
     addSliderModalComponent,
-    AddEditCategoryModalComponent
+    AddEditCategoryModalComponent,
+    AddCityModalComponent
   ],
   providers: [
     ProductsService,

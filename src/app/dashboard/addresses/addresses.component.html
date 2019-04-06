@@ -3,7 +3,42 @@
     <mat-tab-group color="warn">
       <mat-tab label="Cities">
         <div class="mat-tab-content">
+          <table mat-table [dataSource]="cities" class="mat-elevation-z8 product-table">
 
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No.</th>
+              <td mat-cell *matCellDef="let element; index as i"> {{(i + 1)}} </td>
+            </ng-container>
+  
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Product Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+  
+            <!-- Weight Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status</th>
+              <td mat-cell *matCellDef="let element"> {{element.status === '1' ? 'Activated' : 'De-Actived'}} </td>
+            </ng-container>s
+             
+            <ng-container matColumnDef="Actions">
+              <th mat-header-cell *matHeaderCellDef>Actions</th>
+              <td mat-cell *matCellDef="let element; index as i">
+                <div class="d-flex align-items-center">
+                <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'"
+                 (change)="changeCityStatus(i)">
+                  {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
+                </div>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
         </div>
       </mat-tab>
       <mat-tab label="States">
