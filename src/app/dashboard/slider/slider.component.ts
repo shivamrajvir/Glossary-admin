@@ -57,7 +57,6 @@ export class SliderComponent implements OnInit {
   refreshSliders() {
     this._sliderService.getDashboardSliders()
       .subscribe(data => {
-        console.log(data);
         this.sliderList = data;
         this.loaded = true;
       }, err => {
@@ -91,7 +90,6 @@ export class SliderComponent implements OnInit {
       .set('id', id);
     this._sliderService.deleteSlider(body)
       .subscribe(data => {
-        console.log(data);
         this.refreshSliders();
         Swal.fire(
           'Deleted!',
@@ -134,7 +132,6 @@ export class addSliderModalComponent {
   uploadImage(event) {
     const file = event.target.files[0];
     if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      console.log(file);
       this.uploadFile(file);
     } else {
       this.snackbar.open('Please Upload an image with .jpg or .png format', 'Error', {
@@ -153,7 +150,6 @@ export class addSliderModalComponent {
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {
         this.isImageUploading = false;
-        console.log(data);
         this.imageFileName = data[0].pathName;
         this.snackbar.open('Image Uploaded', 'Success', {
           duration: 4000

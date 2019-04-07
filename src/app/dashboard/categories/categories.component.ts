@@ -127,7 +127,6 @@ export class AddEditCategoryModalComponent {
     private http: HttpClient, private _product: ProductsService) {
     this.getProductList();
     this.p_id = this.data.p_id;
-    console.log(this.data.data);
     this.initializeForm(this.data.data);
   }
 
@@ -158,7 +157,6 @@ export class AddEditCategoryModalComponent {
     if (data) {
       this.addEditCategoryForm.controls['name'].setValue(data.name);
       this.addEditCategoryForm.controls['fileName'].setValue(data.image);
-      console.log(this.addEditCategoryForm);
       setTimeout(() => {
         this.addEditCategoryForm.controls['productId'].disable();
       }, 0);

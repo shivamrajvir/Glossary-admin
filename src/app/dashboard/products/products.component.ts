@@ -29,7 +29,6 @@ export class ProductsComponent implements OnInit {
   getProductList() {
     this._product.getProductList()
       .then((data: any) => {
-        console.log(data);
         this.products = data;
         this.displayedColumns = Object.keys(this.products[0]);
         this.displayedColumns.push('Actions');
@@ -144,7 +143,6 @@ export class AddEditProductModalComponent {
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {
         this.isImageUploading = false;
-        console.log(data);
         this.addEditProductForm.controls['image'].setValue(data[0].pathName);
         this.snackbar.open('Image Uploaded', 'Success', {
           duration: 4000

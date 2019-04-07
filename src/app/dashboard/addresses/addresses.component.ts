@@ -105,9 +105,7 @@ export class AddCityModalComponent {
   constructor(public dialogRef: MatDialogRef<any>, public snackbar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) public data, public _address: AddressService) {
     this.initializeForm();
-    console.log(data);
     this.stateList = data.states;
-    console.log(this.stateList);
   }
 
   initializeForm() {
