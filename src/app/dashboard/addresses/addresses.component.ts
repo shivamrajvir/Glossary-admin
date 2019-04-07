@@ -57,8 +57,26 @@ export class AddressesComponent implements OnInit {
       });
   }
 
-  changeCityStatus(index) {
-
+  changeCityStatus(data, index) {
+    this.cities[index].status = this.cities[index].status === '1' ? '0' : '1';
+    const object = new HttpParams()
+      .set('cityId', data.id)
+      .set('cityStatus', data.status === '1' ? '0' : '1');
+    this._addressService.changeCityStatus(object)
+      .then(data => {
+        const status = this.cities[index].status === '0' ? 'De-activated' : 'Activated';
+        this.snackBar.open('Your City has been ' + status, 'Success', {
+          duration: 2000
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.cities[index].status = this.cities[index].status === '1' ? '0' : '1';
+        const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
+        this.snackBar.open(error, 'Error', {
+          duration: 2000
+        });
+      });
   }
 
   addCity() {

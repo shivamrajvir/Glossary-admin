@@ -40,4 +40,15 @@ export class AddressService {
     });
   }
 
+  changeCityStatus(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.change_city_status, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }
