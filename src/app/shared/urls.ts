@@ -24,4 +24,5 @@ export class Urls {
 
   static get_states = Urls.base + 'getStates.php';
   static get_cities = Urls.base + 'getCities.php';
+  static add_city = Urls.base + 'addCity.php';
 }

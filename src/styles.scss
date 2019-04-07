@@ -13,6 +13,10 @@ $primary-orange: #F44336;
   text-align: center;
 }
 
+.orange-text {
+  color: $primary-orange;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */

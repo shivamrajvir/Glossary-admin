@@ -29,4 +29,15 @@ export class AddressService {
     });
   }
 
+  addCity(object) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_city, object)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

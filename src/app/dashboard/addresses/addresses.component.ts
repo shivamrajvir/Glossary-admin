@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {AddressService} from '../../services/address.service';
-import {MatSnackBar, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MatSnackBar, MAT_DIALOG_DATA, MatDialogRef, MatDialog} from '@angular/material';
 import {HttpParams} from '@angular/common/http';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-addresses',
@@ -10,11 +11,14 @@ import {HttpParams} from '@angular/common/http';
 })
 export class AddressesComponent implements OnInit {
 
-  isLoading = true;
+  loaded = false;
+  states = [];
   cities = [];
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['id', 'name', 'Actions'];
 
-  constructor(private _addressService: AddressService, protected snackBar: MatSnackBar) { }
+  constructor(private _addressService: AddressService, protected snackBar: MatSnackBar,
+              protected dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.getStates();
@@ -22,7 +26,8 @@ export class AddressesComponent implements OnInit {
 
   getStates() {
     this._addressService.getStates()
-      .then(data => {
+      .then((data: any) => {
+        this.states = data;
         this.getCities(data[0].id);
       })
       .catch(err => {
@@ -39,11 +44,11 @@ export class AddressesComponent implements OnInit {
       .set('stateId', id);
     this._addressService.getCities(object)
       .then((data: any) => {
-        this.isLoading = false;
+        this.loaded = true;
         this.cities = data;
       })
       .catch(err => {
-        this.isLoading = false;
+        this.loaded = true;
         console.error(err);
         const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
         this.snackBar.open(error, 'Error', {
@@ -57,7 +62,16 @@ export class AddressesComponent implements OnInit {
   }
 
   addCity() {
+    const dialogRef = this.dialog.open(AddCityModalComponent, {
+      width: '600px',
+      data: {
+        states: this.states
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.getStates();
+    });
   }
 
 }
@@ -66,29 +80,51 @@ export class AddressesComponent implements OnInit {
   templateUrl: 'add-city.html',
 })
 export class AddCityModalComponent {
-  
-cityForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<any>,
-    @Inject(MAT_DIALOG_DATA) public data,) {
-      this.initializeForm(data.data);
-    }
+  cityForm: FormGroup;
+  stateList = [];
 
-    initializeForm(data?) {
-        this.cityForm = new FormGroup({
-          cityName: new FormControl(null, Validators.required),
-          stateId: new FormControl(null, Validators.required),
+  constructor(public dialogRef: MatDialogRef<any>, public snackbar: MatSnackBar,
+              @Inject(MAT_DIALOG_DATA) public data, public _address: AddressService) {
+    this.initializeForm();
+    console.log(data);
+    this.stateList = data.states;
+    console.log(this.stateList);
+  }
+
+  initializeForm() {
+    this.cityForm = new FormGroup({
+      cityName: new FormControl(null, Validators.required),
+      stateId: new FormControl(null, Validators.required),
+    });
+  }
+
+  closeModal(): void {
+    this.dialogRef.close();
+  }
+
+  addCity() {
+    if (this.cityForm.valid) {
+      const object = new HttpParams()
+        .set('stateId', this.cityForm.value.stateId)
+        .set('cityName', this.cityForm.value.cityName);
+      this._address.addCity(object)
+        .then(data => {
+          this.closeModal();
+          this.snackbar.open('Your City has been added', 'Success', {
+            duration: 2000
+          });
+        }).catch(err => {
+        console.error(err);
+        this.snackbar.open('Please add all the details', 'Error', {
+          duration: 2000
         });
-
-        if (data) {
-          this.cityForm.patchValue(data);
-        }
+      });
+    } else {
+      this.snackbar.open('Please add all the details', 'Error', {
+        duration: 2000
+      });
     }
-
-    addCity() {
-        if (this.cityForm.valid) {
-          
-        }
-    }
+  }
 
 }
