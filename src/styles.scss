@@ -13,6 +13,10 @@ $primary-orange: #F44336;
   text-align: center;
 }
 
+.orange-text {
+  color: $primary-orange;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
@@ -48,4 +52,13 @@ button {
   .slider-delete {
     display: flex;
   }
+}
+
+.mat-tab-label {
+  font-size: 16px;
+}
+
+.mat-tab-label-active {
+  color: #F44336;
+  font-weight: 600;
 }

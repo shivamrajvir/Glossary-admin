@@ -1,0 +1,32 @@
+@import "../../../styles";
+
+.mat-tab-content {
+  padding: 10px;
+}
+
+.city-table {
+  width: 100%;
+  min-width: 600px;
+
+  th {
+    font-weight: 600;
+    font-size: 15px;
+  }
+}
+
+.product-add-icon {
+  color: $primary-orange;
+  font-size: 32px;
+}
+
+.product-add-icon:hover {
+  cursor: pointer;
+}
+
+.progress-spinner {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

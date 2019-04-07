@@ -19,7 +19,8 @@ export class ProductsComponent implements OnInit {
   imageUrl = environment.imageUrl;
   activeProductCount = 0;
 
-  constructor(private _product: ProductsService, private snackBar: MatSnackBar, public dialog: MatDialog, private cd: ChangeDetectorRef) { }
+  constructor(private _product: ProductsService, private snackBar: MatSnackBar,
+              public dialog: MatDialog, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.getProductList();
