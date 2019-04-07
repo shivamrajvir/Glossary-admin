@@ -184,9 +184,9 @@ export class AddEditCategoryModalComponent {
     const fd = new FormData();
     let name = '';
     if (file.type === 'image/jpeg') {
-      name = file.name.split('.jpg') + Date.now() + '.jpg';
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.jpg';
     } else if (file.type === 'image/png') {
-      name = file.name.split('.png') + Date.now() + '.png';
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.png';
     }
     this.imageUploadFile = file;
     fd.append('tmp_name', name);

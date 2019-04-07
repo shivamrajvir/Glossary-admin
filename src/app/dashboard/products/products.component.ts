@@ -136,9 +136,14 @@ export class AddEditProductModalComponent {
   uploadFile(file) {
     this.isImageUploading = true;
     const fd = new FormData();
-    const name = file.name + new Date().toISOString();
+    let name = '';
+    if (file.type === 'image/jpeg') {
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.jpg';
+    } else if (file.type === 'image/png') {
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.png';
+    }
     this.imageUploadFile = file;
-    fd.append('tmp_name', file.name);
+    fd.append('tmp_name', name);
     fd.append('file', file);
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {

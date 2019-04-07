@@ -144,8 +144,13 @@ export class addSliderModalComponent {
     this.isImageUploading = true;
     this.imageUploadFile = file;
     const fd = new FormData();
-    const name = file.name + new Date().toISOString();
-    fd.append('tmp_name', file.name);
+    let name = '';
+    if (file.type === 'image/jpeg') {
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.jpg';
+    } else if (file.type === 'image/png') {
+      name = new Date().getFullYear().toString() + new Date().getMonth().toString() + new Date().getDate().toString() + '.png';
+    }
+    fd.append('tmp_name', name);
     fd.append('file', file);
     this.http.post(Urls.upload_product_image, fd)
       .subscribe((data: any) => {
@@ -174,7 +179,7 @@ export class addSliderModalComponent {
     //   .set('tmp_name', Date.now().toString())
     //   .set('file', this.imageUploadFile);
     const fd = new FormData();
-      fd.append('tmp_name', Date.now().toString());
+      fd.append('name', Date.now().toString());
       fd.append('file', this.imageUploadFile);
     this._slider.addDashboardSlider(fd)
       .subscribe(data => {
