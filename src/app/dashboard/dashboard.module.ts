@@ -16,6 +16,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
 import { AddressesComponent, AddCityModalComponent } from './addresses/addresses.component';
 import {AddressService} from '../services/address.service';
+import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {AddressService} from '../services/address.service';
     addSliderModalComponent,
     AddEditCategoryModalComponent,
     AddressesComponent,
-    AddCityModalComponent
+    AddCityModalComponent,
+    NotificationSettingsComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +52,8 @@ import {AddressService} from '../services/address.service';
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
     SliderService,
     CategoryService,
-    AddressService
+    AddressService,
+    NotificationService
   ]
 })
 export class DashboardModule { }
