@@ -26,4 +26,8 @@ export class Urls {
   static get_cities = Urls.base + 'getCities.php';
   static add_city = Urls.base + 'addCity.php';
   static change_city_status = Urls.base + 'changeCityStatus.php';
+
+  static get_notification = Urls.base + 'getNotifications.php';
+  static add_notification = Urls.base + 'addNotifications.php';
+  static edit_notification = Urls.base + 'editNotification.php';
 }

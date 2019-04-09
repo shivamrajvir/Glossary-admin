@@ -20,7 +20,7 @@ export class ProductsComponent implements OnInit {
   activeProductCount = 0;
 
   constructor(private _product: ProductsService, private snackBar: MatSnackBar,
-              public dialog: MatDialog, private cd: ChangeDetectorRef) { }
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getProductList();

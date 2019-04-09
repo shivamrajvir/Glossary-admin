@@ -5,6 +5,7 @@ import {ProductsComponent} from './products/products.component';
 import {CategoriesComponent} from './categories/categories.component';
 import {SliderComponent} from './slider/slider.component';
 import {AddressesComponent} from './addresses/addresses.component';
+import {NotificationSettingsComponent} from './notification-settings/notification-settings.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
       {
         path: 'address',
         component: AddressesComponent
+      },
+      {
+        path: 'notifications',
+        component: NotificationSettingsComponent
       }
     ]
   }

@@ -1,21 +1,42 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import {Urls} from '../shared/urls';
 
 @Injectable()
-export class NotficiationService {
+export class NotificationService {
 
     constructor(private http: HttpClient) {}
 
     getNotifications() {
         return new Promise((resolve, reject) => {
-            return this.http.get()
-            .subscribe();
+            return this.http.get(Urls.get_notification)
+            .subscribe(data => {
+              resolve(data);
+            }, err => {
+              reject(err);
+            });
         });
     }
 
-    addNotification() {
+    addNotification(object) {
       return new Promise((resolve, reject) => {
-        return this.http.get(Urls.);
+        return this.http.post(Urls.add_notification, object)
+          .subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+          });
+      });
+    }
+
+    editNotification(object) {
+      return new Promise((resolve, reject) => {
+        return this.http.post(Urls.edit_notification, object)
+          .subscribe(data => {
+            resolve(data);
+          }, err => {
+            reject(err);
+          });
       });
     }
 
