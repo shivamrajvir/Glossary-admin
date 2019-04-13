@@ -23,6 +23,9 @@ export class Urls {
   static changeStatus_category = Urls.base + 'changeCategoryStatus.php';
 
   static get_states = Urls.base + 'getStates.php';
+  static add_state = Urls.base + 'addState.php';
+  static change_state_status = Urls.base + 'changeStateStatus.php';
+
   static get_cities = Urls.base + 'getCities.php';
   static add_city = Urls.base + 'addCity.php';
   static change_city_status = Urls.base + 'changeCityStatus.php';

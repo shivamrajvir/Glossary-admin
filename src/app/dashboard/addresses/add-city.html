@@ -1,26 +1,41 @@
 
 <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
 
-  <h3>Add City</h3>
-  <form style="display: flex; flex-direction: column"
-        [formGroup]="cityForm">
-    <mat-form-field color="warn">
-      <mat-label>Select a State</mat-label>
-      <mat-select formControlName="stateId" placeholder="Select A State">
-        <mat-option *ngFor="let product of stateList" [value]="product.id">
-          {{product.stateName}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field color="warn">
-      <input matInput placeholder="Name" formControlName="cityName">
-      <mat-error *ngIf="cityForm.controls['cityName'].touched && cityForm.controls['cityName'].invalid">
-        Please enter <strong>City name</strong>
-      </mat-error>
-    </mat-form-field>
-  </form>
+  <h3>Add {{isCity ? 'City' : 'State'}}</h3>
+  <ng-container *ngIf="isCity">
+    <form style="display: flex; flex-direction: column"
+          [formGroup]="cityForm">
+      <mat-form-field color="warn">
+        <mat-label>Select a State</mat-label>
+        <mat-select formControlName="stateId" placeholder="Select A State">
+          <mat-option *ngFor="let product of stateList" [value]="product.id">
+            {{product.stateName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field color="warn">
+        <input matInput placeholder="Name" formControlName="cityName">
+        <mat-error *ngIf="cityForm.controls['cityName'].touched && cityForm.controls['cityName'].invalid">
+          Please enter <strong>City name</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </ng-container>
+
+  <ng-container *ngIf="!isCity">
+    <form *ngIf="stateForm" [formGroup]="stateForm">
+      <mat-form-field color="warn">
+        <mat-label>Select a State</mat-label>
+        <input matInput placeholder="Name" formControlName="stateName" />
+        <mat-error *ngIf="cityForm.controls['cityName'].touched && cityForm.controls['cityName'].invalid">
+          Please enter <strong>City name</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </ng-container>
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button color="warn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button cdkFocusInitial color="warn" (click)="addCity()">Save</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="isCity ? addCity() : addState()">Save</button>
 </mat-dialog-actions>

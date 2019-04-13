@@ -18,6 +18,28 @@ export class AddressService {
     });
   }
 
+  addState(object) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_state, object)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  changeStateStatus(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.change_state_status, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
   getCities(id) {
     return new Promise((resolve, reject) => {
       return this.http.post(Urls.get_cities, id)
