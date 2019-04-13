@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Urls } from "../shared/urls";
 
-Injectable()
+@Injectable()
 export class SubCategoryService {
 
     constructor(private http: HttpClient) {}

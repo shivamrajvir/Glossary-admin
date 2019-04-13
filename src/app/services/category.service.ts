@@ -1,10 +1,11 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Urls} from '../shared/urls';
-import {subscribeOn} from 'rxjs/operators';
 
 @Injectable()
 export class CategoryService {
+
+  selectedCategory;
 
   constructor(private http: HttpClient) {}
 

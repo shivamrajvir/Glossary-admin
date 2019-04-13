@@ -18,7 +18,8 @@ import { AddressesComponent, AddCityModalComponent } from './addresses/addresses
 import {AddressService} from '../services/address.service';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 import { NotificationService } from '../services/notification.service';
-import { SubCategoryComponent } from './sub-category/sub-category.component';
+import { SubCategoryComponent } from './categories/sub-category/sub-category.component';
+import {SubCategoryService} from "../services/sub-category.service";
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { SubCategoryComponent } from './sub-category/sub-category.component';
     SliderService,
     CategoryService,
     AddressService,
-    NotificationService
+    NotificationService,
+    SubCategoryService
   ]
 })
 export class DashboardModule { }
