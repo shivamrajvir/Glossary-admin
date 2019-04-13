@@ -30,4 +30,6 @@ export class Urls {
   static get_notification = Urls.base + 'getNotifications.php';
   static add_notification = Urls.base + 'addNotifications.php';
   static edit_notification = Urls.base + 'editNotification.php';
+
+  static get_subcategories = Urls.base + 'subcatNew.php';
 }

@@ -60,7 +60,7 @@ export class NotificationSettingsComponent implements OnInit {
 @Component({
   templateUrl: 'add-edit-notification.html',
 })
-export class AddEditNotificationModalComponent {
+export class AddEditNotificationModalComponent implements OnInit {
   addEditNotificationForm: FormGroup;
   imageUrl = environment.imageUrl;
   isImageUploading = false;
@@ -72,6 +72,9 @@ export class AddEditNotificationModalComponent {
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _notification: NotificationService,
     private http: HttpClient) {
+  }
+
+  ngOnInit() {
     this.initializeForm(this.data.data);
   }
 
