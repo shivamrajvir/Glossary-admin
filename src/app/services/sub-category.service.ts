@@ -18,4 +18,37 @@ export class SubCategoryService {
         });
     }
 
+  changeSubCatStatus(id) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.changeSubCatStatus, id)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  addSubCategory(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_subcategories, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  editSubCategory(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.edit_subcategories, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

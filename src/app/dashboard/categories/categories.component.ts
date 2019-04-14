@@ -18,7 +18,7 @@ export class CategoriesComponent implements OnInit {
 
   loaded = false;
   categories = [];
-  displayedColumns = ['id', 'name', 'image', 'status', 'datetime', 'Actions', 'subcat'];
+  displayedColumns = ['id', 'name', 'image', 'status', 'datetime', 'subcat', 'Actions'];
   imageUrl = environment.imageUrl;
   selectedProduct;
   productList = [];

@@ -59,6 +59,19 @@
             <th mat-header-cell *matHeaderCellDef>Date</th>
             <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
           </ng-container>
+
+          <ng-container matColumnDef="subcat">
+            <th mat-header-cell *matHeaderCellDef>Sub Categories</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="d-flex justify-content-center w-100">
+                <i class="material-icons orange-info" (click)="goToSubcategoriesPage(element)"
+                   matTooltip="View Sub-Categories">
+                  info
+                </i>
+              </div>
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="Actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let element;index as i">
@@ -68,16 +81,6 @@
               </i>
               <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'" (change)="changeCategoryStatus(i)">
                 {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="subcat">
-            <th mat-header-cell *matHeaderCellDef>Sub Categories</th>
-            <td mat-cell *matCellDef="let element">
-              <i class="material-icons orange-info" (click)="goToSubcategoriesPage(element)"
-                 matTooltip="View Sub-Categories">
-                info
-              </i>
             </td>
           </ng-container>
 

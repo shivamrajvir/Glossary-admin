@@ -18,7 +18,7 @@ import { AddressesComponent, AddCityModalComponent } from './addresses/addresses
 import {AddressService} from '../services/address.service';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 import { NotificationService } from '../services/notification.service';
-import { SubCategoryComponent } from './categories/sub-category/sub-category.component';
+import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
 import {SubCategoryService} from "../services/sub-category.service";
 
 
@@ -35,7 +35,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     AddressesComponent,
     AddCityModalComponent,
     NotificationSettingsComponent,
-    SubCategoryComponent
+    SubCategoryComponent,
+    AddEditSubCategoryModalComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +49,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     AddEditProductModalComponent,
     addSliderModalComponent,
     AddEditCategoryModalComponent,
-    AddCityModalComponent
+    AddCityModalComponent,
+    AddEditSubCategoryModalComponent
   ],
   providers: [
     ProductsService,

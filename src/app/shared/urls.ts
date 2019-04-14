@@ -32,4 +32,7 @@ export class Urls {
   static edit_notification = Urls.base + 'editNotification.php';
 
   static get_subcategories = Urls.base + 'subcatNew.php';
+  static changeSubCatStatus = Urls.base + 'changeSubcatStatus.php';
+  static add_subcategories = Urls.base + 'addSubCategories.php';
+  static edit_subcategories = Urls.base + 'editSubCategories.php';
 }

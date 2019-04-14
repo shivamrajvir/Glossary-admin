@@ -1,20 +1,25 @@
 <div class="row ml-0 mr-0">
   <div class="col-12 pb-4">
     <ng-container *ngIf="loaded">
-      <mat-card class="mb-2 mt-2 pb-0 pt-1">
-        <mat-card-title>Sub Categories</mat-card-title>
-      </mat-card>
       <mat-card class="mb-2 mt-2">
         <mat-card-title>
           <div class="d-flex justify-content-between align-items-center">
-            <div>Categories</div>
+            <div>Sub Categories</div>
             <div class="d-flex align-items-center">
-              <span class="mr-1" style="font-size: 16px;">Add Category</span>
+              <span class="mr-1" style="font-size: 16px;">Add Sub Category</span>
               <i class="material-icons product-add-icon" (click)="openAddEditSubCategoryModal()">
                 add_circle
               </i>
             </div>
           </div>
+          <mat-card-content style="margin-bottom: 0;">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item" routerLink="../">Categories</li>
+                <li class="breadcrumb-item b-active" aria-current="page">{{_category.selectedCategory?.name}}</li>
+              </ol>
+            </nav>
+          </mat-card-content>
         </mat-card-title>
       </mat-card>
       <div *ngIf="subCategories.length" class="overflow-x">
