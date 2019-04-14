@@ -189,6 +189,7 @@ export class AddEditSubCategoryModalComponent {
       } else {
         const object = new HttpParams()
           .set('name', this.addEditSubCategoryForm.value.name)
+          .set('description', this.addEditSubCategoryForm.value.description)
           .set('fileName', this.addEditSubCategoryForm.value.fileName)
           .set('c_id', this._category.selectedCategory.id);
         this._subCat.addSubCategory(object)
