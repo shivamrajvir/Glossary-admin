@@ -16,7 +16,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
 import { AddressesComponent, AddCityModalComponent } from './addresses/addresses.component';
 import {AddressService} from '../services/address.service';
-import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
+import {
+  AddEditNotificationModalComponent,
+  NotificationSettingsComponent
+} from './notification-settings/notification-settings.component';
 import { NotificationService } from '../services/notification.service';
 import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
 import {SubCategoryService} from "../services/sub-category.service";
@@ -36,7 +39,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     AddCityModalComponent,
     NotificationSettingsComponent,
     SubCategoryComponent,
-    AddEditSubCategoryModalComponent
+    AddEditSubCategoryModalComponent,
+    AddEditNotificationModalComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +54,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     addSliderModalComponent,
     AddEditCategoryModalComponent,
     AddCityModalComponent,
-    AddEditSubCategoryModalComponent
+    AddEditSubCategoryModalComponent,
+    AddEditNotificationModalComponent
   ],
   providers: [
     ProductsService,
