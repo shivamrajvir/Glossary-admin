@@ -62,3 +62,25 @@ button {
   color: #F44336;
   font-weight: 600;
 }
+
+.breadcrumb {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+  margin-top: 5px;
+
+  .breadcrumb-item {
+    color: black;
+    outline: none !important;
+    transition: all 0.2s ease-in;
+  }
+
+  .breadcrumb-item:hover {
+    color: #F44336;
+    cursor: pointer;
+  }
+
+  .breadcrumb-item:hover.b-active {
+    color: black;
+  }
+}

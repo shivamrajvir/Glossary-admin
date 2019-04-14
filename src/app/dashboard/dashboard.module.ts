@@ -16,8 +16,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {CategoryService} from '../services/category.service';
 import { AddressesComponent, AddCityModalComponent } from './addresses/addresses.component';
 import {AddressService} from '../services/address.service';
-import {AddEditNotificationModalComponent, NotificationSettingsComponent} from './notification-settings/notification-settings.component';
-import {NotificationService} from '../services/notification.service';
+import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
+import { NotificationService } from '../services/notification.service';
+import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
+import {SubCategoryService} from "../services/sub-category.service";
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import {NotificationService} from '../services/notification.service';
     AddressesComponent,
     AddCityModalComponent,
     NotificationSettingsComponent,
-    AddEditNotificationModalComponent
+    SubCategoryComponent,
+    AddEditSubCategoryModalComponent
   ],
   imports: [
     CommonModule,
@@ -47,7 +50,7 @@ import {NotificationService} from '../services/notification.service';
     addSliderModalComponent,
     AddEditCategoryModalComponent,
     AddCityModalComponent,
-    AddEditNotificationModalComponent
+    AddEditSubCategoryModalComponent
   ],
   providers: [
     ProductsService,
@@ -56,7 +59,8 @@ import {NotificationService} from '../services/notification.service';
     SliderService,
     CategoryService,
     AddressService,
-    NotificationService
+    NotificationService,
+    SubCategoryService
   ]
 })
 export class DashboardModule { }

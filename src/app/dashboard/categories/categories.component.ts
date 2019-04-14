@@ -7,6 +7,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Urls} from '../../shared/urls';
 import {CategoryService} from '../../services/category.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-categories',
@@ -17,13 +18,13 @@ export class CategoriesComponent implements OnInit {
 
   loaded = false;
   categories = [];
-  displayedColumns = ['id', 'name', 'image', 'status', 'datetime', 'Actions'];
+  displayedColumns = ['id', 'name', 'image', 'status', 'datetime', 'subcat', 'Actions'];
   imageUrl = environment.imageUrl;
   selectedProduct;
   productList = [];
 
   constructor(private _product: ProductsService, private _category: CategoryService,
-              private snackBar: MatSnackBar, public dialog: MatDialog) { }
+              private snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.getProductList();
@@ -102,6 +103,11 @@ export class CategoriesComponent implements OnInit {
           duration: 2000
         });
       });
+  }
+
+  goToSubcategoriesPage(category) {
+    this._category.selectedCategory = category;
+    this.router.navigate(['dashboard/categories/sub-categories']);
   }
 
 }

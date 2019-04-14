@@ -1,31 +1,29 @@
 <div class="row ml-0 mr-0">
   <div class="col-12 pb-4">
     <ng-container *ngIf="loaded">
-      <mat-card class="mb-2 mt-2 pb-0 pt-1">
-          <div class="d-flex justify-content-start align-items-center">
-            <mat-card-title>Select a product</mat-card-title>
-            <mat-form-field color="warn" class="ml-2">
-              <mat-select [(value)]="selectedProduct" (selectionChange)="productSelectionChanged()">
-                <mat-option *ngFor="let p of productList" [value]="p.id">{{p.name}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-      </mat-card>
       <mat-card class="mb-2 mt-2">
         <mat-card-title>
           <div class="d-flex justify-content-between align-items-center">
-            <div>Categories</div>
+            <div>Sub Categories</div>
             <div class="d-flex align-items-center">
-              <span class="mr-1" style="font-size: 16px;">Add Category</span>
-              <i class="material-icons product-add-icon" (click)="openAddEditCategoryModal()">
+              <span class="mr-1" style="font-size: 16px;">Add Sub Category</span>
+              <i class="material-icons product-add-icon" (click)="openAddEditSubCategoryModal()">
                 add_circle
               </i>
             </div>
           </div>
+          <mat-card-content style="margin-bottom: 0;">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item" routerLink="../">Categories</li>
+                <li class="breadcrumb-item b-active" aria-current="page">{{_category.selectedCategory?.name}}</li>
+              </ol>
+            </nav>
+          </mat-card-content>
         </mat-card-title>
       </mat-card>
-      <div *ngIf="categories.length" class="overflow-x">
-        <table mat-table [dataSource]="categories" class="mat-elevation-z8 product-table">
+      <div *ngIf="subCategories.length" class="overflow-x">
+        <table mat-table [dataSource]="subCategories" class="mat-elevation-z8 product-table">
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
@@ -59,27 +57,15 @@
             <th mat-header-cell *matHeaderCellDef>Date</th>
             <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
           </ng-container>
-
-          <ng-container matColumnDef="subcat">
-            <th mat-header-cell *matHeaderCellDef>Sub Categories</th>
-            <td mat-cell *matCellDef="let element">
-              <div class="d-flex justify-content-center w-100">
-                <i class="material-icons orange-info" (click)="goToSubcategoriesPage(element)"
-                   matTooltip="View Sub-Categories">
-                  info
-                </i>
-              </div>
-            </td>
-          </ng-container>
-
           <ng-container matColumnDef="Actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let element;index as i">
               <i class="material-icons" style="color: #F44336; cursor: pointer"
-                 (click)="openAddEditCategoryModal(element)">
+                 (click)="openAddEditSubCategoryModal(element)">
                 edit
               </i>
-              <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'" (change)="changeCategoryStatus(i)">
+              <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'"
+                                (change)="changeSubCategoryStatus(i)">
                 {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
             </td>
           </ng-container>
@@ -88,7 +74,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <ng-container *ngIf="loaded && !categories.length">
+      <ng-container *ngIf="loaded && !subCategories.length">
         <p class="no-records-found">No Records Found</p>
       </ng-container>
     </ng-container>
