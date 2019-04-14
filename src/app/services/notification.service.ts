@@ -40,4 +40,15 @@ export class NotificationService {
       });
     }
 
+    deleteNotif(obj) {
+      return new Promise((resolve, reject) => {
+        return this.http.post(Urls.delete_notification, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+      });
+    }
+
 }

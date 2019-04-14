@@ -34,6 +34,9 @@ export class CategoriesComponent implements OnInit {
     this._product.getProductList()
       .then((data: any) => {
         this.productList = data;
+        this.productList = this.productList.filter(p => {
+          return (p.status === '1');
+        });
         this.selectedProduct = data[0].id;
         this.getCategories();
       })
@@ -140,6 +143,9 @@ export class AddEditCategoryModalComponent {
     this._product.getProductList()
       .then((data: any) => {
         this.products = data;
+        this.products = this.products.filter(p => {
+          return (p.status === '1');
+        });
         if (this.data.data) {
           this.addEditCategoryForm.controls['productId'].setValue(this.data.data.product_id);
         }

@@ -15,7 +15,7 @@ export class NotificationSettingsComponent implements OnInit {
 
   notifications = [];
   loaded = false;
-  displayColumns = ['id', 'title', 'image', 'validTill', 'status', 'actions'];
+  displayColumns = ['id', 'title', 'image', 'validTill', 'actions'];
   imageUrl = environment.imageUrl;
 
   constructor(private _notifications: NotificationService, private snackBar: MatSnackBar,
@@ -36,8 +36,22 @@ export class NotificationSettingsComponent implements OnInit {
     });
   }
 
-  changeNotificationStatus() {
-
+  deleteNotification(data) {
+    const obj = new HttpParams()
+    .set('id', data.id);
+      this._notifications.deleteNotif(obj)
+      .then(data => {
+        this.getNotifications();
+        this.snackBar.open('Your notification was deleted', 'Success', {
+          duration: 2000
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.snackBar.open('Unable to delete your notification', 'Error', {
+          duration: 4000
+        });
+      });
   }
 
   openAddEditNotificationModal(data?) {
