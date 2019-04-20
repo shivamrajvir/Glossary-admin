@@ -18,10 +18,10 @@ export class SubCategoryComponent implements OnInit {
 
   loaded = false;
   subCategories = [];
-  displayedColumns = ['id', 'name', 'image', 'status', 'Actions'];
+  displayedColumns = ['id', 'name', 'image', 'status', 'Actions', 'details'];
   imageUrl = environment.imageUrl;
 
-  constructor(private _subCategory: SubCategoryService, private _category: CategoryService,
+  constructor(private _subCategory: SubCategoryService, public _category: CategoryService,
               protected snackbar: MatSnackBar, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
