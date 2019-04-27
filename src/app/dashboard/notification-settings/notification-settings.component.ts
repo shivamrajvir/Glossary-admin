@@ -102,6 +102,7 @@ export class AddEditNotificationModalComponent implements OnInit {
 
     if (data) {
       this.addEditNotificationForm.patchValue(data);
+      this.addEditNotificationForm.controls['validTill'].setValue(new Date(data.validTill));
     }
   }
 
@@ -156,7 +157,7 @@ export class AddEditNotificationModalComponent implements OnInit {
     this.isImageUploading = true;
     if (this.addEditNotificationForm.valid) {
       const dateFormat = this.addEditNotificationForm.value.validTill.getUTCFullYear().toString() + '-' +
-        this.addEditNotificationForm.value.validTill.getUTCMonth().toString() + '-' +
+        (this.addEditNotificationForm.value.validTill.getUTCMonth() + 1).toString() + '-' +
         this.addEditNotificationForm.value.validTill.getUTCDate().toString();
       if (this.data.data) {
         const object = new HttpParams()
