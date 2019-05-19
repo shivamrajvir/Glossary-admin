@@ -13,6 +13,7 @@ import {HttpParams} from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loading = false;
 
   constructor(private router: Router, private _auth: AuthService, private snotify: SnotifyService) { }
 
@@ -33,11 +34,13 @@ export class LoginComponent implements OnInit {
 
   doLogin() {
     if (this.loginForm.valid) {
+      this.startLoading();
       const params = new HttpParams()
         .set('phone', this.loginForm.value.phone)
         .set('password', this.loginForm.value.password);
     this._auth.login(params)
       .then(data => {
+        this.stopLoading();
         if (data['sta'] === 1) {
           this.router.navigate(['dashboard']);
         } else {
@@ -45,6 +48,7 @@ export class LoginComponent implements OnInit {
         }
       })
       .catch(err => {
+        this.stopLoading();
         console.error(err);
         const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
         this.snotify.error('Error: ' + error);
@@ -61,6 +65,14 @@ export class LoginComponent implements OnInit {
     if (e.keyCode === 43 || e.keyCode === 101 || e.keyCode === 45 || e.keyCode === 46) {
       e.preventDefault();
     }
+  }
+
+  startLoading() {
+    this.loading = true;
+  }
+
+  stopLoading() {
+    this.loading = false;
   }
 
 }

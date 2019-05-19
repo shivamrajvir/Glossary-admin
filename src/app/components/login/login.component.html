@@ -1,5 +1,5 @@
 <div class="login-div d-flex justify-content-center align-items-center min-vh-100">
-  <mat-card class="login-card">
+  <mat-card *ngIf="!loading" class="login-card">
     <mat-card-title class="text-center">Login</mat-card-title>
     <mat-card-content class="d-flex justify-content-center align-items-center">
       <form *ngIf="loginForm" [formGroup]="loginForm">
@@ -22,4 +22,7 @@
       </form>
     </mat-card-content>
   </mat-card>
+  <div *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>

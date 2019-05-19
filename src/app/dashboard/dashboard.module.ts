@@ -21,7 +21,7 @@ import {
   NotificationSettingsComponent
 } from './notification-settings/notification-settings.component';
 import { NotificationService } from '../services/notification.service';
-import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
+import {AddEditSubCategoryModalComponent, SubCategoryComponent, SubCategoryDetailsComponent} from './categories/sub-category/sub-category.component';
 import {SubCategoryService} from "../services/sub-category.service";
 
 
@@ -40,7 +40,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     NotificationSettingsComponent,
     SubCategoryComponent,
     AddEditSubCategoryModalComponent,
-    AddEditNotificationModalComponent
+    AddEditNotificationModalComponent,
+    SubCategoryDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +56,8 @@ import {SubCategoryService} from "../services/sub-category.service";
     AddEditCategoryModalComponent,
     AddCityModalComponent,
     AddEditSubCategoryModalComponent,
-    AddEditNotificationModalComponent
+    AddEditNotificationModalComponent,
+    SubCategoryDetailsComponent
   ],
   providers: [
     ProductsService,

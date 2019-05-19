@@ -61,6 +61,19 @@ export class SubCategoryComponent implements OnInit {
     });
   }
 
+  openSubCategoryDetailsModal(data?) {
+    const dialogRef = this.dialog.open(SubCategoryDetailsComponent, {
+      width: '600px',
+      data: {
+        data: data ? data : ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getSubCategoryList();
+    });
+  }
+
   changeSubCategoryStatus(index) {
     this.subCategories[index].status = this.subCategories[index].status === '1' ? '0' : '1';
     const object = new HttpParams()
@@ -213,6 +226,42 @@ export class AddEditSubCategoryModalComponent {
         duration: 4000
       });
     }
+  }
+
+}
+
+
+@Component({
+  templateUrl: 'add-edit-subcategory-modal.html',
+})
+export class SubCategoryDetailsComponent {
+
+  subCategoryDetailsForm: FormGroup;
+
+  constructor(
+    public dialogRef: MatDialogRef<any>,
+    @Inject(MAT_DIALOG_DATA) public data,
+    public snackbar: MatSnackBar, private _subCat: SubCategoryService) {
+    this.initializeForm(this.data.data ? this.data.data : null);
+  }
+
+  initializeForm(data?) {
+    this.subCategoryDetailsForm = new FormGroup({
+      subCategoryId: new FormControl(null),
+      quantity: new FormControl(null, [Validators.required, Validators.min(1)]),
+      unit: new FormControl(null, Validators.required),
+      price: new FormControl(null, Validators.required),
+      discountPrice: new FormControl(null),
+      stock: new FormControl(null, [Validators.required, Validators.min(1)])
+    });
+
+    if (data) {
+      this.subCategoryDetailsForm.controls['subCategoryId'].setValue(data.id);
+    }
+  }
+
+  closeModal(): void {
+    this.dialogRef.close();
   }
 
 }
