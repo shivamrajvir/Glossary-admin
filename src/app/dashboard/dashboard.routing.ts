@@ -7,6 +7,7 @@ import {SliderComponent} from './slider/slider.component';
 import {AddressesComponent} from './addresses/addresses.component';
 import {NotificationSettingsComponent} from './notification-settings/notification-settings.component';
 import {SubCategoryComponent} from "./categories/sub-category/sub-category.component";
+import { SubCategoryDetailsComponent } from './sub-category-details/sub-category-details.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,10 @@ export const routes: Routes = [
       {
         path: 'notifications',
         component: NotificationSettingsComponent
+      },
+      {
+        path: 'category/subcategory/details',
+        component: SubCategoryDetailsComponent
       }
     ]
   }

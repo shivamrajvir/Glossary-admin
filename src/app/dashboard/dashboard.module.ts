@@ -9,7 +9,7 @@ import {AddEditProductModalComponent, ProductsComponent} from './products/produc
 import {AddEditCategoryModalComponent, CategoriesComponent} from './categories/categories.component';
 import {ProductsService} from '../services/products.service';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MAT_SNACK_BAR_DEFAULT_OPTIONS} from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {addSliderModalComponent, SliderComponent} from './slider/slider.component';
 import {SliderService} from '../services/slider.service';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -21,8 +21,9 @@ import {
   NotificationSettingsComponent
 } from './notification-settings/notification-settings.component';
 import { NotificationService } from '../services/notification.service';
-import {AddEditSubCategoryModalComponent, SubCategoryComponent, SubCategoryDetailsComponent} from './categories/sub-category/sub-category.component';
-import {SubCategoryService} from "../services/sub-category.service";
+import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
+import {AddEditSubCategoryDetailsModalComponent, SubCategoryDetailsComponent} from './sub-category-details/sub-category-details.component';
+import {SubCategoryService} from '../services/sub-category.service';
 
 
 @NgModule({
@@ -41,14 +42,16 @@ import {SubCategoryService} from "../services/sub-category.service";
     SubCategoryComponent,
     AddEditSubCategoryModalComponent,
     AddEditNotificationModalComponent,
-    SubCategoryDetailsComponent
+    SubCategoryDetailsComponent,
+    AddEditSubCategoryDetailsModalComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModules,
     ReactiveFormsModule,
-    CarouselModule
+    CarouselModule,
+    FormsModule
   ],
   entryComponents: [
     AddEditProductModalComponent,
@@ -57,7 +60,7 @@ import {SubCategoryService} from "../services/sub-category.service";
     AddCityModalComponent,
     AddEditSubCategoryModalComponent,
     AddEditNotificationModalComponent,
-    SubCategoryDetailsComponent
+    AddEditSubCategoryDetailsModalComponent
   ],
   providers: [
     ProductsService,

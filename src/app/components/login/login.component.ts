@@ -40,12 +40,14 @@ export class LoginComponent implements OnInit {
         .set('password', this.loginForm.value.password);
     this._auth.login(params)
       .then(data => {
+        console.log(data);
+        this.router.navigate(['dashboard']);
+        // if (data['sta'] === 1) {
+        //   this.router.navigate(['dashboard']);
+        // } else {
+        //   this.snotify.error('Error: Internal Server Error');
+        // }
         this.stopLoading();
-        if (data['sta'] === 1) {
-          this.router.navigate(['dashboard']);
-        } else {
-          this.snotify.error('Error: Internal Server Error');
-        }
       })
       .catch(err => {
         this.stopLoading();
