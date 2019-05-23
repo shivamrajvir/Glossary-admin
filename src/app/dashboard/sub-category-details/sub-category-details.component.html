@@ -4,81 +4,77 @@
       <mat-card class="mb-2 mt-2">
         <mat-card-title>
           <div class="d-flex justify-content-between align-items-center">
-            <div>Sub Categories</div>
-            <!-- <div class="d-flex align-items-center">
+            <div>Sub Category Detail</div>
+             <div class="d-flex align-items-center">
               <span class="mr-1" style="font-size: 16px;">Add Sub Category</span>
-              <i class="material-icons product-add-icon" (click)="openAddEditSubCategoryModal()">
+              <i class="material-icons product-add-icon" (click)="openSubCategoryDetailsModal()">
                 add_circle
               </i>
-            </div> -->
+            </div>
           </div>
           <mat-card-content style="margin-bottom: 0;">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item" routerLink="../">Categories</li>
-                <li class="breadcrumb-item b-active" aria-current="page">{{_category.selectedCategory?.name}}</li>
+                <li class="breadcrumb-item" routerLink="dashboard/categories">{{_category.selectedCategory?.name}}</li>
+                <li class="breadcrumb-item b-active" aria-current="page">{{_subCategory?.subCategoryDetails?.name}}</li>
               </ol>
             </nav>
           </mat-card-content>
         </mat-card-title>
       </mat-card>
-      <div *ngIf="subCategories.length" class="overflow-x">
-        <table mat-table [dataSource]="subCategories" class="mat-elevation-z8 product-table">
+      <div *ngIf="details.length" class="overflow-x">
+        <table mat-table [dataSource]="details" class="mat-elevation-z8 product-table">
 
           <!--- Note that these columns can be defined in any order.
                 The actual rendered columns are set as a property on the row definition" -->
           <!-- Position Column -->
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="no">
             <th mat-header-cell *matHeaderCellDef> No.</th>
             <td mat-cell *matCellDef="let element; index as i"> {{(i + 1)}} </td>
           </ng-container>
 
           <!-- Name Column -->
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Product Name</th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          <ng-container matColumnDef="stock">
+            <th mat-header-cell *matHeaderCellDef>Stock</th>
+            <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="quantity">
+            <th mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.subQuantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef>Unit Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.UnitName}} </td>
           </ng-container>
 
           <!-- Weight Column -->
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef> Status</th>
-            <td mat-cell *matCellDef="let element"> {{element.status === '1' ? 'Activated' : 'De-Actived'}} </td>
+          <ng-container matColumnDef="Purchase Price">
+            <th mat-header-cell *matHeaderCellDef>Purchase Price</th>
+            <td mat-cell *matCellDef="let element"> {{element.purchasePrice | number: '0.1-2'}} </td>
           </ng-container>
 
-          <!-- Symbol Column -->
-          <ng-container matColumnDef="image">
-            <th mat-header-cell *matHeaderCellDef>Image</th>
-            <td mat-cell *matCellDef="let element">
-              <img class="product-image" [src]="imageUrl + element.image"/>
-            </td>
+          <ng-container matColumnDef="Price">
+            <th mat-header-cell *matHeaderCellDef>Price</th>
+            <td mat-cell *matCellDef="let element"> {{element.price | number: '0.1-2'}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="datetime">
-            <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
+          <ng-container matColumnDef="Discount Price">
+            <th mat-header-cell *matHeaderCellDef>Discount Price</th>
+            <td mat-cell *matCellDef="let element"> {{element.discountPrice | number: '0.1-2'}} </td>
           </ng-container>
-          <ng-container matColumnDef="Actions">
+
+          <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef>Actions</th>
             <td mat-cell *matCellDef="let element;index as i">
               <i class="material-icons" style="color: #F44336; cursor: pointer"
-                 (click)="openAddEditSubCategoryModal(element)">
+                 (click)="openSubCategoryDetailsModal(element)">
                 edit
               </i>
               <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'"
-                                (change)="changeSubCategoryStatus(i)">
+                                (change)="changeDetailStatus(i)">
                 {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="details">
-            <th mat-header-cell *matHeaderCellDef>Details</th>
-            <td mat-cell *matCellDef="let element;index as i">
-              <div class="d-flex w-100">
-                <i class="material-icons orange-info" (click)="openSubCategoryDetailsModal(element)"
-                   matTooltip="View Details">
-                  info
-                </i>
-              </div>
             </td>
           </ng-container>
 
@@ -86,7 +82,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
       </div>
-      <ng-container *ngIf="loaded && !subCategories.length">
+      <ng-container *ngIf="loaded && !details.length">
         <p class="no-records-found">No Records Found</p>
       </ng-container>
     </ng-container>

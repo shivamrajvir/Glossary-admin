@@ -81,7 +81,7 @@ export class SubCategoryComponent implements OnInit {
       .catch(err => {
         console.error(err);
         this.subCategories[index].status = this.subCategories[index].status === '1' ? '0' : '1';
-        const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+        const error = 'Internal Server Error';
         this.snackbar.open(error, 'Error', {
           duration: 2000
         });

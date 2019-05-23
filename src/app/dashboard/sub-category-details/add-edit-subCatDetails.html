@@ -1,38 +1,47 @@
 
 <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
 
-  <h3>{{data.data ? 'Edit' : 'Add'}} Sub Category</h3>
-  <form *ngIf="!isImageUploading && addEditSubCategoryForm" style="display: flex; flex-direction: column" [formGroup]="addEditSubCategoryForm">
+  <h3>{{data.data ? 'Edit' : 'Add'}} Sub Category Details</h3>
+  <form *ngIf="detailForm" style="display: flex; flex-direction: column" [formGroup]="detailForm">
     <mat-form-field color="warn">
-      <input matInput placeholder="Name" formControlName="name">
-      <mat-error *ngIf="addEditSubCategoryForm.controls['name'].touched && addEditSubCategoryForm.controls['name'].invalid">
-        Please enter <strong>name</strong>
+      <input matInput placeholder="Quantity" formControlName="quantity">
+      <mat-error *ngIf="detailForm.controls['quantity'].touched && detailForm.controls['quantity'].invalid">
+        Please enter <strong>Unit</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Description" formControlName="description">
-      <mat-error *ngIf="addEditSubCategoryForm.controls['description'].touched && addEditSubCategoryForm.controls['description'].invalid">
-        Please enter <strong>description</strong>
+      <input matInput placeholder="Unit Name" formControlName="unit">
+      <mat-error *ngIf="detailForm.controls['unit'].touched && detailForm.controls['unit'].invalid">
+        Please enter <strong>Unit</strong>
       </mat-error>
     </mat-form-field>
-    <div *ngIf="addEditSubCategoryForm.controls['fileName'].value" class="d-flex align-items-center">
-      <img [src]="imageUrl + addEditSubCategoryForm.controls['fileName'].value" style="height: 50px; width: auto; object-fit: contain" />
-      <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">
-        delete
-      </i>
-    </div>
-    <button *ngIf="!addEditSubCategoryForm.controls['fileName'].value" mat-raised-button
-            color="accent" (click)="file.click()">Upload File</button>
-    <input hidden #file type="file" accept="image/jpeg, image/png" (change)="uploadImage($event)">
+    <mat-form-field color="warn">
+      <input matInput placeholder="Purchase Price" formControlName="purchasePrice">
+      <mat-error *ngIf="detailForm.controls['purchasePrice'].touched && detailForm.controls['purchasePrice'].invalid">
+        Please enter <strong>Discount Price</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="warn">
+      <input matInput placeholder="Price" formControlName="price">
+      <mat-error *ngIf="detailForm.controls['price'].touched && detailForm.controls['price'].invalid">
+        Please enter <strong>Price</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="warn">
+      <input matInput placeholder="Stock" formControlName="stock">
+      <mat-error *ngIf="detailForm.controls['stock'].touched && detailForm.controls['stock'].invalid">
+        Please enter <strong>Stock</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="warn">
+      <input matInput placeholder="Margin" formControlName="margin">
+      <mat-error *ngIf="detailForm.controls['margin'].touched && detailForm.controls['margin'].invalid">
+        Please enter <strong>Discount Price</strong>
+      </mat-error>
+    </mat-form-field>
   </form>
-  <div *ngIf="isImageUploading" class="progress-spinner">
-    <mat-progress-spinner
-      [color]="'warn'"
-      [mode]="'indeterminate'">
-    </mat-progress-spinner>
-  </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button color="warn" mat-dialog-close>Cancel</button>
-  <button mat-raised-button cdkFocusInitial color="warn" (click)="addEditCategory()">Save</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="addEditSubCateDetails()">Save</button>
 </mat-dialog-actions>

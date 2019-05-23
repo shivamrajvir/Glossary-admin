@@ -54,4 +54,26 @@ export class SubCategoryService {
     });
   }
 
+  addSubCategoryDetails(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_subcat_details, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  editSubCategoryDetails(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.edit_subcat_details, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

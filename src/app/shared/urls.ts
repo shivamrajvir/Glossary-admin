@@ -39,4 +39,9 @@ export class Urls {
   static changeSubCatStatus = Urls.base + 'changeSubcatStatus.php';
   static add_subcategories = Urls.base + 'addSubCategories.php';
   static edit_subcategories = Urls.base + 'editSubCategories.php';
+
+
+  static add_subcat_details = Urls.base + 'addSubCatDetails.php';
+  static edit_subcat_details = Urls.base + 'editSubCatDetails.php';
+
 }
