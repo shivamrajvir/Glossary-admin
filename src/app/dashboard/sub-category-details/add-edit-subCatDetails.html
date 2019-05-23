@@ -1,7 +1,7 @@
 
 <mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
 
-  <h3>{{data.data ? 'Edit' : 'Add'}} Sub Category Details</h3>
+  <h3>{{data.data.data ? 'Edit' : 'Add'}} Sub Category Details</h3>
   <form *ngIf="detailForm" style="display: flex; flex-direction: column" [formGroup]="detailForm">
     <mat-form-field color="warn">
       <input matInput placeholder="Quantity" formControlName="quantity">
@@ -10,7 +10,12 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Unit Name" formControlName="unit">
+      <mat-label>Unit Name</mat-label>
+      <mat-select formControlName="unit">
+        <mat-option *ngFor="let u of units" [value]="u.id">
+          {{u.unitName}}
+        </mat-option>
+      </mat-select>
       <mat-error *ngIf="detailForm.controls['unit'].touched && detailForm.controls['unit'].invalid">
         Please enter <strong>Unit</strong>
       </mat-error>

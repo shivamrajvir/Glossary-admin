@@ -76,4 +76,15 @@ export class SubCategoryService {
     });
   }
 
+  getUnits() {
+    return new Promise((resolve, reject) => {
+      return this.http.get(Urls.get_units)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

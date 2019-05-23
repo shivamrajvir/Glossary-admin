@@ -3,7 +3,7 @@ import {SubCategoryService} from '../../services/sub-category.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 import {CategoryService} from '../../services/category.service';
 
 @Component({
@@ -33,20 +33,20 @@ export class SubCategoryDetailsComponent implements OnInit {
   }
 
   changeDetailStatus(index) {
-    this.details[index].status = this.details[index].status === '1' ? '0' : '1';
+    this.details[index].sta = this.details[index].sta === '1' ? '0' : '1';
     const object = new HttpParams()
       .set('id', this.details[index].id)
-      .set('status', this.details[index].status === '1' ? '0' : '1');
+      .set('status', this.details[index].sta === '1' ? '0' : '1');
     this._category.changeCategoryStatus(object)
       .then(data => {
-        const status = this.details[index].status === '0' ? 'De-activated' : 'Activated';
+        const status = this.details[index].sta === '0' ? 'De-activated' : 'Activated';
         this.snackbar.open('Your Sub Category has been ' + status, 'Success', {
           duration: 2000
         });
       })
       .catch(err => {
         console.error(err);
-        this.details[index].status = this.details[index].status === '1' ? '0' : '1';
+        this.details[index].sta = this.details[index].sta === '1' ? '0' : '1';
         const error = 'Internal Server Error';
         this.snackbar.open(error, 'Error', {
           duration: 2000
@@ -55,11 +55,22 @@ export class SubCategoryDetailsComponent implements OnInit {
   }
 
   refreshList() {
-    this._category.getCategoriesByProductID(this._category.selectedCategory)
-      .then(data => {
+    const obj = new HttpParams()
+      .set('catId', this._category.selectedCategory.id);
+    this._subCategory.getSubCategories(obj)
+      .then((data: any) => {
         console.log(data);
+        data.SubCategoriesDetails.find(d => {
+          if (d.id === this._subCategory.subCategoryDetails.id) {
+            this.details = d.qunatityDetails;
+          }
+        });
       }).catch(err => {
-        console.error(err);
+      console.error(err);
+      this.loaded = true;
+      this.snackbar.open('Error while fetching Sub Categories', 'Error', {
+        duration: 2000
+      });
     });
   }
 
@@ -67,7 +78,12 @@ export class SubCategoryDetailsComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEditSubCategoryDetailsModalComponent, {
       width: '600px',
       data: {
-        data: data ? data : ''
+        data: data ? {
+          data: data,
+          id: this._subCategory.subCategoryDetails.id
+        } : {
+          id: this._subCategory.subCategoryDetails.id
+        }
       }
     });
 
@@ -84,13 +100,24 @@ export class SubCategoryDetailsComponent implements OnInit {
 })
 export class AddEditSubCategoryDetailsModalComponent {
   detailForm: FormGroup;
+  units: any[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _subCat: SubCategoryService) {
-    this.initializeSubCategoryForm(this.data.data ? this.data.data : null);
-    console.log(this.data);
+    this.initializeSubCategoryForm(this.data.data.data ? this.data.data.data : null);
+    console.log(this.data.data);
+    this.getUnits();
+  }
+
+  async getUnits() {
+    try {
+      // @ts-ignore
+      this.units = await this._subCat.getUnits();
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   closeModal() {
@@ -109,7 +136,7 @@ export class AddEditSubCategoryDetailsModalComponent {
 
     if (data) {
       this.detailForm.patchValue(data);
-      this.detailForm.controls['unit'].setValue(data.UnitName);
+      this.detailForm.controls['unit'].setValue(data.unitId);
       this.detailForm.controls['quantity'].setValue(data.subQuantity);
     }
   }
@@ -118,7 +145,7 @@ export class AddEditSubCategoryDetailsModalComponent {
     if (this.detailForm.valid) {
       let discountPrice: any = parseInt(this.detailForm.value.margin, 10) / 100 *  parseInt(this.detailForm.value.price, 10);
       discountPrice = discountPrice.toString();
-      if (this.data.data.id) {
+      if (this.data.data.data) {
         const object = new HttpParams()
           .set('unit', this.detailForm.value.unit)
           .set('margin', this.detailForm.value.margin)
@@ -127,7 +154,7 @@ export class AddEditSubCategoryDetailsModalComponent {
           .set('purchaseprice', this.detailForm.value.purchasePrice)
           .set('quantity', this.detailForm.value.quantity)
           .set('disprice', discountPrice)
-          .set('subcatid', this.data.data.subQuantId)
+          .set('subcatid', this.data.data.data.subQuantId)
           .set('id', this.data.data.id);
         this._subCat.editSubCategoryDetails(object)
           .then(data => {
@@ -144,7 +171,7 @@ export class AddEditSubCategoryDetailsModalComponent {
           .set('price', this.detailForm.value.price)
           .set('purchaseprice', this.detailForm.value.purchasePrice)
           .set('quantity', this.detailForm.value.quantity)
-          .set('subcatid', this.data.data.subQuantId)
+          .set('subcatid', this.data.data.id)
           .set('disprice', discountPrice);
         this._subCat.addSubCategoryDetails(object)
           .then(data => {

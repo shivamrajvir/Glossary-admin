@@ -44,4 +44,6 @@ export class Urls {
   static add_subcat_details = Urls.base + 'addSubCatDetails.php';
   static edit_subcat_details = Urls.base + 'editSubCatDetails.php';
 
+  static get_units = Urls.base + 'getUnits.php';
+
 }

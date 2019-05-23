@@ -72,7 +72,7 @@
                  (click)="openSubCategoryDetailsModal(element)">
                 edit
               </i>
-              <mat-slide-toggle class="ml-2" color="warn" [checked]="element.status === '1'"
+              <mat-slide-toggle class="ml-2" color="warn" [checked]="element.sta === '1'"
                                 (change)="changeDetailStatus(i)">
                 {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
             </td>
