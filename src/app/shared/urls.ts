@@ -46,4 +46,8 @@ export class Urls {
 
   static get_units = Urls.base + 'getUnits.php';
 
+  static add_unit = Urls.base + 'addUnits.php';
+
+  static change_unit_status = Urls.base + '';
+
 }

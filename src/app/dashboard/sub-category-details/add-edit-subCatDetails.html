@@ -27,6 +27,12 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
+      <input matInput placeholder="Margin" formControlName="margin">
+      <mat-error *ngIf="detailForm.controls['margin'].touched && detailForm.controls['margin'].invalid">
+        Please enter <strong>Discount Price</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field color="warn">
       <input matInput placeholder="Price" formControlName="price">
       <mat-error *ngIf="detailForm.controls['price'].touched && detailForm.controls['price'].invalid">
         Please enter <strong>Price</strong>
@@ -36,12 +42,6 @@
       <input matInput placeholder="Stock" formControlName="stock">
       <mat-error *ngIf="detailForm.controls['stock'].touched && detailForm.controls['stock'].invalid">
         Please enter <strong>Stock</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field color="warn">
-      <input matInput placeholder="Margin" formControlName="margin">
-      <mat-error *ngIf="detailForm.controls['margin'].touched && detailForm.controls['margin'].invalid">
-        Please enter <strong>Discount Price</strong>
       </mat-error>
     </mat-form-field>
   </form>

@@ -113,7 +113,8 @@ export class AddEditSubCategoryModalComponent {
       name: new FormControl('', Validators.required),
       fileName: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
-      id: new FormControl('')
+      id: new FormControl(''),
+      canCancel: new FormControl(false)
     });
 
     if (data) {
@@ -121,6 +122,7 @@ export class AddEditSubCategoryModalComponent {
       this.addEditSubCategoryForm.controls['fileName'].setValue(data.image);
       this.addEditSubCategoryForm.controls['description'].setValue(data.description);
       this.addEditSubCategoryForm.controls['id'].setValue(data.id ? data.id : null);
+      this.addEditSubCategoryForm.controls['canCancel'].setValue((data.canCancel && data.canCancel === '1') ? true : false);
     }
   }
 
@@ -180,7 +182,8 @@ export class AddEditSubCategoryModalComponent {
           .set('fileName', this.addEditSubCategoryForm.value.fileName)
           .set('description', this.addEditSubCategoryForm.value.description)
           .set('c_id', this._category.selectedCategory.id)
-          .set('id', this.addEditSubCategoryForm.value.id);
+          .set('id', this.addEditSubCategoryForm.value.id)
+          .set('canCancel', this.addEditSubCategoryForm.value.canCancel ? '1' : '0');
         this._subCat.editSubCategory(object)
           .then(data => {
             this.closeModal();
@@ -196,7 +199,8 @@ export class AddEditSubCategoryModalComponent {
           .set('name', this.addEditSubCategoryForm.value.name)
           .set('description', this.addEditSubCategoryForm.value.description)
           .set('fileName', this.addEditSubCategoryForm.value.fileName)
-          .set('c_id', this._category.selectedCategory.id);
+          .set('c_id', this._category.selectedCategory.id)
+          .set('canCancel', this.addEditSubCategoryForm.value.canCancel ? '1' : '0');
         this._subCat.addSubCategory(object)
           .then(data => {
             this.isImageUploading = false;

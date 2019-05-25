@@ -87,4 +87,26 @@ export class SubCategoryService {
     });
   }
 
+  addUnit(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.add_unit, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  changeUnitStatus(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.change_unit_status, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

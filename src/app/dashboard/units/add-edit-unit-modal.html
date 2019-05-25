@@ -1,0 +1,17 @@
+
+<mat-dialog-content class="mat-typography" style="overflow-y: hidden;">
+
+  <h3>Add Unit</h3>
+  <form *ngIf="unitForm" style="display: flex; flex-direction: column" [formGroup]="unitForm">
+    <mat-form-field color="warn">
+      <input matInput placeholder="Quantity" formControlName="name">
+      <mat-error *ngIf="unitForm.controls['name'].touched && unitForm.controls['name'].invalid">
+        Please enter <strong>Name</strong>
+      </mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" mat-dialog-close>Cancel</button>
+  <button mat-raised-button cdkFocusInitial color="warn" (click)="addEditUnit()">Save</button>
+</mat-dialog-actions>

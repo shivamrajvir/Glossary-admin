@@ -24,6 +24,7 @@ import { NotificationService } from '../services/notification.service';
 import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categories/sub-category/sub-category.component';
 import {AddEditSubCategoryDetailsModalComponent, SubCategoryDetailsComponent} from './sub-category-details/sub-category-details.component';
 import {SubCategoryService} from '../services/sub-category.service';
+import { UnitsComponent, AddEditUnitModalComponent } from './units/units.component';
 
 
 @NgModule({
@@ -43,7 +44,9 @@ import {SubCategoryService} from '../services/sub-category.service';
     AddEditSubCategoryModalComponent,
     AddEditNotificationModalComponent,
     SubCategoryDetailsComponent,
-    AddEditSubCategoryDetailsModalComponent
+    AddEditSubCategoryDetailsModalComponent,
+    UnitsComponent,
+    AddEditUnitModalComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +63,8 @@ import {SubCategoryService} from '../services/sub-category.service';
     AddCityModalComponent,
     AddEditSubCategoryModalComponent,
     AddEditNotificationModalComponent,
-    AddEditSubCategoryDetailsModalComponent
+    AddEditSubCategoryDetailsModalComponent,
+    AddEditUnitModalComponent
   ],
   providers: [
     ProductsService,

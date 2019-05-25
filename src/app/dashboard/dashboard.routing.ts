@@ -8,6 +8,7 @@ import {AddressesComponent} from './addresses/addresses.component';
 import {NotificationSettingsComponent} from './notification-settings/notification-settings.component';
 import {SubCategoryComponent} from "./categories/sub-category/sub-category.component";
 import { SubCategoryDetailsComponent } from './sub-category-details/sub-category-details.component';
+import {UnitsComponent} from './units/units.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,10 @@ export const routes: Routes = [
       {
         path: 'category/subcategory/details',
         component: SubCategoryDetailsComponent
+      },
+      {
+        path: 'units',
+        component: UnitsComponent
       }
     ]
   }

@@ -15,6 +15,7 @@
         Please enter <strong>description</strong>
       </mat-error>
     </mat-form-field>
+      <mat-checkbox color="warn" formControlName="canCancel">Can Cancel</mat-checkbox>
     <div *ngIf="addEditSubCategoryForm.controls['fileName'].value" class="d-flex align-items-center">
       <img [src]="imageUrl + addEditSubCategoryForm.controls['fileName'].value" style="height: 50px; width: auto; object-fit: contain" />
       <i class="material-icons fa-lg" style="color: red;" (click)="deleteImage()">

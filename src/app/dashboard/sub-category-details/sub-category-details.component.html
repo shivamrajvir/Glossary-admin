@@ -41,12 +41,7 @@
 
           <ng-container matColumnDef="quantity">
             <th mat-header-cell *matHeaderCellDef>Quantity</th>
-            <td mat-cell *matCellDef="let element" class="text-center"> {{element.subQuantity}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="unit">
-            <th mat-header-cell *matHeaderCellDef>Unit Name</th>
-            <td mat-cell *matCellDef="let element"> {{element.UnitName}} </td>
+            <td mat-cell *matCellDef="let element" class="text-center"> {{element.subQuantity}} {{element.UnitName}} </td>
           </ng-container>
 
           <!-- Weight Column -->
@@ -58,6 +53,11 @@
           <ng-container matColumnDef="Price">
             <th mat-header-cell *matHeaderCellDef>Price</th>
             <td mat-cell *matCellDef="let element"> {{element.price | number: '0.1-2'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="margin">
+            <th mat-header-cell *matHeaderCellDef>Margin</th>
+            <td mat-cell *matCellDef="let element"> {{element.margin | number: '0.1-2'}} </td>
           </ng-container>
 
           <ng-container matColumnDef="Discount Price">
@@ -74,7 +74,7 @@
               </i>
               <mat-slide-toggle class="ml-2" color="warn" [checked]="element.sta === '1'"
                                 (change)="changeDetailStatus(i)">
-                {{element.status === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
+                {{element.sta === '1' ? 'De-activate' : 'Activate'}}</mat-slide-toggle>
             </td>
           </ng-container>
 

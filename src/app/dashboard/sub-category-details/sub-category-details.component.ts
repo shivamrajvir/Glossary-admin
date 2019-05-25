@@ -15,7 +15,7 @@ export class SubCategoryDetailsComponent implements OnInit {
 
   details = [];
   loaded = false;
-  displayedColumns = ['no', 'quantity', 'unit', 'stock', 'Purchase Price', 'Price', 'Discount Price', 'actions'];
+  displayedColumns = ['no', 'quantity', 'stock', 'Purchase Price', 'Price', 'margin', 'Discount Price', 'actions'];
 
   constructor(public _subCategory: SubCategoryService, private router: Router,  public dialog: MatDialog,
               public _category: CategoryService, public snackbar: MatSnackBar) {
@@ -23,9 +23,7 @@ export class SubCategoryDetailsComponent implements OnInit {
 
   ngOnInit() {
     if (this._subCategory.subCategoryDetails) {
-      console.log(this._subCategory.subCategoryDetails);
       this.details = this._subCategory.subCategoryDetails.qunatityDetails;
-      console.log(this.details);
       this.loaded = true;
     } else {
       this.router.navigate(['dashboard/categories']);
@@ -35,7 +33,7 @@ export class SubCategoryDetailsComponent implements OnInit {
   changeDetailStatus(index) {
     this.details[index].sta = this.details[index].sta === '1' ? '0' : '1';
     const object = new HttpParams()
-      .set('id', this.details[index].id)
+      .set('id', this.details[index].subQuantId)
       .set('status', this.details[index].sta === '1' ? '0' : '1');
     this._category.changeCategoryStatus(object)
       .then(data => {
@@ -107,7 +105,6 @@ export class AddEditSubCategoryDetailsModalComponent {
     @Inject(MAT_DIALOG_DATA) public data,
     public snackbar: MatSnackBar, private _subCat: SubCategoryService) {
     this.initializeSubCategoryForm(this.data.data.data ? this.data.data.data : null);
-    console.log(this.data.data);
     this.getUnits();
   }
 
@@ -115,6 +112,9 @@ export class AddEditSubCategoryDetailsModalComponent {
     try {
       // @ts-ignore
       this.units = await this._subCat.getUnits();
+      this.units = this.units.filter(u => {
+        return (u.status === '1');
+      });
     } catch (err) {
       console.error(err);
     }
@@ -143,8 +143,8 @@ export class AddEditSubCategoryDetailsModalComponent {
 
   addEditSubCateDetails() {
     if (this.detailForm.valid) {
-      let discountPrice: any = parseInt(this.detailForm.value.margin, 10) / 100 *  parseInt(this.detailForm.value.price, 10);
-      discountPrice = discountPrice.toString();
+      const profit: any = parseInt(this.detailForm.value.purchasePrice, 10) * parseInt(this.detailForm.value.margin, 10) /  100;
+      const discountPrice = profit + this.detailForm.value.price;
       if (this.data.data.data) {
         const object = new HttpParams()
           .set('unit', this.detailForm.value.unit)
