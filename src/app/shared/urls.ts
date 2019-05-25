@@ -48,6 +48,6 @@ export class Urls {
 
   static add_unit = Urls.base + 'addUnits.php';
 
-  static change_unit_status = Urls.base + '';
+  static change_unit_status = Urls.base + 'changeUnitStatus.php';
 
 }
