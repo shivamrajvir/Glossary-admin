@@ -12,12 +12,11 @@
   th {
     font-weight: 600;
     font-size: 15px;
+    text-align: center;
   }
 
-  .product-image {
-    height: 60px;
-    width: 60px;
-    object-fit: contain;
+  td {
+    text-align: center;
   }
 }
 

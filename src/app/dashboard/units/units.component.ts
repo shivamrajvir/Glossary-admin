@@ -33,8 +33,9 @@ export class UnitsComponent implements OnInit {
   }
 
   openUnitModal() {
-    const dialogRef = this.dialog.open(AddEditSubCategoryDetailsModalComponent, {
-      width: '600px'
+    const dialogRef = this.dialog.open(AddEditUnitModalComponent, {
+      width: '600px',
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {

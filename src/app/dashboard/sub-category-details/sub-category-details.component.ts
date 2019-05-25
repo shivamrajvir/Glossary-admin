@@ -35,7 +35,7 @@ export class SubCategoryDetailsComponent implements OnInit {
     const object = new HttpParams()
       .set('id', this.details[index].subQuantId)
       .set('status', this.details[index].sta === '1' ? '0' : '1');
-    this._category.changeCategoryStatus(object)
+    this._subCategory.changeSubCategoryDetailStatus(object)
       .then(data => {
         const status = this.details[index].sta === '0' ? 'De-activated' : 'Activated';
         this.snackbar.open('Your Sub Category has been ' + status, 'Success', {
@@ -144,7 +144,7 @@ export class AddEditSubCategoryDetailsModalComponent {
   addEditSubCateDetails() {
     if (this.detailForm.valid) {
       const profit: any = parseInt(this.detailForm.value.purchasePrice, 10) * parseInt(this.detailForm.value.margin, 10) /  100;
-      const discountPrice = profit + this.detailForm.value.price;
+      const discountPrice = profit + parseInt(this.detailForm.value.purchasePrice, 10);
       if (this.data.data.data) {
         const object = new HttpParams()
           .set('unit', this.detailForm.value.unit)
