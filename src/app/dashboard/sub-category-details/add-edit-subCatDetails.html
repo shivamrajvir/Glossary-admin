@@ -4,7 +4,8 @@
   <h3>{{data.data.data ? 'Edit' : 'Add'}} Sub Category Details</h3>
   <form *ngIf="detailForm" style="display: flex; flex-direction: column" [formGroup]="detailForm">
     <mat-form-field color="warn">
-      <input matInput placeholder="Quantity" formControlName="quantity">
+      <input matInput type="number" (keypress)="restrictInputNumbers($event)" placeholder="Quantity"
+             formControlName="quantity">
       <mat-error *ngIf="detailForm.controls['quantity'].touched && detailForm.controls['quantity'].invalid">
         Please enter <strong>Unit</strong>
       </mat-error>
@@ -21,25 +22,29 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Purchase Price" formControlName="purchasePrice">
+      <input matInput placeholder="Purchase Price" formControlName="purchasePrice"
+             type="number" (keypress)="restrictInputNumbers($event)">
       <mat-error *ngIf="detailForm.controls['purchasePrice'].touched && detailForm.controls['purchasePrice'].invalid">
         Please enter <strong>Discount Price</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Margin" formControlName="margin">
+      <input matInput placeholder="Margin" formControlName="margin"
+             type="number" (keypress)="restrictInputNumbers($event)" max="100" min="1">
       <mat-error *ngIf="detailForm.controls['margin'].touched && detailForm.controls['margin'].invalid">
         Please enter <strong>Discount Price</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Price" formControlName="price">
+      <input matInput placeholder="Price" formControlName="price"
+             type="number" (keypress)="restrictInputNumbers($event)">
       <mat-error *ngIf="detailForm.controls['price'].touched && detailForm.controls['price'].invalid">
         Please enter <strong>Price</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput placeholder="Stock" formControlName="stock">
+      <input matInput placeholder="Stock" formControlName="stock"
+             type="number" (keypress)="restrictInputNumbers($event)">
       <mat-error *ngIf="detailForm.controls['stock'].touched && detailForm.controls['stock'].invalid">
         Please enter <strong>Stock</strong>
       </mat-error>

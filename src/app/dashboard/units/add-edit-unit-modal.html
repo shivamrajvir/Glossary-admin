@@ -4,9 +4,9 @@
   <h3>Add Unit</h3>
   <form *ngIf="unitForm" style="display: flex; flex-direction: column" [formGroup]="unitForm">
     <mat-form-field color="warn">
-      <input matInput placeholder="Quantity" formControlName="name">
+      <input matInput placeholder="Unit Name" formControlName="name">
       <mat-error *ngIf="unitForm.controls['name'].touched && unitForm.controls['name'].invalid">
-        Please enter <strong>Name</strong>
+        Please enter <strong>Unit Name</strong>
       </mat-error>
     </mat-form-field>
   </form>
