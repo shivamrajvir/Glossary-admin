@@ -6,9 +6,11 @@ import {CategoriesComponent} from './categories/categories.component';
 import {SliderComponent} from './slider/slider.component';
 import {AddressesComponent} from './addresses/addresses.component';
 import {NotificationSettingsComponent} from './notification-settings/notification-settings.component';
-import {SubCategoryComponent} from "./categories/sub-category/sub-category.component";
 import { SubCategoryDetailsComponent } from './sub-category-details/sub-category-details.component';
 import {UnitsComponent} from './units/units.component';
+import {UsersComponent} from './users/users.component';
+import {UserDetailsComponent} from './users/user-details/user-details.component';
+import {SubCategoryComponent} from './categories/sub-category/sub-category.component';
 
 export const routes: Routes = [
   {
@@ -54,6 +56,14 @@ export const routes: Routes = [
       {
         path: 'units',
         component: UnitsComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
+      {
+        path: 'users/user-details',
+        component: UserDetailsComponent
       }
     ]
   }

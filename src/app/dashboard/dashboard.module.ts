@@ -25,6 +25,9 @@ import {AddEditSubCategoryModalComponent, SubCategoryComponent} from './categori
 import {AddEditSubCategoryDetailsModalComponent, SubCategoryDetailsComponent} from './sub-category-details/sub-category-details.component';
 import {SubCategoryService} from '../services/sub-category.service';
 import { UnitsComponent, AddEditUnitModalComponent } from './units/units.component';
+import { UsersComponent } from './users/users.component';
+import {UsersService} from '../services/users.service';
+import { UserDetailsComponent } from './users/user-details/user-details.component';
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { UnitsComponent, AddEditUnitModalComponent } from './units/units.compone
     SubCategoryDetailsComponent,
     AddEditSubCategoryDetailsModalComponent,
     UnitsComponent,
-    AddEditUnitModalComponent
+    AddEditUnitModalComponent,
+    UsersComponent,
+    UserDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +79,8 @@ import { UnitsComponent, AddEditUnitModalComponent } from './units/units.compone
     CategoryService,
     AddressService,
     NotificationService,
-    SubCategoryService
+    SubCategoryService,
+    UsersService
   ]
 })
 export class DashboardModule { }

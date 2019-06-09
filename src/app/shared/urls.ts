@@ -51,4 +51,7 @@ export class Urls {
 
   static change_unit_status = Urls.base + 'changeUnitStatus.php';
 
+  static get_users = Urls.base + 'getUsers.php';
+  static change_user_status = Urls.base + 'changeUserStatus.php';
+
 }
