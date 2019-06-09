@@ -30,5 +30,39 @@ export class UsersService {
         });
     });
   }
+
+  getTransactions() {
+    return new Promise((resolve, reject) => {
+      this.http.get(Urls.transaction_history)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  getUserOrders(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.user_orders, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  getUserCart(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.user_cart, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
 }
 

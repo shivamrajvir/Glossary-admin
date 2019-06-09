@@ -1,3 +1,31 @@
-<p>
-  user-details works!
-</p>
+<mat-tab-group color="warn" (selectedTabChange)="tabChangeEvent($event)">
+  <mat-tab label="Wallet History">
+    <div class="row ml-0 mr-0 mh-200p">
+      <div class="col-12">
+        <div *ngIf="!loaded" class="progress-spinner">
+          <mat-progress-spinner
+            [color]="'warn'"
+            [mode]="'indeterminate'">
+          </mat-progress-spinner>
+        </div>
+        <div *ngIf="loaded">
+
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Orders">
+    <div class="row ml-0 mr-0 mh-200p">
+      <div class="col-12">
+
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Cart">
+    <div class="row ml-0 mr-0 mh-200p">
+      <div class="col-12">
+
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

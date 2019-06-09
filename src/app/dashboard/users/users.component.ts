@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
   currentPage = 1;
   loaded = false;
   userList = [];
-  displayedColumns = ['id', 'name', 'email', 'phone', 'datetime', 'status', 'actions'];
+  displayedColumns = ['id', 'name', 'email', 'phone', 'datetime', 'isLogin', 'status', 'actions'];
 
   constructor(private _userService: UsersService, private snackBar: MatSnackBar,
               private router: Router) { }

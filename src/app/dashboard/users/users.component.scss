@@ -5,9 +5,9 @@
   overflow-y: hidden;
 }
 
-.product-table {
+.users-table {
   width: 100%;
-  min-width: 600px;
+  min-width: 700px;
 
   th {
     font-weight: 600;
@@ -18,6 +18,11 @@
   td {
     padding: 5px;
     text-align: center;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
   }
 
   .product-image {
