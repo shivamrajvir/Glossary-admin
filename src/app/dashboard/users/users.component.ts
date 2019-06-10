@@ -27,8 +27,14 @@ export class UsersComponent implements OnInit {
     this._userService.getUsers(page ? page : 1)
       .then((data: any[]) => {
         console.log(data);
-        this.userList = data;
-        this.loaded = true;
+        if (data.length) {
+          this.userList = data;
+          this.loaded = true;
+        } else {
+          if (this.currentPage > 1) {
+            this.getUsers(--this.currentPage);
+          }
+        }
       }).catch(err => {
         console.error(err);
     });
@@ -58,6 +64,25 @@ export class UsersComponent implements OnInit {
   openUserDetailPage(user) {
     this._userService.selectedUser = user;
     this.router.navigate(['dashboard/users/user-details']);
+  }
+
+  nextPage() {
+    this.changePage(++this.currentPage);
+  }
+
+  /*
+     Function for going to prev page
+  */
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.changePage(--this.currentPage);
+    }
+  }
+
+  changePage(no) {
+    this.loaded = false;
+    this.currentPage = no;
+    this.getUsers(this.currentPage);
   }
 
 }

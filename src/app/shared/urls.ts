@@ -59,5 +59,6 @@ export class Urls {
   static user_orders = Urls.base + 'getMasterOrders.php';
 
   static user_cart = Urls.base + 'getCart.php';
+  static cart_balance = Urls.base + 'getWallet.php';
 
 }

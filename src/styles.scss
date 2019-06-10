@@ -89,3 +89,30 @@ button {
 .mh-200p {
   min-height: 200px;
 }
+
+/* pagination css */
+
+.prev_btn, .next_btn {
+  color: orangered;
+  font-size: 1.5rem;
+  padding-top: 3px;
+}
+
+.next_btn:hover, .prev_btn:hover {
+  cursor: pointer;
+}
+
+.paginate_button {
+  border-radius: 50%;
+  color: #F44336;
+  padding: 3px 10px;
+  background-color: white;
+}
+
+.paginate_button:hover {
+  background-color: #F44336;
+  color: white;
+  cursor: pointer;
+}
+
+/* end pagination css */
