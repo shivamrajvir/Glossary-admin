@@ -25,27 +25,91 @@ export class UserDetailsComponent implements OnInit {
   walletDisplayedColumns = ['id', 'itemName', 'balance', 'remark', 'datetime'];
   selectedTab = 0;
 
+  walletDetails;
+  isEditBalance = false;
+  editBalance = {
+    id: '',
+    operation: '',
+    amount: 0,
+    reason: '',
+    mobileNo: 0
+  };
+
   constructor(private _userService: UsersService, private router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
     if (this._userService.selectedUser) {
       this.userDetails = this._userService.selectedUser;
-      console.log(this.userDetails);
-      this.getTransactionHistory();
       this.getWallet();
     } else {
       this.router.navigate(['dashboard/users']);
     }
   }
 
+  editWalletBalance() {
+    this.isEditBalance = !this.isEditBalance;
+    if (this.isEditBalance) {
+      this.editBalance = {
+        id: this.walletDetails.id,
+        operation: 'add',
+        amount: 0,
+        reason: '',
+        mobileNo: 0
+      };
+    }
+  }
+
+  editUserWallet() {
+    console.log(this.editBalance);
+    if (this.editBalance.amount <= 0) {
+      this.snackBar.open('Error', 'Amount must be greater than zero', {
+        duration: 4000
+      });
+      return;
+    }
+
+    if (!this.editBalance.reason) {
+      this.snackBar.open('Error', 'Please give a reason', {
+        duration: 4000
+      });
+      return;
+    }
+
+    if (this.editBalance.mobileNo.toString().length !== 10) {
+      this.snackBar.open('Error', 'Mobile No must have 10 digits', {
+        duration: 4000
+      });
+      return;
+    }
+
+    const object = new HttpParams()
+      .set('id', this.editBalance.id)
+      .set('operation', this.editBalance.operation)
+      .set('amount', this.editBalance.amount.toString())
+      .set('reason', this.editBalance.reason)
+      .set('mobileNo', this.editBalance.mobileNo.toString());
+
+    this._userService.editUserWallet(object)
+      .then(data => {
+        console.log(data);
+        this.getWallet();
+        this.isEditBalance = false;
+        this.snackBar.open('Success', 'Wallet balance has been changed', {
+          duration: 4000
+        });
+      }).catch(err => {
+      console.error(err);
+    });
+  }
+
   tabChangeEvent(event) {
     this.selectedTab = event.index;
     this.currentPage = 1;
     if (event.index === 0) {
+      this.getWallet();
     } else if (event.index === 1) {
       this.getTransactionHistory();
-      this.getWallet();
     } else if (event.index === 2) {
       this.getUserOrders(1);
     } else if (event.index === 3) {
@@ -82,11 +146,12 @@ export class UserDetailsComponent implements OnInit {
 
   getWallet() {
     const object = new HttpParams()
-      .set('uid', this.userDetails.id)
-      .set('pageno', '1');
+      .set('uid', this.userDetails.id);
     this._userService.getWalletBalance(object)
       .then(data => {
         console.log(data);
+        this.walletDetails = data[0];
+        this.loaded = true;
       }).catch(err => {
       console.error(err);
     });
@@ -153,6 +218,12 @@ export class UserDetailsComponent implements OnInit {
       }).catch(err => {
       this._userService.errorhandler(err);
     });
+  }
+
+  restrictInputNumbers(e) {
+    if (e.keyCode === 43 || e.keyCode === 101 || e.keyCode === 45 || e.keyCode === 46) {
+      e.preventDefault();
+    }
   }
 
 }

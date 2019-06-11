@@ -67,7 +67,18 @@ export class UsersService {
 
   getWalletBalance(obj) {
     return new Promise((resolve, reject) => {
-      this.http.post(Urls.cart_balance, obj)
+      this.http.post(Urls.wallet_balance, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
+  editUserWallet(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.edit_wallet_balance, obj)
         .subscribe(data => {
           resolve(data);
         }, error => {
