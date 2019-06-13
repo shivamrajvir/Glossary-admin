@@ -87,6 +87,17 @@ export class UsersService {
     });
   }
 
+  getOrderDetailsById(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.get_orders, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   errorhandler(error) {
     console.error(error);
     const message = (error.error && error.error.error && error.error.error.error ) ? error.error.error.error : 'Internal Server Error';

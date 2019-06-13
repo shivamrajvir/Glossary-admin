@@ -11,6 +11,7 @@ import {UnitsComponent} from './units/units.component';
 import {UsersComponent} from './users/users.component';
 import {UserDetailsComponent} from './users/user-details/user-details.component';
 import {SubCategoryComponent} from './categories/sub-category/sub-category.component';
+import {OrderDetailsComponent} from './users/user-details/order-details/order-details.component';
 
 export const routes: Routes = [
   {
@@ -64,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'users/user-details',
         component: UserDetailsComponent
+      },
+      {
+        path: 'users/user-details/order-details/:id',
+        component: OrderDetailsComponent
       }
     ]
   }

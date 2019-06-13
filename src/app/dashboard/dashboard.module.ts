@@ -28,6 +28,7 @@ import { UnitsComponent, AddEditUnitModalComponent } from './units/units.compone
 import { UsersComponent } from './users/users.component';
 import {UsersService} from '../services/users.service';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
+import { OrderDetailsComponent } from './users/user-details/order-details/order-details.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { UserDetailsComponent } from './users/user-details/user-details.componen
     UnitsComponent,
     AddEditUnitModalComponent,
     UsersComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    OrderDetailsComponent
   ],
   imports: [
     CommonModule,

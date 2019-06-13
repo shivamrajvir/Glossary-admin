@@ -55,13 +55,12 @@ export class UserDetailsComponent implements OnInit {
         operation: 'add',
         amount: 0,
         reason: '',
-        mobileNo: 0
+        mobileNo: this.userDetails.phone
       };
     }
   }
 
   editUserWallet() {
-    console.log(this.editBalance);
     if (this.editBalance.amount <= 0) {
       this.snackBar.open('Error', 'Amount must be greater than zero', {
         duration: 4000
@@ -71,13 +70,6 @@ export class UserDetailsComponent implements OnInit {
 
     if (!this.editBalance.reason) {
       this.snackBar.open('Error', 'Please give a reason', {
-        duration: 4000
-      });
-      return;
-    }
-
-    if (this.editBalance.mobileNo.toString().length !== 10) {
-      this.snackBar.open('Error', 'Mobile No must have 10 digits', {
         duration: 4000
       });
       return;
@@ -148,9 +140,9 @@ export class UserDetailsComponent implements OnInit {
     const object = new HttpParams()
       .set('uid', this.userDetails.id);
     this._userService.getWalletBalance(object)
-      .then(data => {
+      .then((data: any[]) => {
         console.log(data);
-        this.walletDetails = data[0];
+        this.walletDetails = data.length ? data[0] : 0;
         this.loaded = true;
       }).catch(err => {
       console.error(err);
@@ -164,9 +156,9 @@ export class UserDetailsComponent implements OnInit {
     this._userService.getTransactions(object)
       .then((data: any[]) => {
         console.log(data);
+        this.loaded = true;
         if (data.length) {
           this.transactionHistory = data;
-          this.loaded = true;
         } else {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
@@ -185,9 +177,9 @@ export class UserDetailsComponent implements OnInit {
     this._userService.getUserOrders(object)
       .then((data: any[]) => {
         console.log(data);
+        this.loaded = true;
         if (data.length) {
           this.orderList = data;
-          this.loaded = true;
         } else {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
@@ -206,9 +198,9 @@ export class UserDetailsComponent implements OnInit {
     this._userService.getUserCart(object)
       .then((data: any[]) => {
         console.log(data);
+        this.loaded = true;
         if (data.length) {
           this.cartData = data;
-          this.loaded = true;
         } else {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
@@ -224,6 +216,11 @@ export class UserDetailsComponent implements OnInit {
     if (e.keyCode === 43 || e.keyCode === 101 || e.keyCode === 45 || e.keyCode === 46) {
       e.preventDefault();
     }
+  }
+
+  goToOrderDetails(row) {
+    console.log(row);
+    this.router.navigate(['dashboard/users/user-details/order-details/' + row.masterOrderId]);
   }
 
 }
