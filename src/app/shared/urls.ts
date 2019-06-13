@@ -63,6 +63,6 @@ export class Urls {
   static wallet_balance = Urls.base + 'getCurrentWalletBalance.php';
   static edit_wallet_balance = Urls.base + 'updateBalance.php';
 
-  static get_orders = Urls.base + 'getorder.php';
+  static get_orders = Urls.base + 'getOrder.php';
 
 }

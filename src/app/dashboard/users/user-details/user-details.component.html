@@ -127,17 +127,13 @@
         </div>
         <div *ngIf="loaded" class="p-2">
           <div *ngIf="orderList.length" class="overflow-x">
-            <table mat-table [dataSource]="orderList" class="mat-elevation-z8 users-table">
+            <table mat-table [dataSource]="orderList" class="mat-elevation-z8 orders-table">
 
-              <!--- Note that these columns can be defined in any order.
-                    The actual rendered columns are set as a property on the row definition" -->
-              <!-- Position Column -->
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>Order No.</th>
                 <td mat-cell *matCellDef="let element; index as i"> {{element.masterOrderId}} </td>
               </ng-container>
 
-              <!-- Name Column -->
               <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef>Name</th>
                 <td mat-cell *matCellDef="let element"> {{element.userName}} </td>

@@ -10,22 +10,25 @@ import {HttpParams} from '@angular/common/http';
 })
 export class OrderDetailsComponent implements OnInit {
 
-  currentPage = 1;
   masterOrderId;
+  orderDetails = [];
+  loaded = false;
+  displayedColumns = ['id', 'name', 'quantity', 'status', 'price', 'datetime'];
 
   constructor(private route: ActivatedRoute, private _users: UsersService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot);
     if (this.route.snapshot.params.id) {
       this.masterOrderId = this.route.snapshot.params.id;
       const obj = new HttpParams()
         .set('mid', this.masterOrderId)
-        .set('pageno', this.currentPage.toString());
+        .set('pageno', '1');
 
       this._users.getOrderDetailsById(obj)
-        .then(data => {
+        .then((data: any[]) => {
           console.log(data);
+          this.orderDetails = data;
+          this.loaded = true;
         }).catch(err => {
           console.error(err);
       });

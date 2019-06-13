@@ -36,6 +36,33 @@
   }
 }
 
+.orders-table {
+  width: 100%;
+  min-width: 700px;
+
+  th {
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  td {
+    padding: 5px;
+    text-align: center;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+    cursor: pointer;
+  }
+
+  .product-image {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+  }
+}
+
 .progress-spinner {
   height: calc(100vh - 64px);
   display: flex;
