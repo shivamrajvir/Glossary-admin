@@ -12,7 +12,7 @@
           <div class="row m-2">
             <div *ngIf="!isEditBalance" class="col-12 p-2 d-flex flex-column">
               <mat-form-field color="warn">
-                <input type="number" matInput placeholder="Wallet balance" disabled=true
+                <input type="text" matInput placeholder="Wallet balance" disabled=true
                        [(ngModel)]="walletDetails.currentbalance" (keypress)="restrictInputNumbers($event)">
               </mat-form-field>
             </div>
