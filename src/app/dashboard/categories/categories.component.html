@@ -87,6 +87,21 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <div *ngIf="loaded && categories.length" class="row ml-0 mr-0 pt-2 d-flex justify-content-end">
+          <div class="d-flex flex-row align-items-center">
+            <div class="prev_btn" (click)="prevPage()">
+              <i class="material-icons">
+                skip_previous
+              </i>
+            </div>
+            <div class="paginate_button">{{currentPage}}</div>
+            <div class="next_btn" (click)="nextPage()">
+              <i class="material-icons">
+                skip_next
+              </i>
+            </div>
+          </div>
+        </div>
       </div>
       <ng-container *ngIf="loaded && !categories.length">
         <p class="no-records-found">No Records Found</p>

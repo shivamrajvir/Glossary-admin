@@ -33,6 +33,9 @@ export class UsersComponent implements OnInit {
         } else {
           if (this.currentPage > 1) {
             this.getUsers(--this.currentPage);
+          } else {
+            this.userList = [];
+          this.loaded = true;
           }
         }
       }).catch(err => {

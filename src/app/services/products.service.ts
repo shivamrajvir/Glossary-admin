@@ -7,9 +7,9 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {}
 
-  getProductList() {
+  getProductList(page) {
     return new Promise((resolve, reject) => {
-      return this.http.get(Urls.product)
+      return this.http.get(Urls.product + '?pageno=' + page)
         .subscribe(data => {
           resolve(data);
         }, err => {

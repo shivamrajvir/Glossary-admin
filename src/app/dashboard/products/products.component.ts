@@ -1,10 +1,10 @@
-import {ChangeDetectorRef, Component, Inject, OnInit} from '@angular/core';
-import {ProductsService} from '../../services/products.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {environment} from '../../../environments/environment';
-import {Urls} from '../../shared/urls';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { Urls } from '../../shared/urls';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-products',
@@ -18,22 +18,33 @@ export class ProductsComponent implements OnInit {
   displayedColumns = [];
   imageUrl = environment.imageUrl;
   activeProductCount = 0;
+  currentPage = 1;
 
   constructor(private _product: ProductsService, private snackBar: MatSnackBar,
-              public dialog: MatDialog) { }
+    public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getProductList();
   }
 
-  getProductList() {
-    this._product.getProductList()
+  getProductList(page?) {
+    this._product.getProductList(page ? page : 1)
       .then((data: any) => {
-        this.products = data;
-        this.displayedColumns = Object.keys(this.products[0]);
-        this.displayedColumns.push('Actions');
-        this.calculateActiveProductCount();
-        this.loaded = true;
+        if (data.length) {
+          this.products = data;
+          this.displayedColumns = Object.keys(this.products[0]);
+          this.displayedColumns.push('Actions');
+          this.calculateActiveProductCount();
+          this.loaded = true;
+        } else {
+          if (this.currentPage > 1) {
+            this.currentPage = this.currentPage - 1;
+            this.getProductList(this.currentPage);
+          } else {
+            this.products = [];
+            this.loaded = true;
+          }
+        }
       })
       .catch(err => {
         console.error(err);
@@ -43,6 +54,22 @@ export class ProductsComponent implements OnInit {
           duration: 2000
         });
       });
+  }
+
+  nextPage() {
+    this.changePage(++this.currentPage);
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.changePage(--this.currentPage);
+    }
+  }
+
+  changePage(no) {
+    this.loaded = false;
+    this.currentPage = no;
+    this.getProductList(this.currentPage);
   }
 
   openAddEditProductModal(data?) {
@@ -111,15 +138,15 @@ export class AddEditProductModalComponent {
   }
 
   initializeForm(data?) {
-      this.addEditProductForm = new FormGroup({
-        name: new FormControl('', Validators.required),
-        image: new FormControl('', Validators.required)
-      });
+    this.addEditProductForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      image: new FormControl('', Validators.required)
+    });
 
-      if (data) {
-        this.addEditProductForm.controls['name'].setValue(data.name);
-        this.addEditProductForm.controls['image'].setValue(data.image);
-      }
+    if (data) {
+      this.addEditProductForm.controls['name'].setValue(data.name);
+      this.addEditProductForm.controls['image'].setValue(data.image);
+    }
   }
 
   uploadImage(event) {

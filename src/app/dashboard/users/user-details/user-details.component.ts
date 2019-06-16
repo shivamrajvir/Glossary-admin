@@ -163,6 +163,9 @@ export class UserDetailsComponent implements OnInit {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
             this.getTransactionHistory(this.currentPage);
+          } else {
+            this.transactionHistory = [];
+            this.loaded = true;
           }
         }
       }).catch(err => {
@@ -177,13 +180,16 @@ export class UserDetailsComponent implements OnInit {
     this._userService.getUserOrders(object)
       .then((data: any[]) => {
         console.log(data);
-        this.loaded = true;
         if (data.length) {
           this.orderList = data;
+          this.loaded = true;
         } else {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
             this.getUserOrders(this.currentPage);
+          } else {
+            this.orderList = [];
+            this.loaded = true;
           }
         }
       }).catch(err => {
@@ -198,13 +204,16 @@ export class UserDetailsComponent implements OnInit {
     this._userService.getUserCart(object)
       .then((data: any[]) => {
         console.log(data);
-        this.loaded = true;
         if (data.length) {
           this.cartData = data;
+          this.loaded = true;
         } else {
           if (this.currentPage > 1) {
             this.currentPage = this.currentPage - 1;
             this.getCartDetails(this.currentPage);
+          } else {
+            this.cartData = [];
+            this.loaded = true;
           }
         }
       }).catch(err => {

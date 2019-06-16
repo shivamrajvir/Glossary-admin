@@ -107,6 +107,8 @@ button {
   color: #F44336;
   padding: 3px 10px;
   background-color: white;
+  transition: all 0.4s linear;
+  box-shadow: 0 2px 11px -3px #F44336;
 }
 
 .paginate_button:hover {

@@ -26,7 +26,6 @@ export class OrderDetailsComponent implements OnInit {
 
       this._users.getOrderDetailsById(obj)
         .then((data: any[]) => {
-          console.log(data);
           this.orderDetails = data;
           this.loaded = true;
         }).catch(err => {

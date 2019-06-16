@@ -1,13 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {ProductsService} from '../../services/products.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {AddEditProductModalComponent} from '../products/products.component';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {Urls} from '../../shared/urls';
-import {CategoryService} from '../../services/category.service';
-import {Router} from "@angular/router";
+import { Component, Inject, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import { ProductsService } from '../../services/products.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { AddEditProductModalComponent } from '../products/products.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Urls } from '../../shared/urls';
+import { CategoryService } from '../../services/category.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-categories',
@@ -22,16 +22,17 @@ export class CategoriesComponent implements OnInit {
   imageUrl = environment.imageUrl;
   selectedProduct;
   productList = [];
+  currentPage = 1;
 
   constructor(private _product: ProductsService, private _category: CategoryService,
-              private snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) { }
+    private snackBar: MatSnackBar, public dialog: MatDialog, private router: Router) { }
 
   ngOnInit() {
     this.getProductList();
   }
 
-  getProductList() {
-    this._product.getProductList()
+  getProductList(page?) {
+    this._product.getProductList(page ? page : 1)
       .then((data: any) => {
         this.productList = data;
         this.productList = this.productList.filter(p => {
@@ -49,13 +50,24 @@ export class CategoriesComponent implements OnInit {
       });
   }
 
-  getCategories() {
+  getCategories(page?) {
     const fd = new HttpParams()
-      .set('p_id', this.selectedProduct);
+      .set('p_id', this.selectedProduct)
+      .set('pageno', page ? page.toString() : '1');
     this._category.getCategoriesByProductID(fd)
       .then((data: any[]) => {
-        this.categories = data;
-        this.loaded = true;
+        if (data.length) {
+          this.categories = data;
+          this.loaded = true;
+        } else {
+          if (this.currentPage > 1) {
+            this.currentPage = this.currentPage - 1;
+            this.getCategories(this.currentPage);
+          } else {
+            this.categories = [];
+            this.loaded = true;
+          }
+        }
       })
       .catch(err => {
         console.error(err);
@@ -65,6 +77,22 @@ export class CategoriesComponent implements OnInit {
           duration: 2000
         });
       });
+  }
+
+  nextPage() {
+    this.changePage(++this.currentPage);
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.changePage(--this.currentPage);
+    }
+  }
+
+  changePage(no) {
+    this.loaded = false;
+    this.currentPage = no;
+    this.getCategories(this.currentPage);
   }
 
   productSelectionChanged() {
@@ -140,7 +168,7 @@ export class AddEditCategoryModalComponent {
   }
 
   getProductList() {
-    this._product.getProductList()
+    this._product.getProductList(1)
       .then((data: any) => {
         this.products = data;
         this.products = this.products.filter(p => {

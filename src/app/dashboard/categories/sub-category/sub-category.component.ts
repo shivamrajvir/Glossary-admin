@@ -1,13 +1,13 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {SubCategoryService} from '../../../services/sub-category.service';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {CategoryService} from '../../../services/category.service';
-import {Router} from '@angular/router';
-import {environment} from '../../../../environments/environment';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ProductsService} from '../../../services/products.service';
-import {Urls} from '../../../shared/urls';
+import { Component, Inject, OnInit } from '@angular/core';
+import { SubCategoryService } from '../../../services/sub-category.service';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { CategoryService } from '../../../services/category.service';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ProductsService } from '../../../services/products.service';
+import { Urls } from '../../../shared/urls';
 
 @Component({
   selector: 'app-sub-category',
@@ -20,9 +20,10 @@ export class SubCategoryComponent implements OnInit {
   subCategories = [];
   displayedColumns = ['id', 'name', 'image', 'status', 'Actions', 'details'];
   imageUrl = environment.imageUrl;
+  currentPage = 1;
 
   constructor(private _subCategory: SubCategoryService, public _category: CategoryService,
-              protected snackbar: MatSnackBar, private router: Router, public dialog: MatDialog) { }
+    protected snackbar: MatSnackBar, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
     if (this._category.selectedCategory && this._category.selectedCategory.id) {
@@ -32,20 +33,47 @@ export class SubCategoryComponent implements OnInit {
     }
   }
 
-  getSubCategoryList() {
+  getSubCategoryList(page?) {
     const obj = new HttpParams()
-      .set('catId', this._category.selectedCategory.id);
+      .set('catId', this._category.selectedCategory.id)
+      .set('pageno', page ? page.toString() : '1');
     this._subCategory.getSubCategories(obj)
       .then((data: any) => {
-        this.subCategories = data.SubCategoriesDetails;
-        this.loaded = true;
+        if (data.SubCategoriesDetails && data.SubCategoriesDetails.length) {
+          this.subCategories = data.SubCategoriesDetails;
+          this.loaded = true;
+        } else {
+          if (this.currentPage > 1) {
+            this.currentPage = this.currentPage - 1;
+            this.getSubCategoryList(this.currentPage);
+          } else {
+            this.subCategories = [];
+            this.loaded = true;
+          }
+        }
       }).catch(err => {
         console.error(err);
-      this.loaded = true;
-      this.snackbar.open('Error while fetching Sub Categories', 'Error', {
-        duration: 2000
+        this.loaded = true;
+        this.snackbar.open('Error while fetching Sub Categories', 'Error', {
+          duration: 2000
+        });
       });
-    });
+  }
+
+  nextPage() {
+    this.changePage(++this.currentPage);
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.changePage(--this.currentPage);
+    }
+  }
+
+  changePage(no) {
+    this.loaded = false;
+    this.currentPage = no;
+    this.getSubCategoryList(this.currentPage);
   }
 
   openAddEditSubCategoryModal(data?) {
@@ -57,7 +85,7 @@ export class SubCategoryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getSubCategoryList();
+      this.getSubCategoryList(this.currentPage);
     });
   }
 
