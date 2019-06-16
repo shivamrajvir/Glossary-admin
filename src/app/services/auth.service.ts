@@ -59,4 +59,16 @@ export class AuthService {
         });
     });
   }
+
+  getOrderStats(obj) {
+    return new Promise((resolve, reject) => {
+      return this.http.post(Urls.dailyOrder, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

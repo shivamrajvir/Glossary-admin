@@ -11,7 +11,8 @@
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
-      <input matInput (focus)="picker.open()" [min]="minDate" [matDatepicker]="picker" formControlName="validTill" placeholder="Choose a date">
+      <input matInput (focus)="picker.open()" [min]="minDate" [matDatepicker]="picker" formControlName="validTill"
+       placeholder="Choose a date" [attr.format]="'dd-mm-yyyy'">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

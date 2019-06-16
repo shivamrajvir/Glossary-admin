@@ -81,6 +81,20 @@
   }
 }
 
+.orange-card {
+  background-color: #F44336;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  i {
+    font-size: 50px;
+    display: flex;
+    align-self: center;
+  }
+}
+
 mat-card {
   border-radius: 8px;
 }
@@ -89,4 +103,8 @@ mat-card-content {
   h4 {
     font-weight: 700;
   }
+}
+
+mat-card-title {
+  word-break: break-word;
 }

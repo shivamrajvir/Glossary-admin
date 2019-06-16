@@ -1,3 +1,5 @@
+<mat-tab-group color="warn" (selectedTabChange)="tabChangeEvent($event)">
+  <mat-tab label="Confirmed">
 <div class="row ml-0 mr-0">
   <div class="col-12 pb-4">
     <ng-container *ngIf="loaded">
@@ -27,10 +29,10 @@
             <td mat-cell *matCellDef="let element"> {{element.subCatquantity + ' ' + element.UnitName}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="status">
+          <!-- <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef> Status</th>
-            <td mat-cell *matCellDef="let element"> {{element.status === '1' ? 'Completed' : 'Pending'}} </td>
-          </ng-container>
+            <td mat-cell *matCellDef="let element"> Confirmed </td>
+          </ng-container> -->
 
           <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Price</th>
@@ -59,3 +61,68 @@
     </div>
   </div>
 </div>
+</mat-tab>
+<mat-tab label="Cancelled">
+  <div class="row ml-0 mr-0">
+    <div class="col-12 pb-4">
+      <ng-container *ngIf="loaded">
+        <mat-card class="mb-2 mt-2">
+          <mat-card-title>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>Order Details</div>
+            </div>
+          </mat-card-title>
+        </mat-card>
+        <div *ngIf="cancelledItems.length" class="overflow-x">
+          <table mat-table [dataSource]="cancelledItems" class="mat-elevation-z8 product-table">
+  
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No.</th>
+              <td mat-cell *matCellDef="let element; index as i"> {{(i + 1)}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Sub Category Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.subCatName}} </td>
+            </ng-container>
+  
+  
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>Quantity</th>
+              <td mat-cell *matCellDef="let element"> {{element.subCatquantity + ' ' + element.UnitName}} </td>
+            </ng-container>
+  
+            <!-- <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status</th>
+              <td mat-cell *matCellDef="let element"> Cancelled </td>
+            </ng-container> -->
+  
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef>Price</th>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="datetime">
+              <th mat-header-cell *matHeaderCellDef>Date</th>
+              <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+        </div>
+        <ng-container *ngIf="loaded && !cancelledItems.length">
+          <p class="no-records-found">No Records Found</p>
+        </ng-container>
+      </ng-container>
+  
+      <div *ngIf="!loaded" class="progress-spinner">
+        <mat-progress-spinner
+          [color]="'warn'"
+          [mode]="'indeterminate'">
+        </mat-progress-spinner>
+      </div>
+    </div>
+  </div>
+  </mat-tab>
+</mat-tab-group>

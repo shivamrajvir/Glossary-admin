@@ -12,8 +12,10 @@ export class OrderDetailsComponent implements OnInit {
 
   masterOrderId;
   orderDetails = [];
+  cancelledItems = [];
   loaded = false;
-  displayedColumns = ['id', 'name', 'quantity', 'status', 'price', 'datetime'];
+  displayedColumns = ['id', 'name', 'quantity', 'price', 'datetime'];
+  selectedTab = 0;
 
   constructor(private route: ActivatedRoute, private _users: UsersService, private router: Router) { }
 
@@ -26,7 +28,17 @@ export class OrderDetailsComponent implements OnInit {
 
       this._users.getOrderDetailsById(obj)
         .then((data: any[]) => {
-          this.orderDetails = data;
+          if (data.length) {
+            this.orderDetails = data.filter(d => {
+              return (d.status === '1');
+            });
+            this.cancelledItems = data.filter(d => {
+              return (d.status === '0');
+            });
+          } else {
+            this.orderDetails = [];
+            this.cancelledItems = [];
+          }
           this.loaded = true;
         }).catch(err => {
           console.error(err);
@@ -35,6 +47,21 @@ export class OrderDetailsComponent implements OnInit {
     } else {
       this.router.navigate(['dashboard/users']);
     }
+  }
+
+  tabChangeEvent(event) {
+    this.selectedTab = event.index;
+    // this.currentPage = 1;
+    // if (event.index === 0) {
+    //   this.getWallet();
+    // } else if (event.index === 1) {
+    //   this.getTransactionHistory();
+    // } else if (event.index === 2) {
+    //   this.getUserOrders(1);
+    // } else if (event.index === 3) {
+    //   this.getCartDetails();
+    // }
+    // this.loaded = false;
   }
 
 }

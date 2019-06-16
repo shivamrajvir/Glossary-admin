@@ -6,6 +6,7 @@ export class Urls {
   static login = Urls.base + 'login.php';
 
   static stats = Urls.base + 'getCount.php';
+  static dailyOrder = Urls.base + 'dayWiseMasterOrder.php';
 
   static product = Urls.base + 'getProducts.php';
   static upload_product_image = Urls.base + 'upload.php';
