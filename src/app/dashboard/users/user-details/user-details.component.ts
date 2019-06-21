@@ -74,7 +74,7 @@ export class UserDetailsComponent implements OnInit {
       });
       return;
     }
-\
+
     if (this.editBalance.amount > parseInt(this.walletDetails.currentbalance, 10) && this.editBalance.operation === 'deduct') {
       this.snackBar.open('Error', 'Deduction money is more than current balance', {
         duration: 4000
@@ -148,8 +148,7 @@ export class UserDetailsComponent implements OnInit {
       .set('uid', this.userDetails.id);
     this._userService.getWalletBalance(object)
       .then((data: any[]) => {
-        console.log(data);
-        this.walletDetails = data.length ? data[0] : 0;
+        this.walletDetails = data.length ? data[data.length - 1] : 0;
         this.loaded = true;
       }).catch(err => {
       console.error(err);
