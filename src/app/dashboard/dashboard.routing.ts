@@ -69,6 +69,10 @@ export const routes: Routes = [
       {
         path: 'users/user-details/order-details/:id',
         component: OrderDetailsComponent
+      },
+      {
+        path: 'reports/orderDetails/:id',
+        component: OrderDetailsComponent
       }
     ]
   }

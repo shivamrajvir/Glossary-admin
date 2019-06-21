@@ -1,100 +1,154 @@
-<div class="row ml-0 mr-0 pb-4">
-  <div *ngIf="!loaded" class="progress-spinner">
-    <mat-progress-spinner
-      [color]="'warn'"
-      [mode]="'indeterminate'">
-    </mat-progress-spinner>
-  </div>
-  <ng-container *ngIf="loaded && statistics">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
-      <mat-card class="blue-card">
-        <div>
-          <mat-card-title>Users</mat-card-title>
-          <mat-card-content>
-            <h4>{{statistics['usersCount'] ? statistics['usersCount'] : 0}}</h4>
-          </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            people
-          </i>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
-      <mat-card class="crimson-card">
-        <div>
-          <mat-card-title>Cities</mat-card-title>
-          <mat-card-content>
-            <h4>{{statistics['cityCount'] ? statistics['cityCount'] : 0}}</h4>
-          </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            location_city
-          </i>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
-      <mat-card class="green-card">
-        <div>
-          <mat-card-title>Products</mat-card-title>
-          <mat-card-content>
-            <h4>{{statistics['productCount'] ? statistics['productCount'] : 0}}</h4>
-          </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            view_list
-          </i>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
-      <mat-card class="purple-card">
-        <div>
-          <mat-card-title>Categories</mat-card-title>
-          <mat-card-content>
-            <h4>{{statistics['categoryCount'] ? statistics['categoryCount'] : 0}}</h4>
-          </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            category
-          </i>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
-      <mat-card class="pink-card">
-        <div>
-        <mat-card-title>Sub Categories</mat-card-title>
-        <mat-card-content>
-          <h4>{{statistics['subcategoriesCount'] ? statistics['subcategoriesCount'] : 0}}</h4>
-        </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            pie_chart
-          </i>
-        </div>
-      </mat-card>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
-      <mat-card class="orange-card">
-        <div>
-        <mat-card-title>Orders Today</mat-card-title>
-        <mat-card-content>
-          <h4>{{dailyOrders ? dailyOrders : 0}}</h4>
-        </mat-card-content>
-        </div>
-        <div class="d-flex">
-          <i class="material-icons">
-            shopping_cart
+
+<ng-container *ngIf="loaded">
+  <div class="row ml-0 mr-0 pb-4">  
+    <ng-container *ngIf="loaded && statistics">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+        <mat-card class="blue-card">
+          <div>
+            <mat-card-title>Users</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['usersCount'] ? statistics['usersCount'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              people
             </i>
-        </div>
-      </mat-card>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+        <mat-card class="crimson-card">
+          <div>
+            <mat-card-title>Cities</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['cityCount'] ? statistics['cityCount'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              location_city
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+        <mat-card class="green-card">
+          <div>
+            <mat-card-title>Products</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['productCount'] ? statistics['productCount'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              view_list
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+        <mat-card class="purple-card">
+          <div>
+            <mat-card-title>Categories</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['categoryCount'] ? statistics['categoryCount'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              category
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+        <mat-card class="pink-card">
+          <div>
+          <mat-card-title>Sub Categories</mat-card-title>
+          <mat-card-content>
+            <h4>{{statistics['subcategoriesCount'] ? statistics['subcategoriesCount'] : 0}}</h4>
+          </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              pie_chart
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+        <mat-card class="orange-card">
+          <div>
+          <mat-card-title>Orders Today</mat-card-title>
+          <mat-card-content>
+            <h4>{{dailyOrders ? dailyOrders : 0}}</h4>
+          </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              shopping_cart
+              </i>
+          </div>
+        </mat-card>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row ml-0 mr-0">
+    <div class="col-12">
+      <div *ngIf="orderList.length" class="overflow-x">
+        <table mat-table [dataSource]="orderList" class="mat-elevation-z8 orders-table">
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Order No.</th>
+            <td mat-cell *matCellDef="let element; index as i"> {{element.masterOrderId}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element"> {{element.orderStatus | titlecase}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>Order Price</th>
+            <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="datetime">
+            <th mat-header-cell *matHeaderCellDef>Order Date</th>
+            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'longDate'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="deliverDate">
+            <th mat-header-cell *matHeaderCellDef>Delivery Date</th>
+            <td mat-cell *matCellDef="let element"> {{element.deliveryDate | date: 'longDate'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="addr">
+            <th mat-header-cell *matHeaderCellDef>Delivery Address</th>
+            <td mat-cell *matCellDef="let element"> {{element.deliveryAddress}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="paymode">
+            <th mat-header-cell *matHeaderCellDef>Payment Mode</th>
+            <td mat-cell *matCellDef="let element"> {{element.payMode | titlecase}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="orderDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;" (click)="goToOrderDetails(row)"></tr>
+        </table>
+      </div>
     </div>
-  </ng-container>
+  </div>
+</ng-container>
+<div *ngIf="!loaded" class="progress-spinner">
+  <mat-progress-spinner
+    [color]="'warn'"
+    [mode]="'indeterminate'">
+  </mat-progress-spinner>
 </div>

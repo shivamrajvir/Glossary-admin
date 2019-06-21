@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
@@ -13,7 +14,10 @@ export class ReportsComponent implements OnInit {
   loaded = false;
   dailyOrders;
 
-  constructor(private _auth: AuthService, private datePipe: DatePipe) { }
+  orderDisplayedColumns = ['id', 'name', 'status', 'price', 'datetime', 'deliverDate', 'addr', 'paymode'];
+  orderList = [];
+
+  constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router) { }
 
   ngOnInit() {
     this.getStatistics();
@@ -33,18 +37,28 @@ export class ReportsComponent implements OnInit {
   }
 
   getOrdersStats() {
-    console.log(this.datePipe.transform(new Date(), 'yyyy-mm-dd'));
     const obj = new HttpParams()
-      .set('deliveryDate', this.datePipe.transform(new Date(), 'yyyy-mm-dd'));
+      // .set('deliveryDate', this.datePipe.transform(new Date(), 'yyyy-mm-dd'));
+      .set('deliveryDate', '2019-06-08');
     this._auth.getOrderStats(obj)
       .then((data: any[]) => {
         this.loaded = true;
-        this.dailyOrders = (data && data.length) ? data.length : 0;
+        if (data && data.length) {
+          this.orderList = data;
+          this.dailyOrders = (data && data.length) ? data.length : 0;
+        } else {
+          this.orderList = [];
+          this.dailyOrders = 0;
+        }
       })
       .catch(err => {
         console.error(err);
         this.loaded = true;
       });
+  }
+
+  goToOrderDetails(data) {
+      this._router.navigate(['dashboard/reports/orderDetails/' + data.id]);
   }
 
 }
