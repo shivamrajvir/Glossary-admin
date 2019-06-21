@@ -7,7 +7,7 @@
       <input matInput type="number" (keypress)="restrictInputNumbers($event)" placeholder="Quantity"
              formControlName="quantity">
       <mat-error *ngIf="detailForm.controls['quantity'].touched && detailForm.controls['quantity'].invalid">
-        Please enter <strong>Unit</strong>
+        Please enter <strong>Quantity</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
@@ -18,21 +18,21 @@
         </mat-option>
       </mat-select>
       <mat-error *ngIf="detailForm.controls['unit'].touched && detailForm.controls['unit'].invalid">
-        Please enter <strong>Unit</strong>
+        Please enter <strong>Unit Name</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
       <input matInput placeholder="Purchase Price" formControlName="purchasePrice"
              type="number" (keypress)="restrictInputNumbers($event)">
       <mat-error *ngIf="detailForm.controls['purchasePrice'].touched && detailForm.controls['purchasePrice'].invalid">
-        Please enter <strong>Discount Price</strong>
+        Please enter <strong>Purchase Price</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
       <input matInput placeholder="Margin" formControlName="margin"
              type="number" (keypress)="restrictInputNumbers($event)" max="100" min="1">
       <mat-error *ngIf="detailForm.controls['margin'].touched && detailForm.controls['margin'].invalid">
-        Please enter <strong>Discount Price</strong>
+        Please enter <strong>Margin</strong>
       </mat-error>
     </mat-form-field>
     <mat-form-field color="warn">
