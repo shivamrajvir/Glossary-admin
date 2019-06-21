@@ -14,7 +14,7 @@ export class ReportsComponent implements OnInit {
   loaded = false;
   dailyOrders;
 
-  orderDisplayedColumns = ['id', 'name', 'status', 'price', 'datetime', 'deliverDate', 'addr', 'paymode'];
+  orderDisplayedColumns = ['id', 'name', 'status', 'price', 'datetime', 'phone', 'addr', 'paymode'];
   orderList = [];
 
   constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router) { }
