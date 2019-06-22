@@ -1,8 +1,7 @@
-
 <ng-container *ngIf="loaded">
-  <div class="row ml-0 mr-0 pb-4">  
+  <div class="row ml-0 mr-0 pb-4">
     <ng-container *ngIf="loaded && statistics">
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-1 mb-1">
         <mat-card class="blue-card">
           <div>
             <mat-card-title>Users</mat-card-title>
@@ -17,7 +16,7 @@
           </div>
         </mat-card>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4  mt-1 mb-1">
         <mat-card class="crimson-card">
           <div>
             <mat-card-title>Cities</mat-card-title>
@@ -32,7 +31,7 @@
           </div>
         </mat-card>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3  mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4  mt-1 mb-1">
         <mat-card class="green-card">
           <div>
             <mat-card-title>Products</mat-card-title>
@@ -47,7 +46,7 @@
           </div>
         </mat-card>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-1 mb-1">
         <mat-card class="purple-card">
           <div>
             <mat-card-title>Categories</mat-card-title>
@@ -62,13 +61,13 @@
           </div>
         </mat-card>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-1 mb-1">
         <mat-card class="pink-card">
           <div>
-          <mat-card-title>Sub Categories</mat-card-title>
-          <mat-card-content>
-            <h4>{{statistics['subcategoriesCount'] ? statistics['subcategoriesCount'] : 0}}</h4>
-          </mat-card-content>
+            <mat-card-title>Sub Categories</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['subcategoriesCount'] ? statistics['subcategoriesCount'] : 0}}</h4>
+            </mat-card-content>
           </div>
           <div class="d-flex">
             <i class="material-icons">
@@ -77,78 +76,141 @@
           </div>
         </mat-card>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-1 mb-1">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-1 mb-1">
         <mat-card class="orange-card">
           <div>
-          <mat-card-title>Orders Today</mat-card-title>
-          <mat-card-content>
-            <h4>{{dailyOrders ? dailyOrders : 0}}</h4>
-          </mat-card-content>
+            <mat-card-title>Orders Today</mat-card-title>
+            <mat-card-content>
+              <h4>{{dailyOrders ? dailyOrders : 0}}</h4>
+            </mat-card-content>
           </div>
           <div class="d-flex">
             <i class="material-icons">
               shopping_cart
-              </i>
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 mt-1 mb-1">
+        <mat-card class="blue-card">
+          <div>
+            <mat-card-title>App Installed</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['acceptedInstall'] ? statistics['acceptedInstall'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              get_app
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4  mt-1 mb-1">
+        <mat-card class="crimson-card">
+          <div>
+            <mat-card-title>Pending Queries</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['pendingQueries'] ? statistics['resolvedQueries'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              help
+            </i>
+          </div>
+        </mat-card>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4  mt-1 mb-1">
+        <mat-card class="green-card">
+          <div>
+            <mat-card-title>Resolved Queries</mat-card-title>
+            <mat-card-content>
+              <h4>{{statistics['resolvedQueries'] ? statistics['resolvedQueries'] : 0}}</h4>
+            </mat-card-content>
+          </div>
+          <div class="d-flex">
+            <i class="material-icons">
+              info
+            </i>
           </div>
         </mat-card>
       </div>
     </ng-container>
   </div>
   <div class="row ml-0 mr-0">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+      <div class="d-inline-flex orders_title">Orders</div>
+      <div class="d-inline-flex">
+        <mat-form-field color="warn">
+          <input disabled matInput [matDatepicker]="picker" placeholder="Choose a date" [value]="today"
+            (dateChange)="getOrdersStats($event)">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div class="row ml-0 mr-0">
     <div class="col-12">
       <div *ngIf="orderList.length" class="overflow-x">
         <table mat-table [dataSource]="orderList" class="mat-elevation-z8 orders-table">
 
-          <ng-container matColumnDef="id">
+          <ng-container matColumnDef="id" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Order No.</th>
             <td mat-cell *matCellDef="let element; index as i"> {{element.id}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="name">
+          <ng-container matColumnDef="name" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Name</th>
             <td mat-cell *matCellDef="let element"> {{element.address_name}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let element"> {{element.orderstatus | titlecase}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="price">
+          <ng-container matColumnDef="price" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Order Price</th>
             <td mat-cell *matCellDef="let element"> {{element.totalprice}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="datetime">
+          <ng-container matColumnDef="datetime" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Order Date</th>
             <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'longDate'}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="phone">
+          <ng-container matColumnDef="phone" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
             <td mat-cell *matCellDef="let element"> {{element.address_contact}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="addr">
+          <ng-container matColumnDef="addr" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Delivery Address</th>
             <td mat-cell *matCellDef="let element"> {{element.address}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="paymode">
+          <ng-container matColumnDef="paymode" (click)="goToOrderDetails(row)">
             <th mat-header-cell *matHeaderCellDef>Payment Mode</th>
             <td mat-cell *matCellDef="let element"> {{element.paymode | titlecase}} </td>
           </ng-container>
 
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-label>Pending</mat-label>
+              <mat-select>
+                <mat-option [value]="'complete'">
+                  Complete
+                </mat-option>
+              </mat-select>
+            </td>
+          </ng-container>
+
           <tr mat-header-row *matHeaderRowDef="orderDisplayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;" (click)="goToOrderDetails(row)"></tr>
+          <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;"></tr>
         </table>
       </div>
     </div>
   </div>
 </ng-container>
 <div *ngIf="!loaded" class="progress-spinner">
-  <mat-progress-spinner
-    [color]="'warn'"
-    [mode]="'indeterminate'">
+  <mat-progress-spinner [color]="'warn'" [mode]="'indeterminate'">
   </mat-progress-spinner>
 </div>

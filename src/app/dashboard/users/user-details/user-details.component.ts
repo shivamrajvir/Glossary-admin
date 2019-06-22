@@ -82,6 +82,8 @@ export class UserDetailsComponent implements OnInit {
       return;
     }
 
+    this.loaded = false;
+
     const object = new HttpParams()
       .set('id', this.editBalance.id)
       .set('operation', this.editBalance.operation)

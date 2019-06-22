@@ -14,8 +14,10 @@ export class ReportsComponent implements OnInit {
   loaded = false;
   dailyOrders;
 
-  orderDisplayedColumns = ['id', 'name', 'status', 'price', 'datetime', 'phone', 'addr', 'paymode'];
+  orderDisplayedColumns = ['id', 'name', 'price', 'datetime', 'phone', 'addr', 'paymode', 'status'];
   orderList = [];
+
+  today = new Date();
 
   constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router) { }
 
@@ -36,10 +38,18 @@ export class ReportsComponent implements OnInit {
       });
   }
 
-  getOrdersStats() {
-    const obj = new HttpParams()
-      // .set('deliveryDate', this.datePipe.transform(new Date(), 'yyyy-mm-dd'));
-      .set('deliveryDate', '2019-06-08');
+  getOrdersStats(date?) {
+    console.log(date);
+    let obj;
+    if (date) {
+      obj = new HttpParams()
+      .set('deliveryDate', this.datePipe.transform(date.value, 'yyyy-MM-dd'));
+      // .set('deliveryDate', '2019-06-08');
+    } else {
+      obj = new HttpParams()
+      .set('deliveryDate', this.datePipe.transform(new Date(), 'yyyy-MM-dd'));
+      // .set('deliveryDate', '2019-06-08');
+    }
     this._auth.getOrderStats(obj)
       .then((data: any[]) => {
         this.loaded = true;
