@@ -66,4 +66,6 @@ export class Urls {
 
   static get_orders = Urls.base + 'getOrder.php';
 
+  static complete_order = Urls.base + 'completeStatusOrder.php';
+
 }

@@ -143,7 +143,7 @@
       <div class="d-inline-flex orders_title">Orders</div>
       <div class="d-inline-flex">
         <mat-form-field color="warn">
-          <input disabled matInput [matDatepicker]="picker" placeholder="Choose a date" [value]="today"
+          <input disabled matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="selectedDate"
             (dateChange)="getOrdersStats($event)">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker disabled="false"></mat-datepicker>
@@ -153,50 +153,52 @@
   </div>
   <div class="row ml-0 mr-0">
     <div class="col-12">
-      <div *ngIf="orderList.length" class="overflow-x">
+      <div class="overflow-x">
         <table mat-table [dataSource]="orderList" class="mat-elevation-z8 orders-table">
 
-          <ng-container matColumnDef="id" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef>Order No.</th>
-            <td mat-cell *matCellDef="let element; index as i"> {{element.id}} </td>
+            <td mat-cell *matCellDef="let element; index as i" (click)="goToOrderDetails(element)"> {{element.id}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="name" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let element"> {{element.address_name}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.address_name}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="price" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef>Order Price</th>
-            <td mat-cell *matCellDef="let element"> {{element.totalprice}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.totalprice}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="datetime" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="datetime">
             <th mat-header-cell *matHeaderCellDef>Order Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'longDate'}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.datetime | date: 'longDate'}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="phone" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="phone">
             <th mat-header-cell *matHeaderCellDef>Phone</th>
-            <td mat-cell *matCellDef="let element"> {{element.address_contact}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.address_contact}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="addr" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="addr">
             <th mat-header-cell *matHeaderCellDef>Delivery Address</th>
-            <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.address}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="paymode" (click)="goToOrderDetails(row)">
+          <ng-container matColumnDef="paymode">
             <th mat-header-cell *matHeaderCellDef>Payment Mode</th>
-            <td mat-cell *matCellDef="let element"> {{element.paymode | titlecase}} </td>
+            <td mat-cell *matCellDef="let element" (click)="goToOrderDetails(element)"> {{element.paymode | titlecase}} </td>
           </ng-container>
 
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let element">
-              <mat-label>Pending</mat-label>
-              <mat-select>
-                <mat-option [value]="'complete'">
+            <td mat-cell *matCellDef="let element; index as i">
+              <mat-select [(ngModel)]="element.orderstatus" (ngModelChange)="orderStatusChange(element)">
+                <mat-option [value]="'pending'">
+                  Pending
+                </mat-option>
+                <mat-option [value]="'completed'">
                   Complete
                 </mat-option>
               </mat-select>
@@ -206,6 +208,9 @@
           <tr mat-header-row *matHeaderRowDef="orderDisplayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: orderDisplayedColumns;"></tr>
         </table>
+        <ng-container *ngIf="loaded && !orderList.length">
+          <p class="no-records-found">No Records Found</p>
+        </ng-container>
       </div>
     </div>
   </div>
