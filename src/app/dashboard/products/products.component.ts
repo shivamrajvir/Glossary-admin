@@ -217,7 +217,7 @@ export class AddEditProductModalComponent {
       } else {
         const object = new HttpParams()
           .set('name', this.addEditProductForm.value.name)
-          .set('fileName', this.addEditProductForm.value.image);
+          .set('file', this.addEditProductForm.value.image);
         this._product.addProduct(object)
           .then(data => {
             this.isImageUploading = false;
