@@ -16,8 +16,11 @@ export class ReportsComponent implements OnInit {
 
   orderDisplayedColumns = ['id', 'name', 'price', 'datetime', 'phone', 'addr', 'paymode', 'status'];
   orderList = [];
+  allOrdersList = [];
 
   selectedDate = new Date();
+
+  filterType = 'all';
 
   constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router) { }
 
@@ -55,10 +58,9 @@ export class ReportsComponent implements OnInit {
       .then((data: any[]) => {
         this.loaded = true;
         if (data && data.length) {
+          this.allOrdersList = data;
           this.orderList = data;
-          this.orderList = this.orderList.filter(order => {
-            return (order.orderstatus === 'pending');
-          });
+          this.changeFilterType();
           this.dailyOrders = (data && data.length) ? data.length : 0;
         } else {
           this.orderList = [];
@@ -87,6 +89,23 @@ export class ReportsComponent implements OnInit {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  changeFilterType(type?) {
+    if (type) {
+      this.filterType = type;
+    }
+    if (this.filterType === 'completed') {
+      this.orderList = this.allOrdersList.filter(order => {
+        return (order.orderstatus === 'completed');
+      });
+    } else if (this.filterType === 'pending') {
+      this.orderList = this.allOrdersList.filter(order => {
+        return (order.orderstatus === 'pending');
+      });
+    } else if (this.filterType === 'all') {
+      this.orderList = JSON.parse(JSON.stringify(this.allOrdersList.slice()));
+    }
   }
 
 }
