@@ -128,6 +128,7 @@ export class AddEditProductModalComponent {
   imageUrl = environment.imageUrl;
   isImageUploading = false;
   imageUploadFile;
+  isEdit = false;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -135,6 +136,10 @@ export class AddEditProductModalComponent {
     public snackbar: MatSnackBar, private _product: ProductsService,
     private http: HttpClient) {
     this.initializeForm(this.data.data);
+    if (this.data.data) {
+      console.log(this.data.data);
+      this.isEdit = true;
+    }
   }
 
   initializeForm(data?) {
@@ -215,9 +220,9 @@ export class AddEditProductModalComponent {
             });
           });
       } else {
-        const object = new HttpParams()
-          .set('name', this.addEditProductForm.value.name)
-          .set('file', this.addEditProductForm.value.image);
+        const object = new FormData();
+          object.append('name', this.addEditProductForm.value.name);
+          object.append('file', this.addEditProductForm.value.image);
         this._product.addProduct(object)
           .then(data => {
             this.isImageUploading = false;
@@ -235,6 +240,7 @@ export class AddEditProductModalComponent {
           });
       }
     } else {
+      this.isImageUploading = false;
       this.snackbar.open('Please add Name and upload an image for the product', 'Error', {
         duration: 4000
       });

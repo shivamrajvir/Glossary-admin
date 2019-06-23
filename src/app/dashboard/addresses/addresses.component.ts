@@ -148,7 +148,6 @@ export class AddCityModalComponent {
       this.isCity = false;
       this.initializeStateForm();
     }
-    console.log(this.isCity);
   }
 
   initializeForm() {
@@ -160,7 +159,7 @@ export class AddCityModalComponent {
 
   initializeStateForm() {
     this.stateForm = new FormGroup({
-      stateName: new FormControl('', Validators.required)
+      stateName: new FormControl(null, Validators.required)
     });
   }
 

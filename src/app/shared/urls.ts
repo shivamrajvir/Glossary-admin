@@ -68,4 +68,8 @@ export class Urls {
 
   static complete_order = Urls.base + 'completeStatusOrder.php';
 
+  static getCancelReason = Urls.base + 'getCancellationReason.php';
+  static addCancelReason = Urls.base + 'addCancellationReason.php';
+  static changeCancelReason = Urls.base + 'changeStatusCancellation.php';
+
 }

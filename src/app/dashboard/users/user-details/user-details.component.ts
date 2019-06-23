@@ -158,9 +158,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getTransactionHistory(page?) {
+    const pageno = page ? page.toString() : '1';
     const object = new HttpParams()
       .set('uid', this.userDetails.id)
-      .set('pageno', page ? page : 1);
+      .set('pageno', pageno);
     this._userService.getTransactions(object)
       .then((data: any[]) => {
         console.log(data);
@@ -182,9 +183,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getUserOrders(page?) {
+    const pageno = page ? page.toString() : '1';
     const object = new HttpParams()
       .set('u_id', this.userDetails.id)
-      .set('pageno', page ? page : 1);
+      .set('pageno', pageno);
     this._userService.getUserOrders(object)
       .then((data: any[]) => {
         console.log(data);
@@ -206,9 +208,10 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getCartDetails(page?) {
+    const pageno = page ? page.toString() : '1';
     const object = new HttpParams()
       .set('uid', this.userDetails.id)
-      .set('pageno', page ? page : 1);
+      .set('pageno', pageno);
     this._userService.getUserCart(object)
       .then((data: any[]) => {
         console.log(data);

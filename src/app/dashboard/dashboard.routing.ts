@@ -12,6 +12,7 @@ import {UsersComponent} from './users/users.component';
 import {UserDetailsComponent} from './users/user-details/user-details.component';
 import {SubCategoryComponent} from './categories/sub-category/sub-category.component';
 import {OrderDetailsComponent} from './users/user-details/order-details/order-details.component';
+import {CancelReasonComponent} from './cancel-reason/cancel-reason.component';
 
 export const routes: Routes = [
   {
@@ -73,6 +74,10 @@ export const routes: Routes = [
       {
         path: 'reports/orderDetails/:id',
         component: OrderDetailsComponent
+      },
+      {
+        path: 'cancel-reason',
+        component: CancelReasonComponent
       }
     ]
   }

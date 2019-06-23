@@ -30,6 +30,8 @@ import { UsersService } from '../services/users.service';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { OrderDetailsComponent } from './users/user-details/order-details/order-details.component';
 import { AppDateAdapter, APP_DATE_FORMATS } from './../shared/date.adapter';
+import { CancelReasonComponent } from './cancel-reason/cancel-reason.component';
+import {CancelService} from '../services/cancel.service';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './../shared/date.adapter';
     AddEditUnitModalComponent,
     UsersComponent,
     UserDetailsComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    CancelReasonComponent
   ],
   imports: [
     CommonModule,
@@ -90,7 +93,8 @@ import { AppDateAdapter, APP_DATE_FORMATS } from './../shared/date.adapter';
     NotificationService,
     SubCategoryService,
     UsersService,
-    DatePipe
+    DatePipe,
+    CancelService
   ]
 })
 export class DashboardModule { }

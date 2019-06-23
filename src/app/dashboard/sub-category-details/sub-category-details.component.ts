@@ -57,7 +57,6 @@ export class SubCategoryDetailsComponent implements OnInit {
       .set('catId', this._category.selectedCategory.id);
     this._subCategory.getSubCategories(obj)
       .then((data: any) => {
-        console.log(data);
         data.SubCategoriesDetails.find(d => {
           if (d.id === this._subCategory.subCategoryDetails.id) {
             this.details = d.qunatityDetails;

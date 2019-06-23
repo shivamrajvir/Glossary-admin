@@ -184,7 +184,7 @@ export class addSliderModalComponent {
     this._slider.addDashboardSlider(fd)
       .subscribe(data => {
         this.isImageUploading = false;
-        this.snackbar.open('Product Added', 'Success', {
+        this.snackbar.open('Slider Added', 'Success', {
           duration: 4000
         });
         this.closeModal();

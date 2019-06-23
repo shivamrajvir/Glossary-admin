@@ -51,9 +51,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   getCategories(page?) {
+    const pageno = page ? page.toString() : '1';
     const fd = new HttpParams()
       .set('p_id', this.selectedProduct)
-      .set('pageno', page ? page.toString() : '1');
+      .set('pageno', pageno);
     this._category.getCategoriesByProductID(fd)
       .then((data: any[]) => {
         if (data.length) {
@@ -296,6 +297,7 @@ export class AddEditCategoryModalComponent {
           });
       }
     } else {
+      this.isImageUploading = false;
       this.snackbar.open('Please add Name and upload an image for the Category', 'Error', {
         duration: 4000
       });

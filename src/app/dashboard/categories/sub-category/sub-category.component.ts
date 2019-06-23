@@ -34,9 +34,11 @@ export class SubCategoryComponent implements OnInit {
   }
 
   getSubCategoryList(page?) {
+    const pageno = page ? page.toString() : '1';
+    console.log(pageno);
     const obj = new HttpParams()
       .set('catId', this._category.selectedCategory.id)
-      .set('pageno', page ? page.toString() : '1');
+      .set('pageno', pageno);
     this._subCategory.getSubCategories(obj)
       .then((data: any) => {
         if (data.SubCategoriesDetails && data.SubCategoriesDetails.length) {
