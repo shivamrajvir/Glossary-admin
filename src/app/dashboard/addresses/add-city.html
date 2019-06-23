@@ -24,11 +24,11 @@
 
   <ng-container *ngIf="!isCity">
     <form *ngIf="stateForm" [formGroup]="stateForm">
-      <mat-form-field color="warn">
+      <mat-form-field color="warn" class="w-100">
         <mat-label>Select a State</mat-label>
         <input matInput placeholder="Name" formControlName="stateName" />
         <mat-error *ngIf="stateForm.controls['stateName'].touched && stateForm.controls['stateName'].invalid">
-          Please enter <strong>City name</strong>
+          Please enter <strong>State name</strong>
         </mat-error>
       </mat-form-field>
     </form>

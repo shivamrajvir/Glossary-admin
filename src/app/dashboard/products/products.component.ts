@@ -220,9 +220,9 @@ export class AddEditProductModalComponent {
             });
           });
       } else {
-        const object = new FormData();
-          object.append('name', this.addEditProductForm.value.name);
-          object.append('file', this.addEditProductForm.value.image);
+        const object = new HttpParams()
+          .set('name', this.addEditProductForm.value.name)
+          .set('file', this.addEditProductForm.value.image);
         this._product.addProduct(object)
           .then(data => {
             this.isImageUploading = false;

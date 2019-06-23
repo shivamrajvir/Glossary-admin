@@ -1,0 +1,44 @@
+@import "../../../theme/variables";
+
+.overflow-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.product-table {
+  width: 100%;
+  min-width: 600px;
+
+  th {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .product-image {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+  }
+}
+
+.progress-spinner {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.product-add-icon {
+  color: $primary-orange;
+  font-size: 32px;
+}
+
+.product-add-icon:hover {
+  cursor: pointer;
+}
+
+.no-records-found {
+  text-align: center;
+  font-weight: 500;
+}
