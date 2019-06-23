@@ -2,8 +2,7 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-
-$primary-orange: #F44336;
+@import "./theme/variables";
 
 .w-100 {
   width: 100%;
@@ -59,7 +58,7 @@ button {
 }
 
 .mat-tab-label-active {
-  color: #F44336;
+  color: $primary-orange;
   font-weight: 600;
 }
 
@@ -76,7 +75,7 @@ button {
   }
 
   .breadcrumb-item:hover {
-    color: #F44336;
+    color: $primary-orange;
     cursor: pointer;
   }
 
@@ -104,15 +103,15 @@ button {
 
 .paginate_button {
   border-radius: 50%;
-  color: #F44336;
+  color: $primary-orange;
   padding: 3px 10px;
   background-color: white;
   transition: all 0.4s linear;
-  box-shadow: 0 2px 11px -3px #F44336;
+  box-shadow: 0 2px 11px -3px $primary-orange;
 }
 
 .paginate_button:hover {
-  background-color: #F44336;
+  background-color: $primary-orange;
   color: white;
   cursor: pointer;
 }

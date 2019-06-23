@@ -1,14 +1,16 @@
 <div class="row ml-0 mr-0">
-  <div class="col-12 pb-4">
+  <div class="col-12 pb-4 pl-0 pr-0">
     <ng-container *ngIf="loaded">
-      <mat-card class="mb-2 mt-2">
-        <mat-card-title>
-          <div class="d-flex justify-content-between align-items-center">
-            <div>Users</div>
-          </div>
-        </mat-card-title>
-      </mat-card>
-      <div *ngIf="userList.length" class="overflow-x">
+      <div class="p-3">
+        <mat-card class="mb-2 mt-2">
+          <mat-card-title>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>Users</div>
+            </div>
+          </mat-card-title>
+        </mat-card>
+      </div>
+      <div *ngIf="userList.length" class="overflow-x p-3">
         <table mat-table [dataSource]="userList" class="mat-elevation-z8 users-table">
 
           <!--- Note that these columns can be defined in any order.

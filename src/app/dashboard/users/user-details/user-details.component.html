@@ -56,8 +56,8 @@
           </mat-progress-spinner>
         </div>
         <div *ngIf="loaded">
-          <div *ngIf="loaded" class="p-2">
-            <div *ngIf="transactionHistory.length" class="overflow-x">
+          <div *ngIf="loaded">
+            <div *ngIf="transactionHistory.length" class="overflow-x p-3">
               <table mat-table [dataSource]="transactionHistory" class="mat-elevation-z8 users-table">
 
                 <!--- Note that these columns can be defined in any order.
@@ -125,8 +125,8 @@
             [mode]="'indeterminate'">
           </mat-progress-spinner>
         </div>
-        <div *ngIf="loaded" class="p-2">
-          <div *ngIf="orderList.length" class="overflow-x">
+        <div *ngIf="loaded">
+          <div *ngIf="orderList.length" class="overflow-x p-3">
             <table mat-table [dataSource]="orderList" class="mat-elevation-z8 orders-table">
 
               <ng-container matColumnDef="id">
@@ -204,8 +204,8 @@
             [mode]="'indeterminate'">
           </mat-progress-spinner>
         </div>
-        <div *ngIf="loaded" class="p-2">
-          <div *ngIf="cartData.length" class="overflow-x">
+        <div *ngIf="loaded">
+          <div *ngIf="cartData.length" class="overflow-x p-3">
             <table mat-table [dataSource]="cartData" class="mat-elevation-z8 users-table">
 
               <!--- Note that these columns can be defined in any order.

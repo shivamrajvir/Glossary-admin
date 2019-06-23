@@ -1,4 +1,4 @@
-@import "../../styles";
+@import "../../theme/variables";
 
 .side-nav {
   width: 250px;
@@ -61,6 +61,6 @@ button {
 }
 
 .arrow-rotate-down {
-  color: #F44336;
+  color: $primary-orange;
   transform: rotate(-90deg);
 }

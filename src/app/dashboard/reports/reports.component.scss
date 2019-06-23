@@ -1,3 +1,5 @@
+@import "../../../theme/variables";
+
 .overflow-x {
   overflow-x: auto;
   overflow-y: hidden;
@@ -73,14 +75,14 @@
 
 .orange-card {
   background-color: white;
-  color: #f44336;
+  color: $primary-orange;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   position: relative;
 
   i {
-    background-color: #f44336;
+    background-color: $primary-orange;
   }
 }
 
@@ -121,7 +123,7 @@ mat-card-title {
     font-weight: 600;
     font-size: 15px;
     text-align: center;
-    color: #f44336;
+    color: $primary-orange;
   }
 
   td {
@@ -144,7 +146,7 @@ mat-card-title {
 
 .orders_title {
   font-size: 26px;
-  color: #f44336;
+  color: $primary-orange;
   font-weight: 600;
   text-transform: capitalize;
 }
