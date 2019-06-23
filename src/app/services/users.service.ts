@@ -32,6 +32,17 @@ export class UsersService {
     });
   }
 
+  changeUserLogin(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.change_user_login_status, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, error => {
+          reject(error);
+        });
+    });
+  }
+
   getTransactions(obj) {
     return new Promise((resolve, reject) => {
       this.http.post(Urls.cart_balance, obj)

@@ -64,6 +64,27 @@ export class UsersComponent implements OnInit {
       });
   }
 
+  changeUserLoginStatus(index) {
+    this.userList[index].islogin = this.userList[index].islogin === '1' ? '0' : '1';
+    const object = new HttpParams()
+      .set('id', this.userList[index].id)
+      .set('islogin', this.userList[index].islogin === '1' ? '0' : '1');
+    this._userService.changeUserLogin(object)
+      .then(data => {
+        const status = this.userList[index].islogin === '0' ? 'logged out' : 'Logged In';
+        this.snackBar.open('Your User has been ' + status, 'Success', {
+          duration: 2000
+        });
+      }).catch(err => {
+      console.error(err);
+      this.userList[index].islogin = this.userList[index].islogin === '1' ? '0' : '1';
+      const error = (err.error && err.error.message) ? err.error.message : 'Internal Server Error';
+      this.snackBar.open(error, 'Error', {
+        duration: 2000
+      });
+    });
+  }
+
   openUserDetailPage(user) {
     this._userService.selectedUser = user;
     this.router.navigate(['dashboard/users/user-details']);

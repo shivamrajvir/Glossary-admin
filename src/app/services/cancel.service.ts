@@ -31,7 +31,7 @@ export class CancelService {
 
   changeCancelReasonStatus(changedStatus) {
     return new Promise((resolve, reject) => {
-      this.http.post(Urls.getCancelReason, changedStatus)
+      this.http.post(Urls.changeCancelReason, changedStatus)
         .subscribe(data => {
           resolve(data);
         }, err => {

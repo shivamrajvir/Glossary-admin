@@ -55,6 +55,8 @@ export class Urls {
   static get_users = Urls.base + 'getUsers.php';
   static change_user_status = Urls.base + 'changeUserStatus.php';
 
+  static change_user_login_status = Urls.base + 'changeisLogin.php';
+
   static transaction_history = Urls.base + '';
 
   static user_orders = Urls.base + 'getMasterOrders.php';

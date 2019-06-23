@@ -45,7 +45,15 @@
 
           <ng-container matColumnDef="isLogin">
             <th mat-header-cell *matHeaderCellDef>Login Status</th>
-            <td mat-cell *matCellDef="let element" (click)="openUserDetailPage(element)"> {{element.isLogin === '1' ? 'Logged In' : 'Logged Out'}} </td>
+            <td mat-cell *matCellDef="let element; index as i">
+              <ng-container *ngIf="element.islogin === '0'">
+                {{element.islogin === '1' ? 'Logged In' : 'Logged Out'}}
+              </ng-container>
+              <ng-container *ngIf="element.islogin === '1'">
+                <mat-slide-toggle class="ml-2" color="warn" [checked]="element.islogin === '1'" (change)="changeUserLoginStatus(i)">
+                  {{element.islogin === '1' ? 'Logged In' : 'Logged Out'}}</mat-slide-toggle>
+              </ng-container>
+            </td>
           </ng-container>
 
           <ng-container matColumnDef="datetime">
