@@ -32,6 +32,7 @@ import {OrderDetailsComponent} from './users/user-details/order-details/order-de
 import {AppDateAdapter, APP_DATE_FORMATS} from '../shared/date.adapter';
 import {AddEditCancelReasonModalComponent, CancelReasonComponent} from './cancel-reason/cancel-reason.component';
 import {CancelService} from '../services/cancel.service';
+import { ExportAsModule } from 'ngx-export-as';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import {CancelService} from '../services/cancel.service';
     MaterialModules,
     ReactiveFormsModule,
     CarouselModule,
-    FormsModule
+    FormsModule,
+    ExportAsModule
   ],
   entryComponents: [
     AddEditProductModalComponent,

@@ -7,10 +7,22 @@
         <mat-card-title>
           <div class="d-flex justify-content-between align-items-center">
             <div>Order Details</div>
+            <div>
+              <button mat-raised-button color="warn" class="d-flex align-items-center" (click)="downloadPDF()">
+                <i class="material-icons">
+                  file_copy
+                </i>
+                Download</button>
+            </div>
           </div>
         </mat-card-title>
       </mat-card>
-      <div *ngIf="orderDetails.length" class="overflow-x">
+      <div id="text" class="p-2">
+        <h2 class="orange-text text-center">Store2Door</h2>
+        <p class="pl-3">Name: {{_users.masterOrder?.deliveryPersonName}}</p>
+        <p class="pl-3">Phone: {{_users.masterOrder?.deliveryPhone}}</p>
+        <p class="pl-3">Address: {{_users.masterOrder?.deliveryAddress}}</p>
+        <p class="pl-3">Date: {{orderDetails[0].datetime | date: 'longDate'}}</p>
         <table mat-table [dataSource]="orderDetails" class="mat-elevation-z8 product-table">
 
           <ng-container matColumnDef="id">
@@ -19,7 +31,7 @@
           </ng-container>
 
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef>Sub Category Name</th>
+            <th mat-header-cell *matHeaderCellDef>Item Name</th>
             <td mat-cell *matCellDef="let element"> {{element.subCatName}} </td>
           </ng-container>
 
@@ -39,15 +51,58 @@
             <td mat-cell *matCellDef="let element"> {{element.price}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="datetime">
-            <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>
-          </ng-container>
+<!--          <ng-container matColumnDef="datetime">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Date</th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>-->
+<!--          </ng-container>-->
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+        <div class="d-flex flex-column align-items-end pr-4">
+          <span class="orange-text mt-4">Payment Mode: {{_users.masterOrder?.payMode | titlecase}}</span>
+          <span class="orange-text">Wallet Deduction: {{_users.masterOrder?.walletDeduction}}</span>
+          <h5 class="orange-text mt-1">Total Rs: {{totalAmount - _users.masterOrder?.walletDeduction}}</h5>
+        </div>
       </div>
+<!--      <div *ngIf="orderDetails.length" class="overflow-x">-->
+<!--        <table mat-table [dataSource]="orderDetails" class="mat-elevation-z8 product-table">-->
+
+<!--          <ng-container matColumnDef="id">-->
+<!--            <th mat-header-cell *matHeaderCellDef> No.</th>-->
+<!--            <td mat-cell *matCellDef="let element; index as i"> {{(i + 1)}} </td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="name">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Sub Category Name</th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.subCatName}} </td>-->
+<!--          </ng-container>-->
+
+
+<!--          <ng-container matColumnDef="quantity">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Quantity</th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.subCatquantity + ' ' + element.UnitName}} </td>-->
+<!--          </ng-container>-->
+
+<!--          &lt;!&ndash; <ng-container matColumnDef="status">-->
+<!--            <th mat-header-cell *matHeaderCellDef> Status</th>-->
+<!--            <td mat-cell *matCellDef="let element"> Confirmed </td>-->
+<!--          </ng-container> &ndash;&gt;-->
+
+<!--          <ng-container matColumnDef="price">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Price</th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.price}} </td>-->
+<!--          </ng-container>-->
+
+<!--          <ng-container matColumnDef="datetime">-->
+<!--            <th mat-header-cell *matHeaderCellDef>Date</th>-->
+<!--            <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'mediumDate'}} </td>-->
+<!--          </ng-container>-->
+
+<!--          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--        </table>-->
+<!--      </div>-->
       <ng-container *ngIf="loaded && !orderDetails.length">
         <p class="no-records-found">No Records Found</p>
       </ng-container>

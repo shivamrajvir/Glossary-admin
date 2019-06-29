@@ -3,6 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { HttpParams } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import {UsersService} from '../../services/users.service';
 
 @Component({
   selector: 'app-reports',
@@ -22,7 +23,8 @@ export class ReportsComponent implements OnInit {
 
   filterType = 'all';
 
-  constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router) { }
+  constructor(private _auth: AuthService, private datePipe: DatePipe, private _router: Router,
+              private _users: UsersService) { }
 
   ngOnInit() {
     this.getStatistics();
@@ -74,6 +76,13 @@ export class ReportsComponent implements OnInit {
   }
 
   goToOrderDetails(data) {
+    this._users.masterOrder = data;
+    console.log(data);
+    this._users.masterOrder.deliveryPersonName = data.address_name;
+    this._users.masterOrder.deliveryAddress = data.address;
+    this._users.masterOrder.deliveryPhone = data.address_contact;
+    this._users.masterOrder.payMode = data.paymode;
+    this._users.masterOrder.walletDeduction = data.walletdeduction;
     this._router.navigate(['dashboard/reports/orderDetails/' + data.id]);
   }
 

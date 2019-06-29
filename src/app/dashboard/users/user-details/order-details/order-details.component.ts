@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UsersService} from '../../../../services/users.service';
 import {HttpParams} from '@angular/common/http';
+import {ExportAsConfig, ExportAsService} from 'ngx-export-as';
+
 
 @Component({
   selector: 'app-order-details',
@@ -14,10 +16,17 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails = [];
   cancelledItems = [];
   loaded = false;
-  displayedColumns = ['id', 'name', 'quantity', 'price', 'datetime'];
+  displayedColumns = ['id', 'name', 'quantity', 'price'];
   selectedTab = 0;
 
-  constructor(private route: ActivatedRoute, private _users: UsersService, private router: Router) { }
+  exportAsConfig: ExportAsConfig = {
+    type: 'pdf', // the type you want to download
+    elementId: 'text', // the id of html/table element
+  };
+  totalAmount = 0;
+
+  constructor(private route: ActivatedRoute, private _users: UsersService, private router: Router,
+              private exportAsService: ExportAsService) { }
 
   ngOnInit() {
     if (this.route.snapshot.params.id) {
@@ -31,6 +40,11 @@ export class OrderDetailsComponent implements OnInit {
           if (data.length) {
             this.orderDetails = data.filter(d => {
               return (d.status === '1');
+            });
+            this.totalAmount = 0;
+            this.orderDetails.forEach(order => {
+              console.log(parseInt(order.price, 10));
+              this.totalAmount += parseInt(order.price, 10);
             });
             this.cancelledItems = data.filter(d => {
               return (d.status === '0');
@@ -62,6 +76,11 @@ export class OrderDetailsComponent implements OnInit {
     //   this.getCartDetails();
     // }
     // this.loaded = false;
+  }
+
+  downloadPDF() {
+    this.exportAsService.save(this.exportAsConfig, 'My File Name');
+
   }
 
 }

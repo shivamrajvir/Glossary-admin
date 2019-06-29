@@ -14,9 +14,9 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       this.http.post(Urls.login, creds)
         .subscribe((data: any) => {
-          if (data.sta && data.sta === 1) {
+          // if (data.sta && data.sta === 1) {
             localStorage.setItem('status', 'true');
-          }
+          // }
           resolve(data);
         }, err => {
           reject(err);

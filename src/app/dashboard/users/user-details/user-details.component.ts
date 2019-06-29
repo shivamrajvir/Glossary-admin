@@ -240,6 +240,7 @@ export class UserDetailsComponent implements OnInit {
 
   goToOrderDetails(row) {
     console.log(row);
+    this._userService.masterOrder = row;
     this.router.navigate(['dashboard/users/user-details/order-details/' + row.masterOrderId]);
   }
 

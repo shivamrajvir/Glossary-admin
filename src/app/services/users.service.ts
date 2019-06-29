@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material';
 export class UsersService {
 
   selectedUser;
+  masterOrder;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
