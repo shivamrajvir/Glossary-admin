@@ -41,11 +41,11 @@ export class LoginComponent implements OnInit {
     this._auth.login(params)
       .then(data => {
         this.router.navigate(['dashboard']);
-        // if (data['sta'] === 1) {
+        if (data['sta'] === 1 && data['role'] === '2') {
           this.router.navigate(['dashboard']);
-        // } else {
-        //   this.snotify.error('Error: Login Failed');
-        // }
+        } else {
+          this.snotify.error('Error: Login Failed');
+        }
         this.stopLoading();
       })
       .catch(err => {

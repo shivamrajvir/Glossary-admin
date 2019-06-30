@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UsersService} from '../../../../services/users.service';
 import {HttpParams} from '@angular/common/http';
 import {ExportAsConfig, ExportAsService} from 'ngx-export-as';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -26,9 +27,12 @@ export class OrderDetailsComponent implements OnInit {
   totalAmount = 0;
 
   constructor(private route: ActivatedRoute, private _users: UsersService, private router: Router,
-              private exportAsService: ExportAsService) { }
+              private exportAsService: ExportAsService, private _datepipe: DatePipe) { }
 
   ngOnInit() {
+    if (!this._users.masterOrder) {
+      this.router.navigate(['dashboard']);
+    }
     if (this.route.snapshot.params.id) {
       this.masterOrderId = this.route.snapshot.params.id;
       const obj = new HttpParams()
@@ -79,7 +83,10 @@ export class OrderDetailsComponent implements OnInit {
   }
 
   downloadPDF() {
-    this.exportAsService.save(this.exportAsConfig, 'My File Name');
+    const date = this._datepipe.transform(this.orderDetails[0].datetime, 'dd_MM_yyyy');
+    const name = this._users.masterOrder.deliveryPersonName;
+    const fileName = name + '_' + date;
+    this.exportAsService.save(this.exportAsConfig, fileName);
 
   }
 

@@ -205,6 +205,12 @@ input {
   th {
     font-weight: 600;
     font-size: 15px;
+    text-align: center;
+    color: $primary-orange;
+  }
+
+  td {
+    text-align: center;
   }
 
   .product-image {

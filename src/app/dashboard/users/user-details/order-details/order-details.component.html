@@ -20,8 +20,8 @@
       <div id="text" class="p-2">
         <h2 class="orange-text text-center">Store2Door</h2>
         <p class="pl-3">Name: {{_users.masterOrder?.deliveryPersonName}}</p>
-        <p class="pl-3">Phone: {{_users.masterOrder?.deliveryPhone}}</p>
         <p class="pl-3">Address: {{_users.masterOrder?.deliveryAddress}}</p>
+        <p class="pl-3">Phone: {{_users.masterOrder?.deliveryPhone}}</p>
         <p class="pl-3">Date: {{orderDetails[0].datetime | date: 'longDate'}}</p>
         <table mat-table [dataSource]="orderDetails" class="mat-elevation-z8 product-table">
 
@@ -61,8 +61,9 @@
         </table>
         <div class="d-flex flex-column align-items-end pr-4">
           <span class="orange-text mt-4">Payment Mode: {{_users.masterOrder?.payMode | titlecase}}</span>
-          <span class="orange-text">Wallet Deduction: {{_users.masterOrder?.walletDeduction}}</span>
-          <h5 class="orange-text mt-1">Total Rs: {{totalAmount - _users.masterOrder?.walletDeduction}}</h5>
+          <span class="orange-text mt-1">Total Rs: {{totalAmount | number}}</span>
+          <span *ngIf="_users.masterOrder?.walletDeduction" class="orange-text">Wallet Deduction: - {{_users.masterOrder?.walletDeduction | number}}</span>
+          <h5 class="orange-text mt-1">Amount Payable Rs: {{(totalAmount - _users.masterOrder?.walletDeduction) | number}}</h5>
         </div>
       </div>
 <!--      <div *ngIf="orderDetails.length" class="overflow-x">-->

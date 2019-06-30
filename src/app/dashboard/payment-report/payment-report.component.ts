@@ -24,7 +24,7 @@ export class PaymentReportComponent implements OnInit {
   orderPayMode = 'cod';
   oOrderStatus = 'pending';
   orderHistory = [];
-  displayedColumns = ['id', 'personName', 'personPhone', 'address', 'datetime', 'paymode', 'totalprice', 'walletdeduction'];
+  displayedColumns = ['id', 'personName', 'personPhone', 'address', 'datetime', 'payable', 'walletdeduction', 'totalprice'];
 
 
   constructor(private _reports: ReportsService, protected _datePipe: DatePipe, public snackbar: MatSnackBar) {
@@ -67,6 +67,10 @@ export class PaymentReportComponent implements OnInit {
       .then((data: any[]) => {
         if (data && data.length) {
           this.orderHistory = data;
+          this.orderHistory.map(o => {
+            o.totalprice = parseInt(o.totalprice, 10);
+            o.walletdeduction = parseInt(o.walletdeduction, 10);
+          });
         } else {
           this.orderHistory = [];
         }

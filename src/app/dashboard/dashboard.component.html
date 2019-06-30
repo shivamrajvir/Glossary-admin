@@ -22,6 +22,33 @@
                    [fixedInViewport]="mobileQuery.matches"
                    fixedTopGap="56" [opened]="true">
         <mat-nav-list class="menu-list">
+          <a mat-list-item [routerLink]="['products']" [routerLinkActive]="'active-menu-item'">Products</a>
+          <a mat-list-item [routerLink]="['categories']" [routerLinkActive]="'active-menu-item'">Categories</a>
+          <a mat-list-item (click)="openActivities()">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <div>One Time Activity</div>
+              <div>
+                <i class="material-icons menu-arrow" [ngClass]="showMenu === 'in' ? 'arrow-rotate-down' : ''">
+                  arrow_back_ios
+                </i>
+              </div>
+            </div>
+          </a>
+          <ul [@slideInOut]="showMenu" class="menu-nested-list">
+            <li>
+              <a mat-list-item [routerLink]="['address']" [routerLinkActive]="'active-menu-item'">Addresses</a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['notifications']" [routerLinkActive]="'active-menu-item'">Notifications</a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['units']" [routerLinkActive]="'active-menu-item'">Units</a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['cancel-reason']" [routerLinkActive]="'active-menu-item'">Cancellation Reason</a>
+            </li>
+          </ul>
+          <a mat-list-item [routerLink]="['users']" [routerLinkActive]="'active-menu-item'">Users</a>
           <a mat-list-item (click)="openReports()">
             <div class="d-flex justify-content-between align-items-center w-100">
               <div>Reports</div>
@@ -39,56 +66,6 @@
             <li>
               <a mat-list-item [routerLink]="['payment-report']" [routerLinkActive]="'active-menu-item'">Payment Report</a>
             </li>
-          </ul>
-<!--          <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>-->
-          <a mat-list-item (click)="openActivities()">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <div>One Time Activity</div>
-              <div>
-                <i class="material-icons menu-arrow" [ngClass]="showMenu === 'in' ? 'arrow-rotate-down' : ''">
-                  arrow_back_ios
-                </i>
-              </div>
-            </div>
-          </a>
-          <ul [@slideInOut]="showMenu" class="menu-nested-list">
-            <li>
-              <a mat-list-item [routerLink]="['products']" [routerLinkActive]="'active-menu-item'">Products</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['categories']" [routerLinkActive]="'active-menu-item'">Categories</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['slider']" [routerLinkActive]="'active-menu-item'">Dashboard Slider</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['address']" [routerLinkActive]="'active-menu-item'">Addresses</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['notifications']" [routerLinkActive]="'active-menu-item'">Notifications</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['units']" [routerLinkActive]="'active-menu-item'">Units</a>
-            </li>
-            <li>
-              <a mat-list-item [routerLink]="['cancel-reason']" [routerLinkActive]="'active-menu-item'">Cancellation Reason</a>
-            </li>
-          </ul>
-          <a mat-list-item (click)="openDailyActivities()">
-            <div class="d-flex justify-content-between align-items-center w-100">
-              <div>Daily Activity</div>
-              <div>
-                <i class="material-icons menu-arrow" [ngClass]="showDailyActivity === 'in' ? 'arrow-rotate-down' : ''">
-                  arrow_back_ios
-                </i>
-              </div>
-            </div>
-          </a>
-          <a mat-list-item [routerLink]="['users']" [routerLinkActive]="'active-menu-item'">Users</a>
-          <ul [@slideInOut]="showDailyActivity" class="menu-nested-list">
-            <!-- <li>
-              <a mat-list-item [routerLink]="['slider']" [routerLinkActive]="'active-menu-item'">Dashboard Slider</a>
-            </li> -->
           </ul>
         </mat-nav-list>
       </mat-sidenav>
