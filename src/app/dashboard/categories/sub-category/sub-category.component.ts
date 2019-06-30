@@ -248,6 +248,7 @@ export class AddEditSubCategoryModalComponent {
           });
       }
     } else {
+      this.isImageUploading = false;
       this.snackbar.open('Please add Name and upload an image for the Category', 'Error', {
         duration: 4000
       });
