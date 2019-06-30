@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
         .set('password', this.loginForm.value.password);
     this._auth.login(params)
       .then(data => {
-        this.router.navigate(['dashboard']);
         if (data['sta'] === 1 && data['role'] === '2') {
           this.router.navigate(['dashboard']);
         } else {
