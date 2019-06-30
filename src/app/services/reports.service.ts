@@ -18,4 +18,15 @@ export class ReportsService {
     });
   }
 
+  getOrderHistory(obj) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.get_order_history, obj)
+        .subscribe(data => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
 }

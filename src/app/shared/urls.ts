@@ -76,4 +76,6 @@ export class Urls {
 
   static payment_report = Urls.base + 'payModeWiseSales.php';
 
+  static get_order_history = Urls.base + 'orderHistory.php';
+
 }

@@ -19,11 +19,20 @@ export class PaymentReportComponent implements OnInit {
   paymentReport;
   loaded = false;
 
+  orderFromDate = new Date();
+  orderToDate = new Date();
+  orderPayMode = 'cod';
+  oOrderStatus = 'pending';
+  orderHistory = [];
+  displayedColumns = ['id', 'personName', 'personPhone', 'address', 'datetime', 'paymode', 'totalprice', 'walletdeduction'];
+
+
   constructor(private _reports: ReportsService, protected _datePipe: DatePipe, public snackbar: MatSnackBar) {
   }
 
   ngOnInit() {
     this.getReports();
+    this.getOrderHistory();
   }
 
   getReports() {
@@ -39,6 +48,27 @@ export class PaymentReportComponent implements OnInit {
           this.paymentReport = data[data.length - 1];
         } else {
           this.paymentReport = {};
+        }
+        this.loaded = true;
+      }).catch(err => {
+      console.error(err);
+      this.loaded = true;
+    });
+  }
+
+  getOrderHistory() {
+    this.loaded = false;
+    const obj = new HttpParams()
+      .set('fromDate', this._datePipe.transform(this.orderFromDate, 'yyyy-MM-dd'))
+      .set('toDate', this._datePipe.transform(this.orderToDate, 'yyyy-MM-dd'))
+      .set('payMode', this.orderPayMode)
+      .set('orderstatus', this.oOrderStatus);
+    this._reports.getOrderHistory(obj)
+      .then((data: any[]) => {
+        if (data && data.length) {
+          this.orderHistory = data;
+        } else {
+          this.orderHistory = [];
         }
         this.loaded = true;
       }).catch(err => {

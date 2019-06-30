@@ -177,3 +177,61 @@ mat-card-title {
 input {
   color: $primary-orange !important;
 }
+
+.filter_btn {
+  border-radius: 0 10px 10px 10px;
+  color: $primary-orange;
+  background-color: #eee;
+  margin: 0 3px;
+  height: 40px;
+  transition: all 0.4s ease-in-out;
+}
+
+.filter_active_btn {
+  background-color: $primary-orange;
+  color: #fff;
+}
+
+
+.overflow-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.product-table {
+  width: 100%;
+  min-width: 600px;
+
+  th {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .product-image {
+    height: 60px;
+    width: 60px;
+    object-fit: contain;
+  }
+}
+
+.progress-spinner {
+  height: calc(100vh - 64px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.product-add-icon {
+  color: $primary-orange;
+  font-size: 32px;
+}
+
+.product-add-icon:hover {
+  cursor: pointer;
+}
+
+.no-records-found {
+  text-align: center;
+  font-weight: 500;
+}
