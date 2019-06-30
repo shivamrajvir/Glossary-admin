@@ -22,7 +22,25 @@
                    [fixedInViewport]="mobileQuery.matches"
                    fixedTopGap="56" [opened]="true">
         <mat-nav-list class="menu-list">
-          <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>
+          <a mat-list-item (click)="openReports()">
+            <div class="d-flex justify-content-between align-items-center w-100">
+              <div>Reports</div>
+              <div>
+                <i class="material-icons menu-arrow" [ngClass]="showReports === 'in' ? 'arrow-rotate-down' : ''">
+                  arrow_back_ios
+                </i>
+              </div>
+            </div>
+          </a>
+          <ul [@slideInOut]="showReports" class="menu-nested-list">
+            <li>
+              <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Dashboard</a>
+            </li>
+            <li>
+              <a mat-list-item [routerLink]="['payment-report']" [routerLinkActive]="'active-menu-item'">Payment Report</a>
+            </li>
+          </ul>
+<!--          <a mat-list-item [routerLink]="['reports']" [routerLinkActive]="'active-menu-item'">Reports</a>-->
           <a mat-list-item (click)="openActivities()">
             <div class="d-flex justify-content-between align-items-center w-100">
               <div>One Time Activity</div>

@@ -30,6 +30,7 @@ export class DashboardComponent implements OnInit {
   mobileQuery: MediaQueryList;
   showMenu = 'out';
   showDailyActivity = 'out';
+  showReports = 'out';
 
   private _mobileQueryListener: () => void;
   @ViewChild('navbar') navbarToggle: ElementRef;
@@ -43,13 +44,21 @@ export class DashboardComponent implements OnInit {
   }
 
   openActivities() {
+    this.showReports = 'out';
     this.showDailyActivity = 'out';
     this.showMenu = this.showMenu === 'out' ? 'in' : 'out';
   }
 
   openDailyActivities() {
     this.showMenu = 'out';
+    this.showReports = 'out';
     this.showDailyActivity = this.showDailyActivity === 'out' ? 'in' : 'out';
+  }
+
+  openReports() {
+    this.showMenu = 'out';
+    this.showDailyActivity = 'out';
+    this.showReports = this.showReports === 'out' ? 'in' : 'out';
   }
 
   doLogout() {

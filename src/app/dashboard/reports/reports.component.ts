@@ -77,7 +77,6 @@ export class ReportsComponent implements OnInit {
 
   goToOrderDetails(data) {
     this._users.masterOrder = data;
-    console.log(data);
     this._users.masterOrder.deliveryPersonName = data.address_name;
     this._users.masterOrder.deliveryAddress = data.address;
     this._users.masterOrder.deliveryPhone = data.address_contact;

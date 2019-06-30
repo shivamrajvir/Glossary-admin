@@ -1,0 +1,88 @@
+<div class="row ml-0 mr-0">
+  <ng-container *ngIf="loaded">
+    <div class="col-12 pb-4">
+      <mat-card class="pl-2 mb-2 mt-2">
+        <mat-card-title>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>Payment Reports</div>
+          </div>
+        </mat-card-title>
+        <mat-card-content>
+          <div class="d-flex flex-row flex-wrap justify-content-between">
+            <div class="d-inline-flex">
+              <mat-form-field color="warn">
+                <input disabled matInput [matDatepicker]="picker" placeholder="Choose from date" [(ngModel)]="fromDate"
+                       (dateChange)="getReports()">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="d-inline-flex ml-2">
+              <mat-form-field color="warn">
+                <input disabled matInput [matDatepicker]="picker2" placeholder="Choose to date" [(ngModel)]="toDate"
+                       (dateChange)="getReports()">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="d-inline-flex ml-2">
+              <mat-form-field color="warn">
+                <mat-label>Payment Mode</mat-label>
+                <mat-select [(value)]="paymentMode" (valueChange)="getReports()">
+                  <mat-option [value]="'cod'">COD</mat-option>
+                  <mat-option [value]="'online'">Online</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="d-inline-flex ml-2">
+              <mat-form-field color="warn">
+                <mat-label>Order Status</mat-label>
+                <mat-select [(value)]="orderStatus" (valueChange)="getReports()">
+                  <mat-option [value]="'pending'">Pending</mat-option>
+                  <mat-option [value]="'completed'">Completed</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 mt-1 mb-1">
+      <mat-card class="purple-card">
+        <div>
+          <mat-card-title>Total Income</mat-card-title>
+          <mat-card-content>
+            <h4>{{paymentReport['totalIncome'] ? paymentReport['totalIncome'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            category
+          </i>
+        </div>
+      </mat-card>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 mt-1 mb-1">
+      <mat-card class="green-card">
+        <div>
+          <mat-card-title>Payment Mode</mat-card-title>
+          <mat-card-content>
+            <h4>{{paymentReport['payMode'] ? paymentReport['payMode'] : 0}}</h4>
+          </mat-card-content>
+        </div>
+        <div class="d-flex">
+          <i class="material-icons">
+            category
+          </i>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!loaded" class="progress-spinner">
+    <mat-progress-spinner
+      [color]="'warn'"
+      [mode]="'indeterminate'">
+    </mat-progress-spinner>
+  </div>
+</div>

@@ -74,4 +74,6 @@ export class Urls {
   static addCancelReason = Urls.base + 'addCancellationReason.php';
   static changeCancelReason = Urls.base + 'changeStatusCancellation.php';
 
+  static payment_report = Urls.base + 'payModeWiseSales.php';
+
 }

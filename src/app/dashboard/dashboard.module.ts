@@ -33,6 +33,8 @@ import {AppDateAdapter, APP_DATE_FORMATS} from '../shared/date.adapter';
 import {AddEditCancelReasonModalComponent, CancelReasonComponent} from './cancel-reason/cancel-reason.component';
 import {CancelService} from '../services/cancel.service';
 import { ExportAsModule } from 'ngx-export-as';
+import { PaymentReportComponent } from './payment-report/payment-report.component';
+import {ReportsService} from '../services/reports.service';
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { ExportAsModule } from 'ngx-export-as';
     UserDetailsComponent,
     OrderDetailsComponent,
     CancelReasonComponent,
-    AddEditCancelReasonModalComponent
+    AddEditCancelReasonModalComponent,
+    PaymentReportComponent
   ],
   imports: [
     CommonModule,
@@ -98,7 +101,8 @@ import { ExportAsModule } from 'ngx-export-as';
     SubCategoryService,
     UsersService,
     DatePipe,
-    CancelService
+    CancelService,
+    ReportsService
   ]
 })
 export class DashboardModule {
