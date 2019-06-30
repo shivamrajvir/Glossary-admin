@@ -17,7 +17,8 @@ export class OrderDetailsComponent implements OnInit {
   orderDetails = [];
   cancelledItems = [];
   loaded = false;
-  displayedColumns = ['id', 'name', 'quantity', 'price'];
+  displayedColumns = ['id', 'name', 'quantity', 'count', 'price'];
+  cancelDisplayedColumns = ['id', 'name', 'quantity', 'count', 'datetime', 'price'];
   selectedTab = 0;
 
   exportAsConfig: ExportAsConfig = {
@@ -32,6 +33,8 @@ export class OrderDetailsComponent implements OnInit {
   ngOnInit() {
     if (!this._users.masterOrder) {
       this.router.navigate(['dashboard']);
+    } else {
+      this._users.masterOrder.walletDeduction = parseInt(this._users.masterOrder.walletDeduction, 10);
     }
     if (this.route.snapshot.params.id) {
       this.masterOrderId = this.route.snapshot.params.id;

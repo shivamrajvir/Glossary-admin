@@ -13,10 +13,24 @@
     font-weight: 600;
     font-size: 15px;
     text-align: center;
+    background-color: $primary-orange;
+    color: white;
   }
 
   td {
-      text-align: center;
+    text-align: center;
+    color: $primary-orange !important;
+  }
+
+  tr {
+    //border: 1px solid #f44336;
+  }
+
+  tr:last-child {
+    border-bottom: 4px solid $primary-orange;
+    td {
+      //border-bottom: 4px solid $primary-orange;
+    }
   }
 
   .product-image {
@@ -46,4 +60,10 @@
 .no-records-found {
   text-align: center;
   font-weight: 500;
+}
+
+#text {
+  p {
+    font-weight: 600;
+  }
 }
