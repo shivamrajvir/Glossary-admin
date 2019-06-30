@@ -24,6 +24,28 @@ export class AuthService {
     });
   }
 
+  forgotPassword(creds) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.forgot_password, creds)
+        .subscribe((data: any) => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
+  changePassword(creds) {
+    return new Promise((resolve, reject) => {
+      this.http.post(Urls.change_password, creds)
+        .subscribe((data: any) => {
+          resolve(data);
+        }, err => {
+          reject(err);
+        });
+    });
+  }
+
   logout() {
     localStorage.clear();
     this.router.navigate(['login']);

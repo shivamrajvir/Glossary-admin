@@ -1,3 +1,5 @@
+@import "../../../styles.scss";
+
 .login-card {
   max-width: 500px;
   width: 100%;
@@ -18,4 +20,15 @@ button {
   margin-top: 1.5rem;
   color: #673AB7;
   float: right;
+}
+
+.forgot_password {
+  text-align: right;
+  width: 100%;
+  color: $primary-orange;
+}
+
+.forgot_password:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

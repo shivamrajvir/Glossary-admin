@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {SnotifyService} from 'ng-snotify';
-import {HttpParams} from '@angular/common/http';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { SnotifyService } from 'ng-snotify';
+import { HttpParams } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +14,33 @@ import {HttpParams} from '@angular/common/http';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  forgotForm: FormGroup;
   loading = false;
+  isLogin = false;
 
-  constructor(private router: Router, private _auth: AuthService, private snotify: SnotifyService) { }
+  constructor(private router: Router, private _auth: AuthService, private snotify: SnotifyService,
+    private _actRoute: ActivatedRoute, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
-    this.initializeForm();
+    if (this._actRoute.snapshot.routeConfig.path.includes('login')) {
+      this.isLogin = true;
+      this.initializeForm();
+    } else {
+      this.isLogin = false;
+      this.initForgotForm();
+    }
   }
 
   initializeForm() {
     this.loginForm = new FormGroup({
       phone: new FormControl('', [Validators.required]),
       password: new FormControl('', Validators.required)
+    });
+  }
+
+  initForgotForm() {
+    this.forgotForm = new FormGroup({
+      phone: new FormControl('')
     });
   }
 
@@ -38,24 +54,56 @@ export class LoginComponent implements OnInit {
       const params = new HttpParams()
         .set('phone', this.loginForm.value.phone)
         .set('password', this.loginForm.value.password);
-    this._auth.login(params)
+      this._auth.login(params)
+        .then(data => {
+          if (data['sta'] === 1 && data['role'] === '2') {
+            this.router.navigate(['dashboard']);
+          } else {
+            this.snackbar.open('Login Failed', 'Error', {
+              duration: 4000
+            });
+          }
+          this.stopLoading();
+        })
+        .catch(err => {
+          this.stopLoading();
+          console.error(err);
+          const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
+          this.snackbar.open(error, 'Error', {
+            duration: 4000
+          });
+        });
+    } else {
+      this.snackbar.open('Please Enter credentials properly', 'Error', {
+        duration: 4000
+      });
+    }
+  }
+
+
+  doForgetPassword() {
+    if (!(this.forgotForm.controls['phone'].value && this.forgotForm.controls['phone'].value.toString().length === 10)) {
+      this.snackbar.open('Phone number must be of 10 digits', 'Error', {
+        duration: 4000
+      });
+      return;
+    }
+    this.startLoading();
+    const params = new HttpParams()
+      .set('phone', this.forgotForm.controls['phone'].value);
+    this._auth.forgotPassword(params)
       .then(data => {
-        if (data['sta'] === 1 && data['role'] === '2') {
-          this.router.navigate(['dashboard']);
-        } else {
-          this.snotify.error('Error: Login Failed');
-        }
+        this.goToLogin();
         this.stopLoading();
       })
       .catch(err => {
         this.stopLoading();
         console.error(err);
         const error = (err.error && err.error.error && err.error.error.message) ? err.error.error.message : 'Internal Server Error';
-        this.snotify.error('Error: ' + error);
+        this.snackbar.open(error, 'Error', {
+          duration: 4000
+        });
       });
-    } else {
-      this.snotify.error('Please Enter credentials properly!');
-    }
   }
 
   restrictInput(e) {
@@ -76,7 +124,11 @@ export class LoginComponent implements OnInit {
   }
 
   triggerForgotPassword() {
-    
+    this.router.navigate(['forgot-password']);
+  }
+
+  goToLogin() {
+    this.router.navigate(['login']);
   }
 
 }

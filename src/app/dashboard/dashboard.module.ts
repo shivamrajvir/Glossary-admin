@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule, DatePipe} from '@angular/common';
-import {DashboardComponent} from './dashboard.component';
+import {DashboardComponent, ChangePasswordModalComponent} from './dashboard.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './dashboard.routing';
 import {MaterialModules} from '../material-modules';
@@ -62,7 +62,8 @@ import {ReportsService} from '../services/reports.service';
     OrderDetailsComponent,
     CancelReasonComponent,
     AddEditCancelReasonModalComponent,
-    PaymentReportComponent
+    PaymentReportComponent,
+    ChangePasswordModalComponent
   ],
   imports: [
     CommonModule,
@@ -82,7 +83,8 @@ import {ReportsService} from '../services/reports.service';
     AddEditNotificationModalComponent,
     AddEditSubCategoryDetailsModalComponent,
     AddEditUnitModalComponent,
-    AddEditCancelReasonModalComponent
+    AddEditCancelReasonModalComponent,
+    ChangePasswordModalComponent
   ],
   providers: [
     ProductsService,

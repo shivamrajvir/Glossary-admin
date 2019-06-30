@@ -2,25 +2,50 @@
   <mat-card *ngIf="!loading" class="login-card">
     <mat-card-title class="text-center orange-text">Login</mat-card-title>
     <mat-card-content class="d-flex justify-content-center align-items-center">
-      <form *ngIf="loginForm" [formGroup]="loginForm">
-        <mat-form-field class="w-100" color="warn">
-          <input matInput type="number" placeholder="Phone" formControlName="phone" (keypress)="restrictInput($event)">
-          <mat-error *ngIf="loginForm.controls['phone'].touched && !loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
-            Please enter a valid phone number
-          </mat-error>
-          <mat-error *ngIf="loginForm.controls['phone'].touched && loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
-            phone is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field class="w-100" color="warn">
-          <input type="password" matInput placeholder="Password" formControlName="password">
-          <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
-            Please enter a <strong>Password</strong>
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="warn" class="login-btn" (click)="doLogin()">Login</button>
-      </form>
-      <!-- <p class="forgot_password" (click)="triggerForgotPassword()">Forgot password?</p> -->
+      <div *ngIf="isLogin" class="d-flex flex-column">
+        <div>
+            <form *ngIf="loginForm" [formGroup]="loginForm">
+                <mat-form-field class="w-100" color="warn">
+                  <input matInput type="number" placeholder="Phone" formControlName="phone" (keypress)="restrictInput($event)">
+                  <mat-error *ngIf="loginForm.controls['phone'].touched && !loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
+                    Please enter a valid phone number
+                  </mat-error>
+                  <mat-error *ngIf="loginForm.controls['phone'].touched && loginForm.controls['phone'].value.length && loginForm.controls['phone'].invalid">
+                    phone is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-100" color="warn">
+                  <input type="password" matInput placeholder="Password" formControlName="password">
+                  <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                    Please enter a <strong>Password</strong>
+                  </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="warn" class="login-btn" (click)="doLogin()">Login</button>
+              </form>
+        </div>
+        <div class="d-flex">
+            <p class="forgot_password" (click)="triggerForgotPassword()">Forgot password?</p>
+        </div>
+      </div>
+      <div *ngIf="!isLogin" class="d-flex flex-column w-75">
+          <div>
+              <form *ngIf="forgotForm" [formGroup]="forgotForm">
+                  <mat-form-field class="w-100" color="warn">
+                    <input matInput type="number" placeholder="Phone" formControlName="phone" (keypress)="restrictInput($event)">
+                    <mat-error *ngIf="forgotForm.controls['phone'].touched && !forgotForm.controls['phone'].value.length && forgotForm.controls['phone'].invalid">
+                      Please enter a valid phone number
+                    </mat-error>
+                    <mat-error *ngIf="forgotForm.controls['phone'].touched && forgotForm.controls['phone'].value.length && forgotForm.controls['phone'].invalid">
+                      phone is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <button mat-raised-button color="warn" class="login-btn" (click)="doForgetPassword()">Send SMS</button>
+                </form>
+          </div>
+          <div class="d-flex">
+              <p class="forgot_password" (click)="goToLogin()">Go to Login</p>
+          </div>
+        </div>
     </mat-card-content>
   </mat-card>
   <div *ngIf="loading">

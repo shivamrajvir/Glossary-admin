@@ -14,6 +14,10 @@ const routes: any[] = [
     component: LoginComponent
   },
   {
+    path: 'forgot-password',
+    component: LoginComponent
+  },
+  {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule',
     canActivate: [AuthGuard]

@@ -4,6 +4,8 @@ import {environment} from '../../environments/environment';
 export class Urls {
   static base = environment.apiUrl + 'ecommerce/api/';
   static login = Urls.base + 'login.php';
+  static forgot_password = Urls.base + 'forgotpassword.php';
+  static change_password = Urls.base + 'changePassword.php';
 
   static stats = Urls.base + 'getCount.php';
   static dailyOrder = Urls.base + 'dayWiseMasterOrder.php';
